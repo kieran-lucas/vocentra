@@ -1,0 +1,13 @@
+node_modules/
+dist/
+src-tauri/target/
+.check.log
+.vite/
+*.log
+light-theme-smoke.png
+.lexium-smoke-pid
+tools/.google-cloud-sdk/
+data/audio-master/
+data/audio-final/
+__pycache__/
+*.pyc

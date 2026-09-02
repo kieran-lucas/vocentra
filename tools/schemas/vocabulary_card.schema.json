@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["sourceKey", "sourceIndex", "word", "ipa", "partOfSpeech", "cefr", "viMeaning", "enDefinition", "exampleMeaning", "exampleUsage", "acceptedAnswers", "extras"],
+  "properties": {
+    "sourceKey": {"type": "string"}, "sourceIndex": {"type": "integer", "minimum": 1},
+    "word": {"type": "string"}, "ipa": {"type": "string"}, "partOfSpeech": {"type": "string"}, "cefr": {"const": "A1"},
+    "viMeaning": {"type": "string"}, "enDefinition": {"type": "string"},
+    "exampleMeaning": {"type": "object", "required": ["en", "vi"]},
+    "exampleUsage": {"type": "object", "required": ["en", "vi", "note"]},
+    "acceptedAnswers": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+    "extras": {"type": "object"}
+  }
+}

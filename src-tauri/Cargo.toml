@@ -1,0 +1,27 @@
+[package]
+name = "lexium"
+version = "0.1.0"
+description = "Offline-first vocabulary learning"
+edition = "2024"
+
+[lib]
+name = "lexium_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2.5.6", features = [] }
+
+[dependencies]
+tauri = { version = "2.11.5", features = [] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "sqlite", "migrate", "uuid"] }
+tokio = { version = "1.47", features = ["sync", "macros", "rt-multi-thread"] }
+uuid = { version = "1.18", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+thiserror = "2.0"
+rand = { version = "0.9", features = ["small_rng"] }
+base64 = "0.22"
+
+[dev-dependencies]
+tempfile = "3.21"

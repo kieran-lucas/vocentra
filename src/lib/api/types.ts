@@ -1,0 +1,7 @@
+export type BlockSummary = { id:string; parentId:string|null; name:string; iconKey:string; sortOrder:number; childCount:number; wordCount:number; averageMastery:number };
+export type VocabularyEntry = { id:string; word:string; ipa:string; partOfSpeech:string; viMeaning:string; enDefinition:string; exampleMeaningEn:string; exampleMeaningVi:string; exampleUsageEn:string; exampleUsageVi:string; collocations:string; usageNote:string|null; register:string|null; wordFamily:string; synonyms:string; antonyms:string; acceptedAnswers:string; extraMetadata:string; sourceKey:string|null; sourceName:string|null; sourceLevel:string|null; sourceIndex:number|null; cefr:string|null; audioPath:string|null; audioVoice:string|null; audioChecksum:string|null };
+export type ManagedEntry = VocabularyEntry & { blockEntryId:string; masteryScore:number; totalReviews:number };
+export type ImportPreview = { validCount:number; errors:string[] };
+export type StudyStart = { turnId:string; blockName:string; totalUnique:number };
+export type StudyNext = { card:(VocabularyEntry & { blockEntryId:string; masteryScore:number })|null; uniqueCovered:number; totalUnique:number; totalShown:number; completed:boolean };
+export type Rating = 'again'|'hard'|'good'|'easy';

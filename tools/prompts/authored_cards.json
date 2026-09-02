@@ -1,0 +1,4180 @@
+[
+  {
+    "sourceKey": "oxford3000:a1:000001",
+    "sourceIndex": 1,
+    "word": "a, an",
+    "ipa": "/ə, eɪ; ən, æn/",
+    "partOfSpeech": "indefinite article",
+    "cefr": "A1",
+    "viMeaning": "một (đứng trước danh từ số ít chưa xác định)",
+    "enDefinition": "used before a singular countable noun when the person or thing is not specific",
+    "exampleMeaning": {
+      "en": "I saw a dog near the gate.",
+      "vi": "Tôi thấy một con chó gần cổng."
+    },
+    "exampleUsage": {
+      "en": "She ate an apple after lunch.",
+      "vi": "Cô ấy ăn một quả táo sau bữa trưa.",
+      "note": "Use an before a vowel sound and a before a consonant sound."
+    },
+    "acceptedAnswers": [
+      "a",
+      "an"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000002",
+    "sourceIndex": 2,
+    "word": "about",
+    "ipa": "/əˈbaʊt/",
+    "partOfSpeech": "prep., adv.",
+    "cefr": "A1",
+    "viMeaning": "về; liên quan đến",
+    "enDefinition": "on the subject of someone or something",
+    "exampleMeaning": {
+      "en": "This book is about space.",
+      "vi": "Cuốn sách này nói về không gian."
+    },
+    "exampleUsage": {
+      "en": "What are you talking about?",
+      "vi": "Bạn đang nói về chuyện gì vậy?",
+      "note": "Common pattern: talk, think, or ask about something."
+    },
+    "acceptedAnswers": [
+      "about"
+    ],
+    "extras": {
+      "collocations": [
+        "talk about",
+        "think about"
+      ]
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000003",
+    "sourceIndex": 3,
+    "word": "above",
+    "ipa": "/əˈbʌv/",
+    "partOfSpeech": "prep., adv.",
+    "cefr": "A1",
+    "viMeaning": "ở trên; cao hơn",
+    "enDefinition": "at or to a higher position than someone or something",
+    "exampleMeaning": {
+      "en": "The clock is above the door.",
+      "vi": "Chiếc đồng hồ ở phía trên cánh cửa."
+    },
+    "exampleUsage": {
+      "en": "Today the temperature is above 20 degrees.",
+      "vi": "Hôm nay nhiệt độ cao hơn 20 độ.",
+      "note": "Use above before a number to mean higher than that number."
+    },
+    "acceptedAnswers": [
+      "above"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000004",
+    "sourceIndex": 4,
+    "word": "across",
+    "ipa": "/əˈkrɔs/",
+    "partOfSpeech": "prep., adv.",
+    "cefr": "A1",
+    "viMeaning": "qua; từ bên này sang bên kia",
+    "enDefinition": "from one side of a place or area to the other side",
+    "exampleMeaning": {
+      "en": "We walked across the bridge.",
+      "vi": "Chúng tôi đi bộ qua cây cầu."
+    },
+    "exampleUsage": {
+      "en": "The bank is across from the station.",
+      "vi": "Ngân hàng nằm đối diện nhà ga.",
+      "note": "In American English, across from means on the opposite side."
+    },
+    "acceptedAnswers": [
+      "across"
+    ],
+    "extras": {
+      "collocations": [
+        "across the street",
+        "across from"
+      ]
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000005",
+    "sourceIndex": 5,
+    "word": "action",
+    "ipa": "/ˈækʃən/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "hành động; việc làm",
+    "enDefinition": "something that a person does",
+    "exampleMeaning": {
+      "en": "His quick action saved the child.",
+      "vi": "Hành động nhanh chóng của anh ấy đã cứu đứa trẻ."
+    },
+    "exampleUsage": {
+      "en": "The school took action to stop the problem.",
+      "vi": "Nhà trường đã hành động để ngăn chặn vấn đề.",
+      "note": "Take action means to do something practical about a problem."
+    },
+    "acceptedAnswers": [
+      "action"
+    ],
+    "extras": {
+      "collocations": [
+        "take action",
+        "quick action"
+      ]
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000006",
+    "sourceIndex": 6,
+    "word": "activity",
+    "ipa": "/ækˈtɪvəti/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "hoạt động",
+    "enDefinition": "something that you do, often for work, learning, or enjoyment",
+    "exampleMeaning": {
+      "en": "Reading is a quiet activity.",
+      "vi": "Đọc sách là một hoạt động yên tĩnh."
+    },
+    "exampleUsage": {
+      "en": "The camp offers many outdoor activities.",
+      "vi": "Khu trại có nhiều hoạt động ngoài trời.",
+      "note": "Activity is countable when referring to a particular thing people do."
+    },
+    "acceptedAnswers": [
+      "activity"
+    ],
+    "extras": {
+      "collocations": [
+        "outdoor activity",
+        "class activity"
+      ]
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000007",
+    "sourceIndex": 7,
+    "word": "actor",
+    "ipa": "/ˈæktər/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "diễn viên",
+    "enDefinition": "a person who performs a character in a play, movie, or television show",
+    "exampleMeaning": {
+      "en": "The actor plays a young doctor in the movie.",
+      "vi": "Nam diễn viên đóng vai một bác sĩ trẻ trong bộ phim."
+    },
+    "exampleUsage": {
+      "en": "He wants to become an actor.",
+      "vi": "Anh ấy muốn trở thành diễn viên.",
+      "note": "Become an actor is a common pattern for entering the profession."
+    },
+    "acceptedAnswers": [
+      "actor"
+    ],
+    "extras": {
+      "collocations": [
+        "movie actor",
+        "lead actor"
+      ]
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000008",
+    "sourceIndex": 8,
+    "word": "actress",
+    "ipa": "/ˈæktrəs/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "nữ diễn viên",
+    "enDefinition": "a woman who performs a character in a play, movie, or television show",
+    "exampleMeaning": {
+      "en": "The actress smiles at the camera.",
+      "vi": "Nữ diễn viên mỉm cười trước máy quay."
+    },
+    "exampleUsage": {
+      "en": "She works as an actress in New York.",
+      "vi": "Cô ấy làm diễn viên tại New York.",
+      "note": "Work as + job names a person's occupation."
+    },
+    "acceptedAnswers": [
+      "actress"
+    ],
+    "extras": {
+      "usage_note": "Actor is also commonly used for performers of any gender."
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000009",
+    "sourceIndex": 9,
+    "word": "add",
+    "ipa": "/æd/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "thêm; cộng",
+    "enDefinition": "to put something with something else so that there is more",
+    "exampleMeaning": {
+      "en": "Please add your name to the list.",
+      "vi": "Vui lòng thêm tên của bạn vào danh sách."
+    },
+    "exampleUsage": {
+      "en": "Add two spoons of sugar to the tea.",
+      "vi": "Thêm hai thìa đường vào trà.",
+      "note": "Common pattern: add something to something."
+    },
+    "acceptedAnswers": [
+      "add"
+    ],
+    "extras": {
+      "collocations": [
+        "add to a list",
+        "add sugar"
+      ]
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000010",
+    "sourceIndex": 10,
+    "word": "address",
+    "ipa": "/ˈædres/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "địa chỉ",
+    "enDefinition": "the details that show where a person lives or where a place is",
+    "exampleMeaning": {
+      "en": "Please write your address on the form.",
+      "vi": "Vui lòng viết địa chỉ của bạn vào biểu mẫu."
+    },
+    "exampleUsage": {
+      "en": "I sent the message to her email address.",
+      "vi": "Tôi đã gửi tin nhắn đến địa chỉ email của cô ấy.",
+      "note": "Address also appears in home address and email address."
+    },
+    "acceptedAnswers": [
+      "address"
+    ],
+    "extras": {
+      "collocations": [
+        "home address",
+        "email address"
+      ]
+    }
+  },
+  {
+    "sourceKey": "oxford3000:a1:000011",
+    "sourceIndex": 11,
+    "word": "adult",
+    "ipa": "/əˈdʌlt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "người trưởng thành",
+    "enDefinition": "a person who is fully grown",
+    "exampleMeaning": {
+      "en": "Two adults are waiting outside.",
+      "vi": "Hai người lớn đang đợi bên ngoài."
+    },
+    "exampleUsage": {
+      "en": "Children must come with an adult.",
+      "vi": "Trẻ em phải đi cùng một người lớn.",
+      "note": "Adult is a countable noun: an adult, two adults."
+    },
+    "acceptedAnswers": [
+      "adult"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000012",
+    "sourceIndex": 12,
+    "word": "advice",
+    "ipa": "/ədˈvaɪs/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "lời khuyên",
+    "enDefinition": "an opinion about what someone should do",
+    "exampleMeaning": {
+      "en": "Her advice helped me choose a course.",
+      "vi": "Lời khuyên của cô ấy giúp tôi chọn khóa học."
+    },
+    "exampleUsage": {
+      "en": "Can you give me some advice?",
+      "vi": "Bạn có thể cho tôi một vài lời khuyên không?",
+      "note": "Advice is uncountable; say some advice, not an advice."
+    },
+    "acceptedAnswers": [
+      "advice"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000013",
+    "sourceIndex": 13,
+    "word": "afraid",
+    "ipa": "/əˈfreɪd/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "sợ; lo sợ",
+    "enDefinition": "feeling fear or worry",
+    "exampleMeaning": {
+      "en": "The child is afraid of the dark.",
+      "vi": "Đứa trẻ sợ bóng tối."
+    },
+    "exampleUsage": {
+      "en": "I'm afraid to ask that question.",
+      "vi": "Tôi ngại hỏi câu đó.",
+      "note": "Use afraid of + noun or afraid to + verb."
+    },
+    "acceptedAnswers": [
+      "afraid"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000014",
+    "sourceIndex": 14,
+    "word": "after",
+    "ipa": "/ˈæftər/",
+    "partOfSpeech": "prep.",
+    "cefr": "A1",
+    "viMeaning": "sau; sau khi",
+    "enDefinition": "later than someone or something",
+    "exampleMeaning": {
+      "en": "We went home after dinner.",
+      "vi": "Chúng tôi về nhà sau bữa tối."
+    },
+    "exampleUsage": {
+      "en": "Meet me after class.",
+      "vi": "Hãy gặp tôi sau giờ học.",
+      "note": "After is followed by a noun or an -ing form."
+    },
+    "acceptedAnswers": [
+      "after"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000015",
+    "sourceIndex": 15,
+    "word": "afternoon",
+    "ipa": "/ˌæftərˈnun/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "buổi chiều",
+    "enDefinition": "the part of the day between noon and evening",
+    "exampleMeaning": {
+      "en": "I have a class this afternoon.",
+      "vi": "Tôi có một lớp học vào chiều nay."
+    },
+    "exampleUsage": {
+      "en": "She works in the afternoon.",
+      "vi": "Cô ấy làm việc vào buổi chiều.",
+      "note": "Say this afternoon, but in the afternoon."
+    },
+    "acceptedAnswers": [
+      "afternoon"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000016",
+    "sourceIndex": 16,
+    "word": "again",
+    "ipa": "/əˈgɛn/",
+    "partOfSpeech": "adv.",
+    "cefr": "A1",
+    "viMeaning": "lại; một lần nữa",
+    "enDefinition": "one more time",
+    "exampleMeaning": {
+      "en": "Please say that again.",
+      "vi": "Vui lòng nói lại điều đó."
+    },
+    "exampleUsage": {
+      "en": "It is good to see you again.",
+      "vi": "Thật vui khi lại gặp bạn.",
+      "note": "Again usually comes after the object or at the end."
+    },
+    "acceptedAnswers": [
+      "again"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000017",
+    "sourceIndex": 17,
+    "word": "age",
+    "ipa": "/eɪʤ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "tuổi; độ tuổi",
+    "enDefinition": "the number of years someone has lived",
+    "exampleMeaning": {
+      "en": "What is your age?",
+      "vi": "Bạn bao nhiêu tuổi?"
+    },
+    "exampleUsage": {
+      "en": "Children of all ages can join.",
+      "vi": "Trẻ em ở mọi độ tuổi đều có thể tham gia.",
+      "note": "At the age of introduces a specific age."
+    },
+    "acceptedAnswers": [
+      "age"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000018",
+    "sourceIndex": 18,
+    "word": "ago",
+    "ipa": "/əˈgoʊ/",
+    "partOfSpeech": "adv.",
+    "cefr": "A1",
+    "viMeaning": "trước đây",
+    "enDefinition": "before now, used with a period of time",
+    "exampleMeaning": {
+      "en": "We met two years ago.",
+      "vi": "Chúng tôi gặp nhau hai năm trước."
+    },
+    "exampleUsage": {
+      "en": "She left a few minutes ago.",
+      "vi": "Cô ấy rời đi vài phút trước.",
+      "note": "Ago follows a length of time."
+    },
+    "acceptedAnswers": [
+      "ago"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000019",
+    "sourceIndex": 19,
+    "word": "agree",
+    "ipa": "/əˈgri/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "đồng ý",
+    "enDefinition": "to have the same opinion or accept a suggestion",
+    "exampleMeaning": {
+      "en": "I agree with you.",
+      "vi": "Tôi đồng ý với bạn."
+    },
+    "exampleUsage": {
+      "en": "They agreed to meet at six.",
+      "vi": "Họ đồng ý gặp nhau lúc sáu giờ.",
+      "note": "Use agree with a person and agree to do something."
+    },
+    "acceptedAnswers": [
+      "agree"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000020",
+    "sourceIndex": 20,
+    "word": "air",
+    "ipa": "/ɛr/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "không khí",
+    "enDefinition": "the mixture of gases that people and animals breathe",
+    "exampleMeaning": {
+      "en": "Open the window and let in some fresh air.",
+      "vi": "Mở cửa sổ để không khí trong lành vào."
+    },
+    "exampleUsage": {
+      "en": "The mountain air is cool and clean.",
+      "vi": "Không khí trên núi mát mẻ và trong lành.",
+      "note": "Air is usually uncountable."
+    },
+    "acceptedAnswers": [
+      "air"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000021",
+    "sourceIndex": 21,
+    "word": "airport",
+    "ipa": "/ˈɛrˌpɔrt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "sân bay",
+    "enDefinition": "a place where airplanes arrive and leave",
+    "exampleMeaning": {
+      "en": "The airport is busy this morning.",
+      "vi": "Sân bay sáng nay rất đông."
+    },
+    "exampleUsage": {
+      "en": "We arrived at the airport early.",
+      "vi": "Chúng tôi đến sân bay sớm.",
+      "note": "Use arrive at the airport."
+    },
+    "acceptedAnswers": [
+      "airport"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000022",
+    "sourceIndex": 22,
+    "word": "all",
+    "ipa": "/ɔl/",
+    "partOfSpeech": "det., pron.",
+    "cefr": "A1",
+    "viMeaning": "tất cả",
+    "enDefinition": "the whole number or amount of people or things",
+    "exampleMeaning": {
+      "en": "All the windows are open.",
+      "vi": "Tất cả cửa sổ đều đang mở."
+    },
+    "exampleUsage": {
+      "en": "We all enjoyed the movie.",
+      "vi": "Tất cả chúng tôi đều thích bộ phim.",
+      "note": "All can come before a noun or after a subject pronoun."
+    },
+    "acceptedAnswers": [
+      "all"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000023",
+    "sourceIndex": 23,
+    "word": "also",
+    "ipa": "/ˈɔlsoʊ/",
+    "partOfSpeech": "adv.",
+    "cefr": "A1",
+    "viMeaning": "cũng; còn",
+    "enDefinition": "in addition",
+    "exampleMeaning": {
+      "en": "She speaks English and also French.",
+      "vi": "Cô ấy nói tiếng Anh và cả tiếng Pháp."
+    },
+    "exampleUsage": {
+      "en": "He is kind, and he is also very patient.",
+      "vi": "Anh ấy tốt bụng và cũng rất kiên nhẫn.",
+      "note": "Also normally comes before the main verb but after be."
+    },
+    "acceptedAnswers": [
+      "also"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000024",
+    "sourceIndex": 24,
+    "word": "always",
+    "ipa": "/ˈɔlˌweɪz/",
+    "partOfSpeech": "adv.",
+    "cefr": "A1",
+    "viMeaning": "luôn luôn",
+    "enDefinition": "at all times or every time",
+    "exampleMeaning": {
+      "en": "He always drinks water with lunch.",
+      "vi": "Anh ấy luôn uống nước vào bữa trưa."
+    },
+    "exampleUsage": {
+      "en": "She is always on time.",
+      "vi": "Cô ấy luôn đúng giờ.",
+      "note": "Always comes before most verbs but after be."
+    },
+    "acceptedAnswers": [
+      "always"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000025",
+    "sourceIndex": 25,
+    "word": "amazing",
+    "ipa": "/əˈmeɪzɪŋ/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "đáng kinh ngạc; tuyệt vời",
+    "enDefinition": "very surprising or extremely good",
+    "exampleMeaning": {
+      "en": "The view from the hill is amazing.",
+      "vi": "Quang cảnh từ ngọn đồi thật tuyệt vời."
+    },
+    "exampleUsage": {
+      "en": "We had an amazing time at the beach.",
+      "vi": "Chúng tôi đã có khoảng thời gian tuyệt vời ở bãi biển.",
+      "note": "Amazing describes the thing that causes the feeling."
+    },
+    "acceptedAnswers": [
+      "amazing"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000026",
+    "sourceIndex": 26,
+    "word": "and",
+    "ipa": "/ænd/",
+    "partOfSpeech": "conj.",
+    "cefr": "A1",
+    "viMeaning": "và",
+    "enDefinition": "used to join words, phrases, or ideas",
+    "exampleMeaning": {
+      "en": "I bought bread and cheese.",
+      "vi": "Tôi mua bánh mì và phô mai."
+    },
+    "exampleUsage": {
+      "en": "She opened the door and walked inside.",
+      "vi": "Cô ấy mở cửa rồi bước vào trong.",
+      "note": "And joins items or actions of equal importance."
+    },
+    "acceptedAnswers": [
+      "and"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000027",
+    "sourceIndex": 27,
+    "word": "angry",
+    "ipa": "/ˈæŋgri/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "tức giận",
+    "enDefinition": "feeling strong displeasure",
+    "exampleMeaning": {
+      "en": "He was angry about the mistake.",
+      "vi": "Anh ấy tức giận về lỗi đó."
+    },
+    "exampleUsage": {
+      "en": "Please don't be angry with me.",
+      "vi": "Xin đừng giận tôi.",
+      "note": "Use angry with a person and angry about something."
+    },
+    "acceptedAnswers": [
+      "angry"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000028",
+    "sourceIndex": 28,
+    "word": "animal",
+    "ipa": "/ˈænəməl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "động vật",
+    "enDefinition": "a living creature that is not a plant",
+    "exampleMeaning": {
+      "en": "A dolphin is an intelligent animal.",
+      "vi": "Cá heo là một loài động vật thông minh."
+    },
+    "exampleUsage": {
+      "en": "Many animals live in this forest.",
+      "vi": "Nhiều loài động vật sống trong khu rừng này.",
+      "note": "Animal is countable."
+    },
+    "acceptedAnswers": [
+      "animal"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000029",
+    "sourceIndex": 29,
+    "word": "another",
+    "ipa": "/əˈnəðər/",
+    "partOfSpeech": "det./pron.",
+    "cefr": "A1",
+    "viMeaning": "một cái/người khác; thêm một",
+    "enDefinition": "one more person or thing, or a different one",
+    "exampleMeaning": {
+      "en": "Can I have another cup of tea?",
+      "vi": "Tôi có thể uống thêm một tách trà không?"
+    },
+    "exampleUsage": {
+      "en": "This pen is broken; give me another.",
+      "vi": "Cây bút này hỏng rồi; đưa tôi cây khác nhé.",
+      "note": "Another can stand before a singular noun or alone as a pronoun."
+    },
+    "acceptedAnswers": [
+      "another"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000030",
+    "sourceIndex": 30,
+    "word": "answer",
+    "ipa": "/ˈænsər/",
+    "partOfSpeech": "n., v.",
+    "cefr": "A1",
+    "viMeaning": "câu trả lời; trả lời",
+    "enDefinition": "something said or written in reply, or to reply",
+    "exampleMeaning": {
+      "en": "I know the answer to this question.",
+      "vi": "Tôi biết câu trả lời cho câu hỏi này."
+    },
+    "exampleUsage": {
+      "en": "Please answer the phone.",
+      "vi": "Vui lòng nghe điện thoại.",
+      "note": "Use the answer to a question; answer does not need to before an object."
+    },
+    "acceptedAnswers": [
+      "answer"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000031",
+    "sourceIndex": 31,
+    "word": "any",
+    "ipa": "/ˈeni/",
+    "partOfSpeech": "det., pron.",
+    "cefr": "A1",
+    "viMeaning": "bất kỳ; một chút nào",
+    "enDefinition": "one or some, without saying exactly which or how many",
+    "exampleMeaning": {
+      "en": "Do you have any questions?",
+      "vi": "Bạn có câu hỏi nào không?"
+    },
+    "exampleUsage": {
+      "en": "I don't have any money with me.",
+      "vi": "Tôi không mang theo chút tiền nào.",
+      "note": "Any is common in questions and negative sentences."
+    },
+    "acceptedAnswers": [
+      "any"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000032",
+    "sourceIndex": 32,
+    "word": "anyone",
+    "ipa": "/ˈeniˌwʌn/",
+    "partOfSpeech": "pron.",
+    "cefr": "A1",
+    "viMeaning": "bất kỳ ai; ai đó",
+    "enDefinition": "any person",
+    "exampleMeaning": {
+      "en": "Does anyone know her name?",
+      "vi": "Có ai biết tên cô ấy không?"
+    },
+    "exampleUsage": {
+      "en": "Anyone can use this computer.",
+      "vi": "Bất kỳ ai cũng có thể dùng máy tính này.",
+      "note": "Anyone takes a singular verb."
+    },
+    "acceptedAnswers": [
+      "anyone"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000033",
+    "sourceIndex": 33,
+    "word": "anything",
+    "ipa": "/ˈeniˌθɪŋ/",
+    "partOfSpeech": "pron.",
+    "cefr": "A1",
+    "viMeaning": "bất kỳ điều gì; thứ gì đó",
+    "enDefinition": "any thing or event",
+    "exampleMeaning": {
+      "en": "Is there anything in the box?",
+      "vi": "Có thứ gì trong hộp không?"
+    },
+    "exampleUsage": {
+      "en": "You can ask me anything.",
+      "vi": "Bạn có thể hỏi tôi bất cứ điều gì.",
+      "note": "Anything takes a singular verb."
+    },
+    "acceptedAnswers": [
+      "anything"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000034",
+    "sourceIndex": 34,
+    "word": "apartment",
+    "ipa": "/əˈpɑrtmənt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "căn hộ",
+    "enDefinition": "a set of rooms for living in, usually on one floor of a building",
+    "exampleMeaning": {
+      "en": "Their apartment has two bedrooms.",
+      "vi": "Căn hộ của họ có hai phòng ngủ."
+    },
+    "exampleUsage": {
+      "en": "She lives in a small apartment downtown.",
+      "vi": "Cô ấy sống trong một căn hộ nhỏ ở trung tâm thành phố.",
+      "note": "Use live in an apartment."
+    },
+    "acceptedAnswers": [
+      "apartment"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000035",
+    "sourceIndex": 35,
+    "word": "apple",
+    "ipa": "/ˈæpəl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "quả táo",
+    "enDefinition": "a round fruit with red, green, or yellow skin",
+    "exampleMeaning": {
+      "en": "He ate an apple after lunch.",
+      "vi": "Anh ấy ăn một quả táo sau bữa trưa."
+    },
+    "exampleUsage": {
+      "en": "Would you like a slice of apple?",
+      "vi": "Bạn có muốn một lát táo không?",
+      "note": "Apple is countable; use an before it."
+    },
+    "acceptedAnswers": [
+      "apple"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000036",
+    "sourceIndex": 36,
+    "word": "April",
+    "ipa": "/ˈeɪprəl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "tháng Tư",
+    "enDefinition": "the fourth month of the year",
+    "exampleMeaning": {
+      "en": "My course starts in April.",
+      "vi": "Khóa học của tôi bắt đầu vào tháng Tư."
+    },
+    "exampleUsage": {
+      "en": "Her birthday is on April 12.",
+      "vi": "Sinh nhật của cô ấy là ngày 12 tháng Tư.",
+      "note": "Use in with a month and on with a full date."
+    },
+    "acceptedAnswers": [
+      "April"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000037",
+    "sourceIndex": 37,
+    "word": "area",
+    "ipa": "/ˈɛriə/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "khu vực; vùng",
+    "enDefinition": "a particular part of a place",
+    "exampleMeaning": {
+      "en": "This area is quiet at night.",
+      "vi": "Khu vực này yên tĩnh vào ban đêm."
+    },
+    "exampleUsage": {
+      "en": "There is a seating area near the window.",
+      "vi": "Có một khu vực chỗ ngồi gần cửa sổ.",
+      "note": "Area is countable when referring to a particular place."
+    },
+    "acceptedAnswers": [
+      "area"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000038",
+    "sourceIndex": 38,
+    "word": "arm",
+    "ipa": "/ɑrm/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "cánh tay",
+    "enDefinition": "the part of the body from the shoulder to the hand",
+    "exampleMeaning": {
+      "en": "She carried the baby in her arms.",
+      "vi": "Cô ấy bế em bé trong vòng tay."
+    },
+    "exampleUsage": {
+      "en": "He put his arm around his brother.",
+      "vi": "Anh ấy vòng tay ôm em trai mình.",
+      "note": "Common phrases include in your arms and put an arm around someone."
+    },
+    "acceptedAnswers": [
+      "arm"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000039",
+    "sourceIndex": 39,
+    "word": "around",
+    "ipa": "/əˈraʊnd/",
+    "partOfSpeech": "prep., adv.",
+    "cefr": "A1",
+    "viMeaning": "quanh; xung quanh",
+    "enDefinition": "in a circle or on every side of something",
+    "exampleMeaning": {
+      "en": "We sat around the table.",
+      "vi": "Chúng tôi ngồi quanh bàn."
+    },
+    "exampleUsage": {
+      "en": "She looked around but saw nobody.",
+      "vi": "Cô ấy nhìn quanh nhưng không thấy ai.",
+      "note": "Around can be a preposition or an adverb without an object."
+    },
+    "acceptedAnswers": [
+      "around"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000040",
+    "sourceIndex": 40,
+    "word": "arrive",
+    "ipa": "/əˈraɪv/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "đến nơi",
+    "enDefinition": "to reach a place",
+    "exampleMeaning": {
+      "en": "The train arrived late.",
+      "vi": "Tàu đến muộn."
+    },
+    "exampleUsage": {
+      "en": "We arrived in Hanoi at noon.",
+      "vi": "Chúng tôi đến Hà Nội vào buổi trưa.",
+      "note": "Use arrive in for cities/countries and arrive at for smaller places."
+    },
+    "acceptedAnswers": [
+      "arrive"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000041",
+    "sourceIndex": 41,
+    "word": "art",
+    "ipa": "/ɑrt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "nghệ thuật",
+    "enDefinition": "the creation of beautiful or meaningful objects and images",
+    "exampleMeaning": {
+      "en": "Modern art can be very colorful.",
+      "vi": "Nghệ thuật hiện đại có thể rất nhiều màu sắc."
+    },
+    "exampleUsage": {
+      "en": "She studies art at college.",
+      "vi": "Cô ấy học nghệ thuật ở trường cao đẳng.",
+      "note": "Art is usually uncountable when it means the subject."
+    },
+    "acceptedAnswers": [
+      "art"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000042",
+    "sourceIndex": 42,
+    "word": "article",
+    "ipa": "/ˈɑrtɪkəl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bài báo; bài viết",
+    "enDefinition": "a piece of writing in a newspaper, magazine, or website",
+    "exampleMeaning": {
+      "en": "I read an article about healthy food.",
+      "vi": "Tôi đọc một bài viết về thức ăn lành mạnh."
+    },
+    "exampleUsage": {
+      "en": "She wrote an article for the school blog.",
+      "vi": "Cô ấy viết một bài cho blog của trường.",
+      "note": "Use an article about a topic and an article for a publication."
+    },
+    "acceptedAnswers": [
+      "article"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000043",
+    "sourceIndex": 43,
+    "word": "artist",
+    "ipa": "/ˈɑrtɪst/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "nghệ sĩ",
+    "enDefinition": "a person who creates art",
+    "exampleMeaning": {
+      "en": "The artist painted a picture of the sea.",
+      "vi": "Người nghệ sĩ vẽ một bức tranh về biển."
+    },
+    "exampleUsage": {
+      "en": "He works as an artist in the city.",
+      "vi": "Anh ấy làm nghệ sĩ trong thành phố.",
+      "note": "Work as + job names a person's occupation."
+    },
+    "acceptedAnswers": [
+      "artist"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000044",
+    "sourceIndex": 44,
+    "word": "as",
+    "ipa": "/æz/",
+    "partOfSpeech": "prep.",
+    "cefr": "A1",
+    "viMeaning": "với vai trò là; như",
+    "enDefinition": "in the role or function of someone or something",
+    "exampleMeaning": {
+      "en": "She works as a teacher.",
+      "vi": "Cô ấy làm giáo viên."
+    },
+    "exampleUsage": {
+      "en": "Use this box as a table.",
+      "vi": "Hãy dùng chiếc hộp này làm bàn.",
+      "note": "As introduces a role or function."
+    },
+    "acceptedAnswers": [
+      "as"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000045",
+    "sourceIndex": 45,
+    "word": "ask",
+    "ipa": "/æsk/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "hỏi; yêu cầu",
+    "enDefinition": "to speak or write to get information or request something",
+    "exampleMeaning": {
+      "en": "I asked her name.",
+      "vi": "Tôi hỏi tên cô ấy."
+    },
+    "exampleUsage": {
+      "en": "Ask your teacher for help.",
+      "vi": "Hãy nhờ giáo viên giúp đỡ.",
+      "note": "Use ask someone a question and ask someone for something."
+    },
+    "acceptedAnswers": [
+      "ask"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000046",
+    "sourceIndex": 46,
+    "word": "at",
+    "ipa": "/æt/",
+    "partOfSpeech": "prep.",
+    "cefr": "A1",
+    "viMeaning": "ở; tại",
+    "enDefinition": "used to show an exact place or time",
+    "exampleMeaning": {
+      "en": "Meet me at the station.",
+      "vi": "Gặp tôi tại nhà ga nhé."
+    },
+    "exampleUsage": {
+      "en": "The class starts at nine o'clock.",
+      "vi": "Lớp học bắt đầu lúc chín giờ.",
+      "note": "Use at for exact places and clock times."
+    },
+    "acceptedAnswers": [
+      "at"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000047",
+    "sourceIndex": 47,
+    "word": "August",
+    "ipa": "/ˈɔɡəst/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "tháng Tám",
+    "enDefinition": "the eighth month of the year",
+    "exampleMeaning": {
+      "en": "It is very hot here in August.",
+      "vi": "Ở đây rất nóng vào tháng Tám."
+    },
+    "exampleUsage": {
+      "en": "The festival begins on August 5.",
+      "vi": "Lễ hội bắt đầu vào ngày 5 tháng Tám.",
+      "note": "Use in with a month and on with a full date."
+    },
+    "acceptedAnswers": [
+      "August"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000048",
+    "sourceIndex": 48,
+    "word": "aunt",
+    "ipa": "/ænt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "cô; dì; thím; mợ",
+    "enDefinition": "the sister of your mother or father, or the wife of your uncle",
+    "exampleMeaning": {
+      "en": "My aunt lives near us.",
+      "vi": "Dì tôi sống gần nhà chúng tôi."
+    },
+    "exampleUsage": {
+      "en": "We are visiting Aunt Mai this weekend.",
+      "vi": "Cuối tuần này chúng tôi sẽ thăm dì Mai.",
+      "note": "Capitalize Aunt when it is used with a person's name."
+    },
+    "acceptedAnswers": [
+      "aunt"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000049",
+    "sourceIndex": 49,
+    "word": "away",
+    "ipa": "/əˈweɪ/",
+    "partOfSpeech": "adv.",
+    "cefr": "A1",
+    "viMeaning": "xa; đi khỏi",
+    "enDefinition": "to or at another place",
+    "exampleMeaning": {
+      "en": "The school is two kilometers away.",
+      "vi": "Trường học cách đây hai ki-lô-mét."
+    },
+    "exampleUsage": {
+      "en": "Please put your phone away during class.",
+      "vi": "Vui lòng cất điện thoại trong giờ học.",
+      "note": "Put something away means return it to its proper place."
+    },
+    "acceptedAnswers": [
+      "away"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000050",
+    "sourceIndex": 50,
+    "word": "awesome",
+    "ipa": "/ˈɔsəm/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "tuyệt vời; rất ấn tượng",
+    "enDefinition": "extremely good or impressive",
+    "exampleMeaning": {
+      "en": "The concert was awesome.",
+      "vi": "Buổi hòa nhạc thật tuyệt vời."
+    },
+    "exampleUsage": {
+      "en": "You did an awesome job on the project.",
+      "vi": "Bạn đã làm dự án rất xuất sắc.",
+      "note": "Awesome is informal and common in conversation."
+    },
+    "acceptedAnswers": [
+      "awesome"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000051",
+    "sourceIndex": 51,
+    "word": "baby",
+    "ipa": "/ˈbeɪbi/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "em bé; con non",
+    "enDefinition": "a very young child or animal",
+    "exampleMeaning": {
+      "en": "The baby is sleeping.",
+      "vi": "Em bé đang ngủ."
+    },
+    "exampleUsage": {
+      "en": "They have a six-month-old baby.",
+      "vi": "Họ có một em bé sáu tháng tuổi.",
+      "note": "Baby is countable; the plural is babies."
+    },
+    "acceptedAnswers": [
+      "baby"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000052",
+    "sourceIndex": 52,
+    "word": "back",
+    "ipa": "/bæk/",
+    "partOfSpeech": "n., adv.",
+    "cefr": "A1",
+    "viMeaning": "phía sau; trở lại",
+    "enDefinition": "the rear part, or toward an earlier place or condition",
+    "exampleMeaning": {
+      "en": "The garden is at the back of the house.",
+      "vi": "Khu vườn ở phía sau ngôi nhà."
+    },
+    "exampleUsage": {
+      "en": "I'll call you back after lunch.",
+      "vi": "Tôi sẽ gọi lại cho bạn sau bữa trưa.",
+      "note": "Call someone back means return a phone call."
+    },
+    "acceptedAnswers": [
+      "back"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000053",
+    "sourceIndex": 53,
+    "word": "bad",
+    "ipa": "/bæd/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "xấu; tệ",
+    "enDefinition": "of poor quality, unpleasant, or harmful",
+    "exampleMeaning": {
+      "en": "The weather is bad today.",
+      "vi": "Thời tiết hôm nay xấu."
+    },
+    "exampleUsage": {
+      "en": "Smoking is bad for your health.",
+      "vi": "Hút thuốc có hại cho sức khỏe.",
+      "note": "Use bad for to describe something harmful."
+    },
+    "acceptedAnswers": [
+      "bad"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000054",
+    "sourceIndex": 54,
+    "word": "bag",
+    "ipa": "/bæg/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "túi",
+    "enDefinition": "a container made of flexible material used for carrying things",
+    "exampleMeaning": {
+      "en": "Her books are in the bag.",
+      "vi": "Sách của cô ấy ở trong túi."
+    },
+    "exampleUsage": {
+      "en": "He packed a bag for the weekend.",
+      "vi": "Anh ấy xếp một túi đồ cho cuối tuần.",
+      "note": "Common phrases include a shopping bag and pack a bag."
+    },
+    "acceptedAnswers": [
+      "bag"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000055",
+    "sourceIndex": 55,
+    "word": "ball",
+    "ipa": "/bɔl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "quả bóng",
+    "enDefinition": "a round object used in games and sports",
+    "exampleMeaning": {
+      "en": "The children kicked the ball.",
+      "vi": "Bọn trẻ đá quả bóng."
+    },
+    "exampleUsage": {
+      "en": "Throw the ball to me.",
+      "vi": "Ném bóng cho tôi.",
+      "note": "Common verbs with ball are throw, catch, and kick."
+    },
+    "acceptedAnswers": [
+      "ball"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000056",
+    "sourceIndex": 56,
+    "word": "banana",
+    "ipa": "/bəˈnænə/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "quả chuối",
+    "enDefinition": "a long curved fruit with yellow skin",
+    "exampleMeaning": {
+      "en": "She put a banana in her lunch box.",
+      "vi": "Cô ấy đặt một quả chuối vào hộp cơm trưa."
+    },
+    "exampleUsage": {
+      "en": "I made a banana smoothie.",
+      "vi": "Tôi làm một ly sinh tố chuối.",
+      "note": "Banana is countable; banana can also describe a flavor or ingredient."
+    },
+    "acceptedAnswers": [
+      "banana"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000057",
+    "sourceIndex": 57,
+    "word": "band",
+    "ipa": "/bænd/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "ban nhạc",
+    "enDefinition": "a group of musicians who perform together",
+    "exampleMeaning": {
+      "en": "The band played three songs.",
+      "vi": "Ban nhạc đã chơi ba bài hát."
+    },
+    "exampleUsage": {
+      "en": "My brother plays in a rock band.",
+      "vi": "Anh trai tôi chơi trong một ban nhạc rock.",
+      "note": "Use play in a band for membership."
+    },
+    "acceptedAnswers": [
+      "band"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000058",
+    "sourceIndex": 58,
+    "word": "bank",
+    "ipa": "/bæŋk/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "ngân hàng",
+    "enDefinition": "a business that keeps and lends money",
+    "exampleMeaning": {
+      "en": "The bank closes at five.",
+      "vi": "Ngân hàng đóng cửa lúc năm giờ."
+    },
+    "exampleUsage": {
+      "en": "I need to take some money out of the bank.",
+      "vi": "Tôi cần rút một ít tiền từ ngân hàng.",
+      "note": "This card uses the money sense of bank."
+    },
+    "acceptedAnswers": [
+      "bank"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000059",
+    "sourceIndex": 59,
+    "word": "bar",
+    "ipa": "/bɑr/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "quán bar; quầy phục vụ",
+    "enDefinition": "a place or counter where drinks are served",
+    "exampleMeaning": {
+      "en": "We met at a small bar near the hotel.",
+      "vi": "Chúng tôi gặp nhau tại một quán bar nhỏ gần khách sạn."
+    },
+    "exampleUsage": {
+      "en": "He ordered water at the bar.",
+      "vi": "Anh ấy gọi nước tại quầy.",
+      "note": "At the bar can mean at the serving counter."
+    },
+    "acceptedAnswers": [
+      "bar"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000060",
+    "sourceIndex": 60,
+    "word": "baseball",
+    "ipa": "/ˈbeɪsˌbɔl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bóng chày",
+    "enDefinition": "a game in which players hit a ball with a bat and run around bases",
+    "exampleMeaning": {
+      "en": "They play baseball after school.",
+      "vi": "Họ chơi bóng chày sau giờ học."
+    },
+    "exampleUsage": {
+      "en": "He is on the school baseball team.",
+      "vi": "Cậu ấy ở trong đội bóng chày của trường.",
+      "note": "Use play baseball without an article."
+    },
+    "acceptedAnswers": [
+      "baseball"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000061",
+    "sourceIndex": 61,
+    "word": "basketball",
+    "ipa": "/ˈbæskɪtˌbɔl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bóng rổ",
+    "enDefinition": "a game in which players throw a ball through a high ring",
+    "exampleMeaning": {
+      "en": "Basketball is popular at our school.",
+      "vi": "Bóng rổ phổ biến ở trường chúng tôi."
+    },
+    "exampleUsage": {
+      "en": "She plays basketball twice a week.",
+      "vi": "Cô ấy chơi bóng rổ hai lần một tuần.",
+      "note": "Use play basketball without an article."
+    },
+    "acceptedAnswers": [
+      "basketball"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000062",
+    "sourceIndex": 62,
+    "word": "bath",
+    "ipa": "/bæθ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "việc tắm; nước tắm",
+    "enDefinition": "the act of washing your body in water, or the water used for it",
+    "exampleMeaning": {
+      "en": "The child is having a bath.",
+      "vi": "Đứa trẻ đang tắm."
+    },
+    "exampleUsage": {
+      "en": "I take a warm bath before bed.",
+      "vi": "Tôi tắm nước ấm trước khi ngủ.",
+      "note": "Have a bath and take a bath are both common."
+    },
+    "acceptedAnswers": [
+      "bath"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000063",
+    "sourceIndex": 63,
+    "word": "bathroom",
+    "ipa": "/ˈbæθˌrum/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "phòng tắm",
+    "enDefinition": "a room containing a toilet, sink, and often a bath or shower",
+    "exampleMeaning": {
+      "en": "The bathroom is next to the bedroom.",
+      "vi": "Phòng tắm ở cạnh phòng ngủ."
+    },
+    "exampleUsage": {
+      "en": "May I use your bathroom?",
+      "vi": "Tôi có thể dùng nhà vệ sinh của bạn không?",
+      "note": "In American English, bathroom can politely mean toilet."
+    },
+    "acceptedAnswers": [
+      "bathroom"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000064",
+    "sourceIndex": 64,
+    "word": "be",
+    "ipa": "/bi/",
+    "partOfSpeech": "v., auxiliary v.",
+    "cefr": "A1",
+    "viMeaning": "thì; là; ở",
+    "enDefinition": "the basic verb used to describe identity, condition, or location",
+    "exampleMeaning": {
+      "en": "I want to be a doctor.",
+      "vi": "Tôi muốn trở thành bác sĩ."
+    },
+    "exampleUsage": {
+      "en": "Be careful on the stairs.",
+      "vi": "Hãy cẩn thận trên cầu thang.",
+      "note": "Forms of be include am, is, are, was, and were."
+    },
+    "acceptedAnswers": [
+      "be"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000065",
+    "sourceIndex": 65,
+    "word": "beach",
+    "ipa": "/biʧ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bãi biển",
+    "enDefinition": "a sandy or stony area beside the sea or a lake",
+    "exampleMeaning": {
+      "en": "We walked along the beach.",
+      "vi": "Chúng tôi đi bộ dọc bãi biển."
+    },
+    "exampleUsage": {
+      "en": "They spent the day at the beach.",
+      "vi": "Họ dành cả ngày ở bãi biển.",
+      "note": "Use at the beach for being there and on the beach for the surface."
+    },
+    "acceptedAnswers": [
+      "beach"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000066",
+    "sourceIndex": 66,
+    "word": "beautiful",
+    "ipa": "/ˈbjutəfəl/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "đẹp; xinh đẹp",
+    "enDefinition": "very attractive or pleasant to see",
+    "exampleMeaning": {
+      "en": "The garden is beautiful in spring.",
+      "vi": "Khu vườn rất đẹp vào mùa xuân."
+    },
+    "exampleUsage": {
+      "en": "What a beautiful day!",
+      "vi": "Thật là một ngày đẹp trời!",
+      "note": "Beautiful can describe people, places, things, or experiences."
+    },
+    "acceptedAnswers": [
+      "beautiful"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000067",
+    "sourceIndex": 67,
+    "word": "because",
+    "ipa": "/bɪˈkɔz/",
+    "partOfSpeech": "conj.",
+    "cefr": "A1",
+    "viMeaning": "bởi vì",
+    "enDefinition": "for the reason that",
+    "exampleMeaning": {
+      "en": "We stayed inside because it was raining.",
+      "vi": "Chúng tôi ở trong nhà vì trời mưa."
+    },
+    "exampleUsage": {
+      "en": "She smiled because she was happy.",
+      "vi": "Cô ấy mỉm cười vì vui.",
+      "note": "Because introduces a clause with a subject and verb."
+    },
+    "acceptedAnswers": [
+      "because"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000068",
+    "sourceIndex": 68,
+    "word": "become",
+    "ipa": "/bɪˈkəm/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "trở thành",
+    "enDefinition": "to begin to be something",
+    "exampleMeaning": {
+      "en": "The sky became dark.",
+      "vi": "Bầu trời trở nên tối."
+    },
+    "exampleUsage": {
+      "en": "He wants to become a teacher.",
+      "vi": "Anh ấy muốn trở thành giáo viên.",
+      "note": "Become is followed by a noun or adjective."
+    },
+    "acceptedAnswers": [
+      "become"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000069",
+    "sourceIndex": 69,
+    "word": "bed",
+    "ipa": "/bɛd/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "giường",
+    "enDefinition": "a piece of furniture used for sleeping",
+    "exampleMeaning": {
+      "en": "The cat is under the bed.",
+      "vi": "Con mèo ở dưới gầm giường."
+    },
+    "exampleUsage": {
+      "en": "I usually go to bed at eleven.",
+      "vi": "Tôi thường đi ngủ lúc mười một giờ.",
+      "note": "Go to bed means begin sleeping and normally has no article."
+    },
+    "acceptedAnswers": [
+      "bed"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000070",
+    "sourceIndex": 70,
+    "word": "bedroom",
+    "ipa": "/ˈbɛˌdrum/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "phòng ngủ",
+    "enDefinition": "a room used mainly for sleeping",
+    "exampleMeaning": {
+      "en": "Her bedroom has a large window.",
+      "vi": "Phòng ngủ của cô ấy có một cửa sổ lớn."
+    },
+    "exampleUsage": {
+      "en": "There are two bedrooms upstairs.",
+      "vi": "Có hai phòng ngủ ở tầng trên.",
+      "note": "Bedroom is countable."
+    },
+    "acceptedAnswers": [
+      "bedroom"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000071",
+    "sourceIndex": 71,
+    "word": "beer",
+    "ipa": "/bɪr/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bia",
+    "enDefinition": "an alcoholic drink made from grain",
+    "exampleMeaning": {
+      "en": "He ordered a glass of beer.",
+      "vi": "Anh ấy gọi một ly bia."
+    },
+    "exampleUsage": {
+      "en": "Would you like a beer?",
+      "vi": "Bạn có muốn một ly bia không?",
+      "note": "Beer is uncountable for the drink, but a beer means one serving."
+    },
+    "acceptedAnswers": [
+      "beer"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000072",
+    "sourceIndex": 72,
+    "word": "before",
+    "ipa": "/bɪˈfɔr/",
+    "partOfSpeech": "prep.",
+    "cefr": "A1",
+    "viMeaning": "trước; trước khi",
+    "enDefinition": "earlier than someone or something",
+    "exampleMeaning": {
+      "en": "Wash your hands before dinner.",
+      "vi": "Hãy rửa tay trước bữa tối."
+    },
+    "exampleUsage": {
+      "en": "We arrived before eight o'clock.",
+      "vi": "Chúng tôi đến trước tám giờ.",
+      "note": "Before can introduce a noun, time, or -ing form."
+    },
+    "acceptedAnswers": [
+      "before"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000073",
+    "sourceIndex": 73,
+    "word": "begin",
+    "ipa": "/bɪˈgɪn/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "bắt đầu",
+    "enDefinition": "to start happening or doing something",
+    "exampleMeaning": {
+      "en": "The movie begins at seven.",
+      "vi": "Bộ phim bắt đầu lúc bảy giờ."
+    },
+    "exampleUsage": {
+      "en": "She began to learn English last year.",
+      "vi": "Cô ấy bắt đầu học tiếng Anh năm ngoái.",
+      "note": "Begin can be followed by to + verb or an -ing form."
+    },
+    "acceptedAnswers": [
+      "begin"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000074",
+    "sourceIndex": 74,
+    "word": "beginning",
+    "ipa": "/bɪˈgɪnɪŋ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "sự khởi đầu; phần đầu",
+    "enDefinition": "the first part of an event, story, or period",
+    "exampleMeaning": {
+      "en": "The beginning of the movie was funny.",
+      "vi": "Phần đầu bộ phim rất vui."
+    },
+    "exampleUsage": {
+      "en": "Let's start from the beginning.",
+      "vi": "Hãy bắt đầu lại từ đầu.",
+      "note": "Use the beginning of something."
+    },
+    "acceptedAnswers": [
+      "beginning"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000075",
+    "sourceIndex": 75,
+    "word": "behind",
+    "ipa": "/bɪˈhaɪnd/",
+    "partOfSpeech": "prep., adv.",
+    "cefr": "A1",
+    "viMeaning": "phía sau; đằng sau",
+    "enDefinition": "at or toward the back of someone or something",
+    "exampleMeaning": {
+      "en": "The car is behind the bus.",
+      "vi": "Chiếc xe hơi ở sau xe buýt."
+    },
+    "exampleUsage": {
+      "en": "She looked behind but saw nobody.",
+      "vi": "Cô ấy nhìn ra phía sau nhưng không thấy ai.",
+      "note": "Behind can be followed by an object or used alone."
+    },
+    "acceptedAnswers": [
+      "behind"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000076",
+    "sourceIndex": 76,
+    "word": "believe",
+    "ipa": "/bɪˈliv/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "tin; tin tưởng",
+    "enDefinition": "to think that something is true",
+    "exampleMeaning": {
+      "en": "I believe your story.",
+      "vi": "Tôi tin câu chuyện của bạn."
+    },
+    "exampleUsage": {
+      "en": "Do you believe in ghosts?",
+      "vi": "Bạn có tin vào ma không?",
+      "note": "Believe someone means accept their words; believe in means accept that something exists."
+    },
+    "acceptedAnswers": [
+      "believe"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000077",
+    "sourceIndex": 77,
+    "word": "below",
+    "ipa": "/bɪˈloʊ/",
+    "partOfSpeech": "adv., prep.",
+    "cefr": "A1",
+    "viMeaning": "ở dưới; thấp hơn",
+    "enDefinition": "in or to a lower position than something",
+    "exampleMeaning": {
+      "en": "The temperature fell below zero.",
+      "vi": "Nhiệt độ giảm xuống dưới không."
+    },
+    "exampleUsage": {
+      "en": "Please read the note below.",
+      "vi": "Vui lòng đọc ghi chú bên dưới.",
+      "note": "Below can be a preposition or an adverb."
+    },
+    "acceptedAnswers": [
+      "below"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000078",
+    "sourceIndex": 78,
+    "word": "best",
+    "ipa": "/bɛst/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "tốt nhất",
+    "enDefinition": "of the highest quality or level",
+    "exampleMeaning": {
+      "en": "This is the best restaurant in town.",
+      "vi": "Đây là nhà hàng tốt nhất trong thị trấn."
+    },
+    "exampleUsage": {
+      "en": "Try your best in the test.",
+      "vi": "Hãy cố gắng hết sức trong bài kiểm tra.",
+      "note": "Best is the superlative form of good."
+    },
+    "acceptedAnswers": [
+      "best"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000079",
+    "sourceIndex": 79,
+    "word": "better",
+    "ipa": "/ˈbɛtər/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "tốt hơn",
+    "enDefinition": "of higher quality or more suitable",
+    "exampleMeaning": {
+      "en": "This book is better than that one.",
+      "vi": "Cuốn sách này hay hơn cuốn kia."
+    },
+    "exampleUsage": {
+      "en": "I feel much better today.",
+      "vi": "Hôm nay tôi cảm thấy khỏe hơn nhiều.",
+      "note": "Better is the comparative form of good; use better than for comparison."
+    },
+    "acceptedAnswers": [
+      "better"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000080",
+    "sourceIndex": 80,
+    "word": "between",
+    "ipa": "/bɪtˈwin/",
+    "partOfSpeech": "prep.",
+    "cefr": "A1",
+    "viMeaning": "giữa; ở khoảng giữa",
+    "enDefinition": "in the space separating two people, places, times, or things",
+    "exampleMeaning": {
+      "en": "The bank is between the cafe and the hotel.",
+      "vi": "Ngân hàng nằm giữa quán cà phê và khách sạn."
+    },
+    "exampleUsage": {
+      "en": "Choose between the blue shirt and the black one.",
+      "vi": "Hãy chọn giữa áo xanh và áo đen.",
+      "note": "Between commonly connects two alternatives with and."
+    },
+    "acceptedAnswers": [
+      "between"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000081",
+    "sourceIndex": 81,
+    "word": "bicycle",
+    "ipa": "/ˈbaɪsɪkəl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "xe đạp",
+    "enDefinition": "a vehicle with two wheels that you move by pushing pedals",
+    "exampleMeaning": {
+      "en": "She rides her bicycle to school.",
+      "vi": "Cô ấy đi xe đạp đến trường."
+    },
+    "exampleUsage": {
+      "en": "He came by bicycle.",
+      "vi": "Anh ấy đến bằng xe đạp.",
+      "note": "Ride a bicycle, but travel by bicycle."
+    },
+    "acceptedAnswers": [
+      "bicycle"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000082",
+    "sourceIndex": 82,
+    "word": "big",
+    "ipa": "/bɪg/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "to; lớn",
+    "enDefinition": "large in size or amount",
+    "exampleMeaning": {
+      "en": "They live in a big house.",
+      "vi": "Họ sống trong một ngôi nhà lớn."
+    },
+    "exampleUsage": {
+      "en": "Moving abroad was a big decision.",
+      "vi": "Chuyển ra nước ngoài là một quyết định lớn.",
+      "note": "Big can describe physical size or importance."
+    },
+    "acceptedAnswers": [
+      "big"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000083",
+    "sourceIndex": 83,
+    "word": "bike",
+    "ipa": "/baɪk/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "xe đạp",
+    "enDefinition": "a bicycle",
+    "exampleMeaning": {
+      "en": "My bike is outside.",
+      "vi": "Xe đạp của tôi ở bên ngoài."
+    },
+    "exampleUsage": {
+      "en": "We went for a bike ride.",
+      "vi": "Chúng tôi đi đạp xe.",
+      "note": "Bike is the common informal word for bicycle."
+    },
+    "acceptedAnswers": [
+      "bike"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000084",
+    "sourceIndex": 84,
+    "word": "bill",
+    "ipa": "/bɪl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "hóa đơn; tờ tiền",
+    "enDefinition": "a written statement of money owed, or a piece of paper money",
+    "exampleMeaning": {
+      "en": "The electricity bill arrived today.",
+      "vi": "Hóa đơn tiền điện đến hôm nay."
+    },
+    "exampleUsage": {
+      "en": "Can we have the bill, please?",
+      "vi": "Cho chúng tôi xin hóa đơn được không?",
+      "note": "In a restaurant, bill is common; American English also uses check."
+    },
+    "acceptedAnswers": [
+      "bill"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000085",
+    "sourceIndex": 85,
+    "word": "bird",
+    "ipa": "/bərd/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "chim",
+    "enDefinition": "an animal with feathers, wings, and a beak",
+    "exampleMeaning": {
+      "en": "A small bird landed on the wall.",
+      "vi": "Một con chim nhỏ đậu trên tường."
+    },
+    "exampleUsage": {
+      "en": "We heard birds singing in the trees.",
+      "vi": "Chúng tôi nghe tiếng chim hót trên cây.",
+      "note": "Bird is countable."
+    },
+    "acceptedAnswers": [
+      "bird"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000086",
+    "sourceIndex": 86,
+    "word": "birthday",
+    "ipa": "/ˈbərθˌdeɪ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "sinh nhật",
+    "enDefinition": "the day each year that marks when someone was born",
+    "exampleMeaning": {
+      "en": "Today is my birthday.",
+      "vi": "Hôm nay là sinh nhật của tôi."
+    },
+    "exampleUsage": {
+      "en": "We bought her a birthday cake.",
+      "vi": "Chúng tôi mua cho cô ấy một chiếc bánh sinh nhật.",
+      "note": "Birthday often modifies nouns: birthday party, card, or cake."
+    },
+    "acceptedAnswers": [
+      "birthday"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000087",
+    "sourceIndex": 87,
+    "word": "black",
+    "ipa": "/blæk/",
+    "partOfSpeech": "adj., n.",
+    "cefr": "A1",
+    "viMeaning": "màu đen; đen",
+    "enDefinition": "the darkest color, or having that color",
+    "exampleMeaning": {
+      "en": "He is wearing a black coat.",
+      "vi": "Anh ấy đang mặc một chiếc áo khoác đen."
+    },
+    "exampleUsage": {
+      "en": "The photo is in black and white.",
+      "vi": "Bức ảnh có màu đen trắng.",
+      "note": "Black can be an adjective or a noun naming the color."
+    },
+    "acceptedAnswers": [
+      "black"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000088",
+    "sourceIndex": 88,
+    "word": "blog",
+    "ipa": "/blɔg/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "blog",
+    "enDefinition": "a website or page where someone regularly posts writing or pictures",
+    "exampleMeaning": {
+      "en": "She writes a travel blog.",
+      "vi": "Cô ấy viết một blog du lịch."
+    },
+    "exampleUsage": {
+      "en": "I posted the recipe on my blog.",
+      "vi": "Tôi đăng công thức lên blog của mình.",
+      "note": "Write a blog, but post something on a blog."
+    },
+    "acceptedAnswers": [
+      "blog"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000089",
+    "sourceIndex": 89,
+    "word": "blond",
+    "ipa": "/blɑnd/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "vàng hoe; tóc vàng",
+    "enDefinition": "having pale yellow hair",
+    "exampleMeaning": {
+      "en": "The child has blond hair.",
+      "vi": "Đứa trẻ có mái tóc vàng hoe."
+    },
+    "exampleUsage": {
+      "en": "He is tall and blond.",
+      "vi": "Anh ấy cao và có tóc vàng.",
+      "note": "Blond can describe a person or their hair."
+    },
+    "acceptedAnswers": [
+      "blond"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000090",
+    "sourceIndex": 90,
+    "word": "blue",
+    "ipa": "/blu/",
+    "partOfSpeech": "adj., n.",
+    "cefr": "A1",
+    "viMeaning": "màu xanh dương; xanh dương",
+    "enDefinition": "the color of a clear sky, or having that color",
+    "exampleMeaning": {
+      "en": "She wore a blue dress.",
+      "vi": "Cô ấy mặc một chiếc váy xanh dương."
+    },
+    "exampleUsage": {
+      "en": "Blue is my favorite color.",
+      "vi": "Xanh dương là màu yêu thích của tôi.",
+      "note": "Blue can be an adjective or a noun naming the color."
+    },
+    "acceptedAnswers": [
+      "blue"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000091",
+    "sourceIndex": 91,
+    "word": "boat",
+    "ipa": "/boʊt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "thuyền",
+    "enDefinition": "a small vehicle used for traveling on water",
+    "exampleMeaning": {
+      "en": "The boat is on the lake.",
+      "vi": "Chiếc thuyền ở trên hồ."
+    },
+    "exampleUsage": {
+      "en": "We went across the river by boat.",
+      "vi": "Chúng tôi qua sông bằng thuyền.",
+      "note": "Travel by boat, but get on or off a boat."
+    },
+    "acceptedAnswers": [
+      "boat"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000092",
+    "sourceIndex": 92,
+    "word": "body",
+    "ipa": "/ˈbɑdi/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "cơ thể",
+    "enDefinition": "the whole physical form of a person or animal",
+    "exampleMeaning": {
+      "en": "Exercise is good for your body.",
+      "vi": "Tập thể dục tốt cho cơ thể bạn."
+    },
+    "exampleUsage": {
+      "en": "The human body needs water.",
+      "vi": "Cơ thể con người cần nước.",
+      "note": "Body is countable; the plural is bodies."
+    },
+    "acceptedAnswers": [
+      "body"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000093",
+    "sourceIndex": 93,
+    "word": "book",
+    "ipa": "/bʊk/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "sách",
+    "enDefinition": "a set of printed or digital pages containing writing or pictures",
+    "exampleMeaning": {
+      "en": "This book is easy to read.",
+      "vi": "Cuốn sách này dễ đọc."
+    },
+    "exampleUsage": {
+      "en": "I borrowed a book from the library.",
+      "vi": "Tôi mượn một cuốn sách từ thư viện.",
+      "note": "Read a book; a book about something describes its topic."
+    },
+    "acceptedAnswers": [
+      "book"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000094",
+    "sourceIndex": 94,
+    "word": "boot",
+    "ipa": "/but/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "ủng; giày cổ cao",
+    "enDefinition": "a strong shoe that covers the foot and part of the leg",
+    "exampleMeaning": {
+      "en": "My boots are wet.",
+      "vi": "Đôi ủng của tôi bị ướt."
+    },
+    "exampleUsage": {
+      "en": "She put on her walking boots.",
+      "vi": "Cô ấy mang đôi giày đi bộ.",
+      "note": "Boot is often used in the plural for a pair."
+    },
+    "acceptedAnswers": [
+      "boot"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000095",
+    "sourceIndex": 95,
+    "word": "bored",
+    "ipa": "/bɔrd/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "chán; cảm thấy buồn chán",
+    "enDefinition": "feeling tired and unhappy because something is not interesting",
+    "exampleMeaning": {
+      "en": "The children are bored at home.",
+      "vi": "Bọn trẻ cảm thấy chán ở nhà."
+    },
+    "exampleUsage": {
+      "en": "I'm bored with this game.",
+      "vi": "Tôi chán trò chơi này rồi.",
+      "note": "A person is bored; a thing is boring."
+    },
+    "acceptedAnswers": [
+      "bored"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000096",
+    "sourceIndex": 96,
+    "word": "boring",
+    "ipa": "/ˈbɔrɪŋ/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "nhàm chán",
+    "enDefinition": "not interesting or exciting",
+    "exampleMeaning": {
+      "en": "The lesson was boring.",
+      "vi": "Bài học thật nhàm chán."
+    },
+    "exampleUsage": {
+      "en": "Doing the same thing every day is boring.",
+      "vi": "Làm cùng một việc mỗi ngày thật chán.",
+      "note": "A thing is boring; a person who feels this way is bored."
+    },
+    "acceptedAnswers": [
+      "boring"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000097",
+    "sourceIndex": 97,
+    "word": "born",
+    "ipa": "/bɔrn/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "được sinh ra",
+    "enDefinition": "brought into life by birth",
+    "exampleMeaning": {
+      "en": "She was born in 2005.",
+      "vi": "Cô ấy sinh năm 2005."
+    },
+    "exampleUsage": {
+      "en": "He was born in Vietnam but grew up in Canada.",
+      "vi": "Anh ấy sinh ra ở Việt Nam nhưng lớn lên tại Canada.",
+      "note": "Born is normally used with be: was born in a place or on a date."
+    },
+    "acceptedAnswers": [
+      "born"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000098",
+    "sourceIndex": 98,
+    "word": "both",
+    "ipa": "/boʊθ/",
+    "partOfSpeech": "det./pron.",
+    "cefr": "A1",
+    "viMeaning": "cả hai",
+    "enDefinition": "used to refer to two people or things together",
+    "exampleMeaning": {
+      "en": "Both answers are correct.",
+      "vi": "Cả hai câu trả lời đều đúng."
+    },
+    "exampleUsage": {
+      "en": "We both enjoy cooking.",
+      "vi": "Cả hai chúng tôi đều thích nấu ăn.",
+      "note": "Both can come before a plural noun or after a subject pronoun."
+    },
+    "acceptedAnswers": [
+      "both"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000099",
+    "sourceIndex": 99,
+    "word": "bottle",
+    "ipa": "/ˈbɑtəl/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "chai",
+    "enDefinition": "a container with a narrow top, usually for liquids",
+    "exampleMeaning": {
+      "en": "There is a bottle of water on the desk.",
+      "vi": "Có một chai nước trên bàn."
+    },
+    "exampleUsage": {
+      "en": "Please put the milk bottle in the fridge.",
+      "vi": "Vui lòng đặt chai sữa vào tủ lạnh.",
+      "note": "Use a bottle of + liquid to describe an amount."
+    },
+    "acceptedAnswers": [
+      "bottle"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000100",
+    "sourceIndex": 100,
+    "word": "box",
+    "ipa": "/bɑks/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "hộp",
+    "enDefinition": "a container with flat sides, usually square or rectangular",
+    "exampleMeaning": {
+      "en": "The shoes are in a box.",
+      "vi": "Đôi giày ở trong hộp."
+    },
+    "exampleUsage": {
+      "en": "She gave me a box of chocolates.",
+      "vi": "Cô ấy tặng tôi một hộp sô-cô-la.",
+      "note": "Use a box of to describe a container and its contents."
+    },
+    "acceptedAnswers": [
+      "box"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000101",
+    "sourceIndex": 101,
+    "word": "boy",
+    "ipa": "/bɔɪ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "con trai; cậu bé",
+    "enDefinition": "a male child or young male person",
+    "exampleMeaning": {
+      "en": "The boy is playing with a ball.",
+      "vi": "Cậu bé đang chơi bóng."
+    },
+    "exampleUsage": {
+      "en": "They have two boys and one girl.",
+      "vi": "Họ có hai con trai và một con gái.",
+      "note": "Boy is countable."
+    },
+    "acceptedAnswers": [
+      "boy"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000102",
+    "sourceIndex": 102,
+    "word": "boyfriend",
+    "ipa": "/ˈbɔɪˌfrɛnd/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bạn trai",
+    "enDefinition": "a male person with whom someone has a romantic relationship",
+    "exampleMeaning": {
+      "en": "Her boyfriend works at the airport.",
+      "vi": "Bạn trai của cô ấy làm việc ở sân bay."
+    },
+    "exampleUsage": {
+      "en": "She went to the concert with her boyfriend.",
+      "vi": "Cô ấy đi xem hòa nhạc cùng bạn trai.",
+      "note": "Boyfriend is countable."
+    },
+    "acceptedAnswers": [
+      "boyfriend"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000103",
+    "sourceIndex": 103,
+    "word": "bread",
+    "ipa": "/brɛd/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bánh mì",
+    "enDefinition": "food made by baking a mixture of flour and water",
+    "exampleMeaning": {
+      "en": "We bought fresh bread this morning.",
+      "vi": "Chúng tôi mua bánh mì tươi sáng nay."
+    },
+    "exampleUsage": {
+      "en": "Would you like a slice of bread?",
+      "vi": "Bạn có muốn một lát bánh mì không?",
+      "note": "Bread is uncountable; use a loaf or slice for a countable amount."
+    },
+    "acceptedAnswers": [
+      "bread"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000104",
+    "sourceIndex": 104,
+    "word": "break",
+    "ipa": "/breɪk/",
+    "partOfSpeech": "v., n.",
+    "cefr": "A1",
+    "viMeaning": "làm vỡ; nghỉ giải lao",
+    "enDefinition": "to damage something into pieces, or a short period of rest",
+    "exampleMeaning": {
+      "en": "Be careful not to break the glass.",
+      "vi": "Hãy cẩn thận đừng làm vỡ chiếc ly."
+    },
+    "exampleUsage": {
+      "en": "Let's take a short break after this lesson.",
+      "vi": "Hãy nghỉ giải lao ngắn sau bài học này.",
+      "note": "Break is a verb; take a break uses it as a countable noun."
+    },
+    "acceptedAnswers": [
+      "break"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000105",
+    "sourceIndex": 105,
+    "word": "breakfast",
+    "ipa": "/ˈbrɛkfəst/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bữa sáng",
+    "enDefinition": "the first meal of the day",
+    "exampleMeaning": {
+      "en": "Breakfast is ready.",
+      "vi": "Bữa sáng đã sẵn sàng."
+    },
+    "exampleUsage": {
+      "en": "I usually have breakfast at seven.",
+      "vi": "Tôi thường ăn sáng lúc bảy giờ.",
+      "note": "Use have breakfast without an article for the daily meal."
+    },
+    "acceptedAnswers": [
+      "breakfast"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000106",
+    "sourceIndex": 106,
+    "word": "bring",
+    "ipa": "/brɪŋ/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "mang; đem",
+    "enDefinition": "to take someone or something with you to a place",
+    "exampleMeaning": {
+      "en": "Please bring your book to class.",
+      "vi": "Vui lòng mang sách đến lớp."
+    },
+    "exampleUsage": {
+      "en": "Can I bring a friend with me?",
+      "vi": "Tôi có thể dẫn theo một người bạn không?",
+      "note": "Bring moves something toward the speaker or destination; take often moves it away."
+    },
+    "acceptedAnswers": [
+      "bring"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000107",
+    "sourceIndex": 107,
+    "word": "brother",
+    "ipa": "/ˈbrəðər/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "anh/em trai",
+    "enDefinition": "a male person who has the same parents as you",
+    "exampleMeaning": {
+      "en": "My brother is younger than me.",
+      "vi": "Em trai tôi nhỏ tuổi hơn tôi."
+    },
+    "exampleUsage": {
+      "en": "I share a room with my brother.",
+      "vi": "Tôi ở chung phòng với anh trai.",
+      "note": "Brother is countable."
+    },
+    "acceptedAnswers": [
+      "brother"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000108",
+    "sourceIndex": 108,
+    "word": "brown",
+    "ipa": "/braʊn/",
+    "partOfSpeech": "adj., n.",
+    "cefr": "A1",
+    "viMeaning": "màu nâu; nâu",
+    "enDefinition": "the color of earth or wood, or having that color",
+    "exampleMeaning": {
+      "en": "She has brown eyes.",
+      "vi": "Cô ấy có đôi mắt nâu."
+    },
+    "exampleUsage": {
+      "en": "Brown goes well with blue.",
+      "vi": "Màu nâu hợp với màu xanh dương.",
+      "note": "Brown can be an adjective or a noun naming the color."
+    },
+    "acceptedAnswers": [
+      "brown"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000109",
+    "sourceIndex": 109,
+    "word": "build",
+    "ipa": "/bɪld/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "xây dựng",
+    "enDefinition": "to make a structure by putting parts together",
+    "exampleMeaning": {
+      "en": "They plan to build a new school.",
+      "vi": "Họ dự định xây một ngôi trường mới."
+    },
+    "exampleUsage": {
+      "en": "The children built a house out of boxes.",
+      "vi": "Bọn trẻ dựng một ngôi nhà bằng các hộp giấy.",
+      "note": "Build something out of a material means use that material to make it."
+    },
+    "acceptedAnswers": [
+      "build"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000110",
+    "sourceIndex": 110,
+    "word": "building",
+    "ipa": "/ˈbɪldɪŋ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "tòa nhà",
+    "enDefinition": "a structure with walls and a roof",
+    "exampleMeaning": {
+      "en": "That tall building is a hotel.",
+      "vi": "Tòa nhà cao đó là một khách sạn."
+    },
+    "exampleUsage": {
+      "en": "The office is on the second floor of the building.",
+      "vi": "Văn phòng ở tầng hai của tòa nhà.",
+      "note": "Building is countable."
+    },
+    "acceptedAnswers": [
+      "building"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000111",
+    "sourceIndex": 111,
+    "word": "bus",
+    "ipa": "/bəs/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "xe buýt",
+    "enDefinition": "a large road vehicle that carries many passengers",
+    "exampleMeaning": {
+      "en": "The bus is late today.",
+      "vi": "Xe buýt hôm nay đến muộn."
+    },
+    "exampleUsage": {
+      "en": "I go to work by bus.",
+      "vi": "Tôi đi làm bằng xe buýt.",
+      "note": "Travel by bus, but get on or off the bus."
+    },
+    "acceptedAnswers": [
+      "bus"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000112",
+    "sourceIndex": 112,
+    "word": "business",
+    "ipa": "/ˈbɪznɪs/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "kinh doanh; doanh nghiệp",
+    "enDefinition": "the activity of buying and selling, or an organization that does this",
+    "exampleMeaning": {
+      "en": "Her family owns a small business.",
+      "vi": "Gia đình cô ấy sở hữu một doanh nghiệp nhỏ."
+    },
+    "exampleUsage": {
+      "en": "They do business with companies in Asia.",
+      "vi": "Họ làm ăn với các công ty ở châu Á.",
+      "note": "Do business with means have commercial relations with."
+    },
+    "acceptedAnswers": [
+      "business"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000113",
+    "sourceIndex": 113,
+    "word": "busy",
+    "ipa": "/ˈbɪzi/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "bận rộn",
+    "enDefinition": "having many things to do",
+    "exampleMeaning": {
+      "en": "I'm busy this afternoon.",
+      "vi": "Tôi bận chiều nay."
+    },
+    "exampleUsage": {
+      "en": "She is busy preparing for the exam.",
+      "vi": "Cô ấy bận chuẩn bị cho kỳ thi.",
+      "note": "Use busy doing something, without with or to."
+    },
+    "acceptedAnswers": [
+      "busy"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000114",
+    "sourceIndex": 114,
+    "word": "but",
+    "ipa": "/bʌt/",
+    "partOfSpeech": "conj.",
+    "cefr": "A1",
+    "viMeaning": "nhưng",
+    "enDefinition": "used to introduce an idea that contrasts with the previous one",
+    "exampleMeaning": {
+      "en": "The room is small but comfortable.",
+      "vi": "Căn phòng nhỏ nhưng thoải mái."
+    },
+    "exampleUsage": {
+      "en": "I called him, but he did not answer.",
+      "vi": "Tôi gọi cho anh ấy nhưng anh ấy không trả lời.",
+      "note": "But joins contrasting words or clauses."
+    },
+    "acceptedAnswers": [
+      "but"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000115",
+    "sourceIndex": 115,
+    "word": "butter",
+    "ipa": "/ˈbətər/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bơ",
+    "enDefinition": "a soft yellow food made from cream",
+    "exampleMeaning": {
+      "en": "Put some butter on the bread.",
+      "vi": "Phết một ít bơ lên bánh mì."
+    },
+    "exampleUsage": {
+      "en": "Melt the butter in a small pan.",
+      "vi": "Đun chảy bơ trong một chiếc chảo nhỏ.",
+      "note": "Butter is usually uncountable."
+    },
+    "acceptedAnswers": [
+      "butter"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000116",
+    "sourceIndex": 116,
+    "word": "buy",
+    "ipa": "/baɪ/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "mua",
+    "enDefinition": "to get something by paying money for it",
+    "exampleMeaning": {
+      "en": "I need to buy a new coat.",
+      "vi": "Tôi cần mua một chiếc áo khoác mới."
+    },
+    "exampleUsage": {
+      "en": "She bought the book for ten dollars.",
+      "vi": "Cô ấy mua cuốn sách với giá mười đô-la.",
+      "note": "Buy something for an amount states its price."
+    },
+    "acceptedAnswers": [
+      "buy"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000117",
+    "sourceIndex": 117,
+    "word": "by",
+    "ipa": "/baɪ/",
+    "partOfSpeech": "prep.",
+    "cefr": "A1",
+    "viMeaning": "bởi; bằng; cạnh",
+    "enDefinition": "used to show the person doing something, the method, or a nearby position",
+    "exampleMeaning": {
+      "en": "The picture was painted by my aunt.",
+      "vi": "Bức tranh được dì tôi vẽ."
+    },
+    "exampleUsage": {
+      "en": "We traveled by train.",
+      "vi": "Chúng tôi đi bằng tàu hỏa.",
+      "note": "By can name the agent in a passive sentence or a method of travel."
+    },
+    "acceptedAnswers": [
+      "by"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000118",
+    "sourceIndex": 118,
+    "word": "bye",
+    "ipa": "/baɪ/",
+    "partOfSpeech": "exclam.",
+    "cefr": "A1",
+    "viMeaning": "tạm biệt",
+    "enDefinition": "used when leaving someone",
+    "exampleMeaning": {
+      "en": "Bye! See you tomorrow.",
+      "vi": "Tạm biệt! Hẹn gặp bạn ngày mai."
+    },
+    "exampleUsage": {
+      "en": "She waved and said bye to everyone.",
+      "vi": "Cô ấy vẫy tay và chào tạm biệt mọi người.",
+      "note": "Bye is informal; goodbye is more neutral."
+    },
+    "acceptedAnswers": [
+      "bye"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000119",
+    "sourceIndex": 119,
+    "word": "cafe",
+    "ipa": "/kæˈfeɪ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "quán cà phê",
+    "enDefinition": "a small restaurant serving drinks and simple meals",
+    "exampleMeaning": {
+      "en": "Let's meet at the cafe.",
+      "vi": "Hãy gặp nhau ở quán cà phê."
+    },
+    "exampleUsage": {
+      "en": "We stopped for coffee at a nearby cafe.",
+      "vi": "Chúng tôi dừng lại uống cà phê tại một quán gần đó.",
+      "note": "Cafe is countable."
+    },
+    "acceptedAnswers": [
+      "cafe"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000120",
+    "sourceIndex": 120,
+    "word": "cake",
+    "ipa": "/keɪk/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "bánh ngọt",
+    "enDefinition": "a sweet baked food made from flour, eggs, sugar, and other ingredients",
+    "exampleMeaning": {
+      "en": "She made a chocolate cake.",
+      "vi": "Cô ấy làm một chiếc bánh sô-cô-la."
+    },
+    "exampleUsage": {
+      "en": "Would you like a piece of cake?",
+      "vi": "Bạn có muốn một miếng bánh không?",
+      "note": "Cake can be countable as a whole cake or uncountable as food."
+    },
+    "acceptedAnswers": [
+      "cake"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000121",
+    "sourceIndex": 121,
+    "word": "call",
+    "ipa": "/kɔl/",
+    "partOfSpeech": "v., n.",
+    "cefr": "A1",
+    "viMeaning": "gọi; cuộc gọi",
+    "enDefinition": "an act of speaking to someone by phone, or to contact them by phone or voice",
+    "exampleMeaning": {
+      "en": "I'll call you tonight.",
+      "vi": "Tối nay tôi sẽ gọi cho bạn."
+    },
+    "exampleUsage": {
+      "en": "Please give me a call when you arrive.",
+      "vi": "Vui lòng gọi cho tôi khi bạn đến.",
+      "note": "Call someone needs no preposition; give someone a call is a common noun phrase."
+    },
+    "acceptedAnswers": [
+      "call"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000122",
+    "sourceIndex": 122,
+    "word": "camera",
+    "ipa": "/ˈkæmərə/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "máy ảnh",
+    "enDefinition": "a device used for taking photographs or recording video",
+    "exampleMeaning": {
+      "en": "This camera takes clear pictures.",
+      "vi": "Máy ảnh này chụp hình rõ nét."
+    },
+    "exampleUsage": {
+      "en": "She smiled at the camera.",
+      "vi": "Cô ấy mỉm cười trước máy ảnh.",
+      "note": "Look or smile at the camera."
+    },
+    "acceptedAnswers": [
+      "camera"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000123",
+    "sourceIndex": 123,
+    "word": "can",
+    "ipa": "/kæn/",
+    "partOfSpeech": "modal v.",
+    "cefr": "A1",
+    "viMeaning": "có thể",
+    "enDefinition": "used to say that someone is able or allowed to do something",
+    "exampleMeaning": {
+      "en": "I can swim.",
+      "vi": "Tôi biết bơi."
+    },
+    "exampleUsage": {
+      "en": "Can I open the window?",
+      "vi": "Tôi có thể mở cửa sổ không?",
+      "note": "Can is followed by the base form of a verb."
+    },
+    "acceptedAnswers": [
+      "can"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000124",
+    "sourceIndex": 124,
+    "word": "cannot",
+    "ipa": "/ˈkænɑt/",
+    "partOfSpeech": "modal v.",
+    "cefr": "A1",
+    "viMeaning": "không thể",
+    "enDefinition": "used to say that someone is not able or allowed to do something",
+    "exampleMeaning": {
+      "en": "I cannot hear you.",
+      "vi": "Tôi không thể nghe thấy bạn."
+    },
+    "exampleUsage": {
+      "en": "You cannot park here.",
+      "vi": "Bạn không được đỗ xe ở đây.",
+      "note": "Cannot is one word; can't is its common short form."
+    },
+    "acceptedAnswers": [
+      "cannot"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000125",
+    "sourceIndex": 125,
+    "word": "capital",
+    "ipa": "/ˈkæpɪtəl/",
+    "partOfSpeech": "n., adj.",
+    "cefr": "A1",
+    "viMeaning": "thủ đô; chính; viết hoa",
+    "enDefinition": "the main city of a country, most important, or written as a large letter",
+    "exampleMeaning": {
+      "en": "Hanoi is the capital of Vietnam.",
+      "vi": "Hà Nội là thủ đô của Việt Nam."
+    },
+    "exampleUsage": {
+      "en": "Begin every sentence with a capital letter.",
+      "vi": "Hãy bắt đầu mỗi câu bằng một chữ cái viết hoa.",
+      "note": "Capital is a noun for a city and an adjective in capital letter."
+    },
+    "acceptedAnswers": [
+      "capital"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000126",
+    "sourceIndex": 126,
+    "word": "car",
+    "ipa": "/kɑr/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "xe hơi",
+    "enDefinition": "a road vehicle with an engine, usually for a small number of people",
+    "exampleMeaning": {
+      "en": "Their car is parked outside.",
+      "vi": "Xe của họ đậu bên ngoài."
+    },
+    "exampleUsage": {
+      "en": "We traveled to the beach by car.",
+      "vi": "Chúng tôi đi đến bãi biển bằng xe hơi.",
+      "note": "Travel by car, but get into or out of a car."
+    },
+    "acceptedAnswers": [
+      "car"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000127",
+    "sourceIndex": 127,
+    "word": "card",
+    "ipa": "/kɑrd/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "thẻ; thiệp",
+    "enDefinition": "a small piece of plastic or stiff paper used for payment, identification, or messages",
+    "exampleMeaning": {
+      "en": "I paid with my card.",
+      "vi": "Tôi thanh toán bằng thẻ."
+    },
+    "exampleUsage": {
+      "en": "She sent me a birthday card.",
+      "vi": "Cô ấy gửi cho tôi một tấm thiệp sinh nhật.",
+      "note": "Common compounds include credit card, ID card, and birthday card."
+    },
+    "acceptedAnswers": [
+      "card"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000128",
+    "sourceIndex": 128,
+    "word": "career",
+    "ipa": "/kəˈrɪr/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "sự nghiệp; nghề nghiệp lâu dài",
+    "enDefinition": "the series of jobs someone has during their working life",
+    "exampleMeaning": {
+      "en": "She wants a career in medicine.",
+      "vi": "Cô ấy muốn theo đuổi sự nghiệp trong ngành y."
+    },
+    "exampleUsage": {
+      "en": "He began his teaching career at 24.",
+      "vi": "Anh ấy bắt đầu sự nghiệp giảng dạy ở tuổi 24.",
+      "note": "Use a career in a field and begin a career."
+    },
+    "acceptedAnswers": [
+      "career"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000129",
+    "sourceIndex": 129,
+    "word": "carrot",
+    "ipa": "/ˈkɛrət/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "cà rốt",
+    "enDefinition": "a long orange root vegetable",
+    "exampleMeaning": {
+      "en": "The rabbit is eating a carrot.",
+      "vi": "Con thỏ đang ăn một củ cà rốt."
+    },
+    "exampleUsage": {
+      "en": "Add some chopped carrots to the soup.",
+      "vi": "Thêm một ít cà rốt thái nhỏ vào súp.",
+      "note": "Carrot is countable; carrots can also refer to the food generally."
+    },
+    "acceptedAnswers": [
+      "carrot"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000130",
+    "sourceIndex": 130,
+    "word": "carry",
+    "ipa": "/ˈkɛri/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "mang; xách",
+    "enDefinition": "to hold something and move it from one place to another",
+    "exampleMeaning": {
+      "en": "She carried the bag upstairs.",
+      "vi": "Cô ấy xách chiếc túi lên tầng trên."
+    },
+    "exampleUsage": {
+      "en": "This bus can carry 50 people.",
+      "vi": "Xe buýt này có thể chở 50 người.",
+      "note": "Carry can refer to holding things or transporting passengers."
+    },
+    "acceptedAnswers": [
+      "carry"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000131",
+    "sourceIndex": 131,
+    "word": "cat",
+    "ipa": "/kæt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "con mèo",
+    "enDefinition": "a small animal often kept as a pet",
+    "exampleMeaning": {
+      "en": "The cat is sleeping on the chair.",
+      "vi": "Con mèo đang ngủ trên ghế."
+    },
+    "exampleUsage": {
+      "en": "Our cat likes to play with boxes.",
+      "vi": "Con mèo của chúng tôi thích chơi với hộp.",
+      "note": "Cat is countable."
+    },
+    "acceptedAnswers": [
+      "cat"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000132",
+    "sourceIndex": 132,
+    "word": "CD",
+    "ipa": "/ˌsiː ˈdiː/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "đĩa CD",
+    "enDefinition": "a small plastic disc used to store music or computer data",
+    "exampleMeaning": {
+      "en": "This CD has ten songs.",
+      "vi": "Đĩa CD này có mười bài hát."
+    },
+    "exampleUsage": {
+      "en": "I listened to the album on CD.",
+      "vi": "Tôi nghe album bằng đĩa CD.",
+      "note": "CD is pronounced as two letters and is countable."
+    },
+    "acceptedAnswers": [
+      "CD"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000133",
+    "sourceIndex": 133,
+    "word": "cent",
+    "ipa": "/sɛnt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "xu; một phần một trăm của đô-la",
+    "enDefinition": "a unit of money equal to one hundredth of a dollar",
+    "exampleMeaning": {
+      "en": "The candy costs fifty cents.",
+      "vi": "Viên kẹo có giá năm mươi xu."
+    },
+    "exampleUsage": {
+      "en": "I found a one-cent coin.",
+      "vi": "Tôi tìm thấy một đồng xu một cent.",
+      "note": "Use cent after a number; the plural is cents."
+    },
+    "acceptedAnswers": [
+      "cent"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000134",
+    "sourceIndex": 134,
+    "word": "center",
+    "ipa": "/ˈsentər/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "trung tâm",
+    "enDefinition": "the middle point or main part of a place",
+    "exampleMeaning": {
+      "en": "There is a fountain in the center of the park.",
+      "vi": "Có một đài phun nước ở trung tâm công viên."
+    },
+    "exampleUsage": {
+      "en": "The hotel is close to the city center.",
+      "vi": "Khách sạn gần trung tâm thành phố.",
+      "note": "Use the center of a place; city center is a common compound."
+    },
+    "acceptedAnswers": [
+      "center"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000135",
+    "sourceIndex": 135,
+    "word": "chair",
+    "ipa": "/tʃer/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "ghế",
+    "enDefinition": "a piece of furniture for one person to sit on",
+    "exampleMeaning": {
+      "en": "Please sit on this chair.",
+      "vi": "Vui lòng ngồi trên chiếc ghế này."
+    },
+    "exampleUsage": {
+      "en": "He pulled up a chair beside me.",
+      "vi": "Anh ấy kéo một chiếc ghế đến cạnh tôi.",
+      "note": "Sit on a chair; pull up a chair means bring one closer."
+    },
+    "acceptedAnswers": [
+      "chair"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000136",
+    "sourceIndex": 136,
+    "word": "change",
+    "ipa": "/ʧeɪnʤ/",
+    "partOfSpeech": "v., n.",
+    "cefr": "A1",
+    "viMeaning": "thay đổi; sự thay đổi",
+    "enDefinition": "to become different or make something different",
+    "exampleMeaning": {
+      "en": "The weather can change quickly.",
+      "vi": "Thời tiết có thể thay đổi nhanh chóng."
+    },
+    "exampleUsage": {
+      "en": "We made a small change to the plan.",
+      "vi": "Chúng tôi thực hiện một thay đổi nhỏ trong kế hoạch.",
+      "note": "Change can be a verb; make a change uses it as a noun."
+    },
+    "acceptedAnswers": [
+      "change"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000137",
+    "sourceIndex": 137,
+    "word": "chart",
+    "ipa": "/tʃɑrt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "biểu đồ",
+    "enDefinition": "a diagram that shows information in a clear visual form",
+    "exampleMeaning": {
+      "en": "The chart shows our monthly sales.",
+      "vi": "Biểu đồ cho thấy doanh số hàng tháng."
+    },
+    "exampleUsage": {
+      "en": "Look at the chart and compare the numbers.",
+      "vi": "Hãy nhìn biểu đồ và so sánh các con số.",
+      "note": "A chart can show numbers, changes, or categories."
+    },
+    "acceptedAnswers": [
+      "chart"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000138",
+    "sourceIndex": 138,
+    "word": "cheap",
+    "ipa": "/ʧip/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "rẻ; rẻ tiền",
+    "enDefinition": "costing little money",
+    "exampleMeaning": {
+      "en": "This restaurant is good and cheap.",
+      "vi": "Nhà hàng này ngon và rẻ."
+    },
+    "exampleUsage": {
+      "en": "We found a cheap flight to Bangkok.",
+      "vi": "Chúng tôi tìm được một chuyến bay giá rẻ đến Bangkok.",
+      "note": "Cheap describes price, but can sound negative about quality in some contexts."
+    },
+    "acceptedAnswers": [
+      "cheap"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000139",
+    "sourceIndex": 139,
+    "word": "check",
+    "ipa": "/ʧɛk/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "kiểm tra",
+    "enDefinition": "to examine something to make sure it is correct or safe",
+    "exampleMeaning": {
+      "en": "Please check your answers.",
+      "vi": "Vui lòng kiểm tra câu trả lời của bạn."
+    },
+    "exampleUsage": {
+      "en": "Check that the door is locked.",
+      "vi": "Hãy kiểm tra xem cửa đã khóa chưa.",
+      "note": "Use check something or check that + clause."
+    },
+    "acceptedAnswers": [
+      "check"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000140",
+    "sourceIndex": 140,
+    "word": "cheese",
+    "ipa": "/ʧiz/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "phô mai",
+    "enDefinition": "a food made from milk that can be soft or firm",
+    "exampleMeaning": {
+      "en": "There is cheese in the sandwich.",
+      "vi": "Có phô mai trong chiếc bánh mì kẹp."
+    },
+    "exampleUsage": {
+      "en": "I'd like a piece of cheese.",
+      "vi": "Tôi muốn một miếng phô mai.",
+      "note": "Cheese is usually uncountable; use a piece or slice for an amount."
+    },
+    "acceptedAnswers": [
+      "cheese"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000141",
+    "sourceIndex": 141,
+    "word": "chicken",
+    "ipa": "/ˈʧɪkən/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "thịt gà; con gà",
+    "enDefinition": "the meat from a chicken, or the farm bird itself",
+    "exampleMeaning": {
+      "en": "We had chicken and rice for dinner.",
+      "vi": "Chúng tôi ăn thịt gà và cơm vào bữa tối."
+    },
+    "exampleUsage": {
+      "en": "There are six chickens on the farm.",
+      "vi": "Có sáu con gà trong trang trại.",
+      "note": "Chicken is uncountable for meat and countable for the animal."
+    },
+    "acceptedAnswers": [
+      "chicken"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000142",
+    "sourceIndex": 142,
+    "word": "child",
+    "ipa": "/ʧaɪld/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "đứa trẻ",
+    "enDefinition": "a young person who is not yet an adult",
+    "exampleMeaning": {
+      "en": "The child is learning to read.",
+      "vi": "Đứa trẻ đang học đọc."
+    },
+    "exampleUsage": {
+      "en": "This ticket is free for children under five.",
+      "vi": "Vé này miễn phí cho trẻ em dưới năm tuổi.",
+      "note": "The irregular plural of child is children."
+    },
+    "acceptedAnswers": [
+      "child"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000143",
+    "sourceIndex": 143,
+    "word": "chocolate",
+    "ipa": "/ˈʧɔklət/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "sô-cô-la",
+    "enDefinition": "a sweet brown food made from cocoa",
+    "exampleMeaning": {
+      "en": "She gave me some chocolate.",
+      "vi": "Cô ấy cho tôi một ít sô-cô-la."
+    },
+    "exampleUsage": {
+      "en": "He bought a box of chocolates.",
+      "vi": "Anh ấy mua một hộp kẹo sô-cô-la.",
+      "note": "Chocolate is uncountable as food; chocolates are individual pieces."
+    },
+    "acceptedAnswers": [
+      "chocolate"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000144",
+    "sourceIndex": 144,
+    "word": "choose",
+    "ipa": "/ʧuz/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "chọn",
+    "enDefinition": "to decide which person or thing you want",
+    "exampleMeaning": {
+      "en": "Choose a color for the wall.",
+      "vi": "Hãy chọn một màu cho bức tường."
+    },
+    "exampleUsage": {
+      "en": "You can choose between tea and coffee.",
+      "vi": "Bạn có thể chọn giữa trà và cà phê.",
+      "note": "Use choose between alternatives or choose to + verb."
+    },
+    "acceptedAnswers": [
+      "choose"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000145",
+    "sourceIndex": 145,
+    "word": "city",
+    "ipa": "/ˈsɪti/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "thành phố",
+    "enDefinition": "a large and important town",
+    "exampleMeaning": {
+      "en": "Ho Chi Minh City is very busy.",
+      "vi": "Thành phố Hồ Chí Minh rất nhộn nhịp."
+    },
+    "exampleUsage": {
+      "en": "They live in the city center.",
+      "vi": "Họ sống ở trung tâm thành phố.",
+      "note": "City is countable; the plural is cities."
+    },
+    "acceptedAnswers": [
+      "city"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000146",
+    "sourceIndex": 146,
+    "word": "class",
+    "ipa": "/klæs/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "lớp học; buổi học",
+    "enDefinition": "a group of students learning together, or a lesson",
+    "exampleMeaning": {
+      "en": "Our class begins at nine.",
+      "vi": "Lớp của chúng tôi bắt đầu lúc chín giờ."
+    },
+    "exampleUsage": {
+      "en": "She is taking an English class.",
+      "vi": "Cô ấy đang học một lớp tiếng Anh.",
+      "note": "Take a class means attend a course or lesson."
+    },
+    "acceptedAnswers": [
+      "class"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000147",
+    "sourceIndex": 147,
+    "word": "classroom",
+    "ipa": "/ˈklæsˌrum/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "phòng học",
+    "enDefinition": "a room where students are taught",
+    "exampleMeaning": {
+      "en": "There are twenty desks in the classroom.",
+      "vi": "Có hai mươi chiếc bàn trong phòng học."
+    },
+    "exampleUsage": {
+      "en": "Please speak English in the classroom.",
+      "vi": "Vui lòng nói tiếng Anh trong lớp học.",
+      "note": "Use in the classroom for activity inside the room."
+    },
+    "acceptedAnswers": [
+      "classroom"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000148",
+    "sourceIndex": 148,
+    "word": "clean",
+    "ipa": "/klin/",
+    "partOfSpeech": "adj., v.",
+    "cefr": "A1",
+    "viMeaning": "sạch; làm sạch",
+    "enDefinition": "not dirty, or to remove dirt",
+    "exampleMeaning": {
+      "en": "The kitchen is clean now.",
+      "vi": "Nhà bếp bây giờ sạch rồi."
+    },
+    "exampleUsage": {
+      "en": "Please clean the table after dinner.",
+      "vi": "Vui lòng lau bàn sau bữa tối.",
+      "note": "Clean can be an adjective or a verb."
+    },
+    "acceptedAnswers": [
+      "clean"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000149",
+    "sourceIndex": 149,
+    "word": "climb",
+    "ipa": "/klaɪm/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "leo; trèo",
+    "enDefinition": "to move upward using your hands and feet",
+    "exampleMeaning": {
+      "en": "The children climbed the tree.",
+      "vi": "Bọn trẻ trèo lên cây."
+    },
+    "exampleUsage": {
+      "en": "We climbed up the hill slowly.",
+      "vi": "Chúng tôi từ từ leo lên đồi.",
+      "note": "Climb can take a direct object; climb up emphasizes upward movement."
+    },
+    "acceptedAnswers": [
+      "climb"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000150",
+    "sourceIndex": 150,
+    "word": "clock",
+    "ipa": "/klɑk/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "đồng hồ treo tường/để bàn",
+    "enDefinition": "a device that shows the time and is not worn on the body",
+    "exampleMeaning": {
+      "en": "The clock says ten thirty.",
+      "vi": "Đồng hồ chỉ mười giờ ba mươi."
+    },
+    "exampleUsage": {
+      "en": "There is a clock on the wall.",
+      "vi": "Có một chiếc đồng hồ trên tường.",
+      "note": "A clock is not worn; a watch is worn on the wrist."
+    },
+    "acceptedAnswers": [
+      "clock"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000151",
+    "sourceIndex": 151,
+    "word": "close",
+    "ipa": "/kloʊz/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "đóng; khép",
+    "enDefinition": "to move something so that an opening is covered",
+    "exampleMeaning": {
+      "en": "Please close the window.",
+      "vi": "Vui lòng đóng cửa sổ."
+    },
+    "exampleUsage": {
+      "en": "The store closes at nine.",
+      "vi": "Cửa hàng đóng cửa lúc chín giờ.",
+      "note": "Close can take an object or describe a business ending service."
+    },
+    "acceptedAnswers": [
+      "close"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000152",
+    "sourceIndex": 152,
+    "word": "clothes",
+    "ipa": "/kloʊðz/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "quần áo",
+    "enDefinition": "the things people wear",
+    "exampleMeaning": {
+      "en": "Her clothes are in the closet.",
+      "vi": "Quần áo của cô ấy ở trong tủ."
+    },
+    "exampleUsage": {
+      "en": "I need some warm clothes for winter.",
+      "vi": "Tôi cần một ít quần áo ấm cho mùa đông.",
+      "note": "Clothes is plural and has no singular form."
+    },
+    "acceptedAnswers": [
+      "clothes"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000153",
+    "sourceIndex": 153,
+    "word": "club",
+    "ipa": "/kləb/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "câu lạc bộ; hội",
+    "enDefinition": "a group of people who meet for a shared activity",
+    "exampleMeaning": {
+      "en": "I joined the school music club.",
+      "vi": "Tôi tham gia câu lạc bộ âm nhạc của trường."
+    },
+    "exampleUsage": {
+      "en": "The club meets every Friday.",
+      "vi": "Câu lạc bộ gặp nhau vào mỗi thứ Sáu.",
+      "note": "Join a club means become a member."
+    },
+    "acceptedAnswers": [
+      "club"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000154",
+    "sourceIndex": 154,
+    "word": "coat",
+    "ipa": "/koʊt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "áo khoác",
+    "enDefinition": "a piece of clothing worn over other clothes",
+    "exampleMeaning": {
+      "en": "Put on your coat; it is cold outside.",
+      "vi": "Hãy mặc áo khoác; bên ngoài trời lạnh."
+    },
+    "exampleUsage": {
+      "en": "She took off her coat at the door.",
+      "vi": "Cô ấy cởi áo khoác ở cửa.",
+      "note": "Put on and take off are common verbs with coat."
+    },
+    "acceptedAnswers": [
+      "coat"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000155",
+    "sourceIndex": 155,
+    "word": "coffee",
+    "ipa": "/ˈkɔfi/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "cà phê",
+    "enDefinition": "a dark drink made from roasted coffee beans",
+    "exampleMeaning": {
+      "en": "I drink coffee every morning.",
+      "vi": "Tôi uống cà phê mỗi sáng."
+    },
+    "exampleUsage": {
+      "en": "Can I have a cup of coffee?",
+      "vi": "Tôi có thể gọi một tách cà phê không?",
+      "note": "Coffee is uncountable; a coffee can mean one serving in informal use."
+    },
+    "acceptedAnswers": [
+      "coffee"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000156",
+    "sourceIndex": 156,
+    "word": "cold",
+    "ipa": "/koʊld/",
+    "partOfSpeech": "adj., n.",
+    "cefr": "A1",
+    "viMeaning": "lạnh; cảm lạnh",
+    "enDefinition": "having a low temperature, or a common minor illness",
+    "exampleMeaning": {
+      "en": "The water is too cold to swim in.",
+      "vi": "Nước quá lạnh để bơi."
+    },
+    "exampleUsage": {
+      "en": "I have a bad cold today.",
+      "vi": "Hôm nay tôi bị cảm nặng.",
+      "note": "Cold is an adjective for temperature; have a cold uses it as a noun."
+    },
+    "acceptedAnswers": [
+      "cold"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000157",
+    "sourceIndex": 157,
+    "word": "college",
+    "ipa": "/ˈkɑlɪʤ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "trường cao đẳng; đại học",
+    "enDefinition": "a place where students study after high school",
+    "exampleMeaning": {
+      "en": "She studies art at college.",
+      "vi": "Cô ấy học nghệ thuật ở trường cao đẳng."
+    },
+    "exampleUsage": {
+      "en": "He is a college student in Boston.",
+      "vi": "Anh ấy là sinh viên đại học ở Boston.",
+      "note": "At college describes studying there; college student is a common compound."
+    },
+    "acceptedAnswers": [
+      "college"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000158",
+    "sourceIndex": 158,
+    "word": "color",
+    "ipa": "/ˈkʌlər/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "màu sắc",
+    "enDefinition": "the quality that makes things look red, blue, green, and so on",
+    "exampleMeaning": {
+      "en": "What color is your car?",
+      "vi": "Xe của bạn màu gì?"
+    },
+    "exampleUsage": {
+      "en": "The room needs a little more color.",
+      "vi": "Căn phòng cần thêm một chút màu sắc.",
+      "note": "Color is countable for a particular color and uncountable as a general quality."
+    },
+    "acceptedAnswers": [
+      "color"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000159",
+    "sourceIndex": 159,
+    "word": "come",
+    "ipa": "/kəm/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "đến; đi tới",
+    "enDefinition": "to move toward or arrive at a place or person",
+    "exampleMeaning": {
+      "en": "Come here, please.",
+      "vi": "Lại đây nhé."
+    },
+    "exampleUsage": {
+      "en": "Would you like to come with us?",
+      "vi": "Bạn có muốn đi cùng chúng tôi không?",
+      "note": "Come with someone means accompany them."
+    },
+    "acceptedAnswers": [
+      "come"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000160",
+    "sourceIndex": 160,
+    "word": "common",
+    "ipa": "/ˈkɑmən/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "phổ biến; thông thường",
+    "enDefinition": "happening often or found in many places",
+    "exampleMeaning": {
+      "en": "This is a common mistake.",
+      "vi": "Đây là một lỗi phổ biến."
+    },
+    "exampleUsage": {
+      "en": "It is common for shops to close early on Sunday.",
+      "vi": "Các cửa hàng đóng cửa sớm vào Chủ nhật là chuyện thường.",
+      "note": "Common for someone/something to do describes a usual situation."
+    },
+    "acceptedAnswers": [
+      "common"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000161",
+    "sourceIndex": 161,
+    "word": "company",
+    "ipa": "/ˈkəmpəˌni/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "công ty",
+    "enDefinition": "a business organization that sells goods or services",
+    "exampleMeaning": {
+      "en": "She works for a software company.",
+      "vi": "Cô ấy làm việc cho một công ty phần mềm."
+    },
+    "exampleUsage": {
+      "en": "The company employs 200 people.",
+      "vi": "Công ty sử dụng 200 người.",
+      "note": "Work for a company names your employer."
+    },
+    "acceptedAnswers": [
+      "company"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000162",
+    "sourceIndex": 162,
+    "word": "compare",
+    "ipa": "/kəmˈper/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "so sánh",
+    "enDefinition": "to examine people or things to see how they are similar or different",
+    "exampleMeaning": {
+      "en": "Compare the two pictures.",
+      "vi": "Hãy so sánh hai bức tranh."
+    },
+    "exampleUsage": {
+      "en": "People often compare this city with New York.",
+      "vi": "Mọi người thường so sánh thành phố này với New York.",
+      "note": "Compare A with B is the common learner pattern."
+    },
+    "acceptedAnswers": [
+      "compare"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000163",
+    "sourceIndex": 163,
+    "word": "complete",
+    "ipa": "/kəmˈplit/",
+    "partOfSpeech": "adj., v.",
+    "cefr": "A1",
+    "viMeaning": "hoàn chỉnh; hoàn thành",
+    "enDefinition": "having every necessary part, or to finish something",
+    "exampleMeaning": {
+      "en": "The list is now complete.",
+      "vi": "Danh sách bây giờ đã đầy đủ."
+    },
+    "exampleUsage": {
+      "en": "Please complete the form before Friday.",
+      "vi": "Vui lòng hoàn thành biểu mẫu trước thứ Sáu.",
+      "note": "Complete can be an adjective or a verb."
+    },
+    "acceptedAnswers": [
+      "complete"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000164",
+    "sourceIndex": 164,
+    "word": "computer",
+    "ipa": "/kəmˈpjutər/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "máy tính",
+    "enDefinition": "a machine that stores and processes information",
+    "exampleMeaning": {
+      "en": "My computer is very slow today.",
+      "vi": "Máy tính của tôi hôm nay rất chậm."
+    },
+    "exampleUsage": {
+      "en": "She uses a computer for work.",
+      "vi": "Cô ấy sử dụng máy tính để làm việc.",
+      "note": "Use a computer for a purpose."
+    },
+    "acceptedAnswers": [
+      "computer"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000165",
+    "sourceIndex": 165,
+    "word": "concert",
+    "ipa": "/ˈkɑnsərt/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "buổi hòa nhạc",
+    "enDefinition": "a public performance of music",
+    "exampleMeaning": {
+      "en": "The concert starts at eight.",
+      "vi": "Buổi hòa nhạc bắt đầu lúc tám giờ."
+    },
+    "exampleUsage": {
+      "en": "We went to a rock concert last night.",
+      "vi": "Tối qua chúng tôi đi xem một buổi hòa nhạc rock.",
+      "note": "Go to a concert; a rock or classical concert describes the music."
+    },
+    "acceptedAnswers": [
+      "concert"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000166",
+    "sourceIndex": 166,
+    "word": "conversation",
+    "ipa": "/ˌkɑnvərˈseɪʃən/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "cuộc trò chuyện",
+    "enDefinition": "an informal talk between two or more people",
+    "exampleMeaning": {
+      "en": "We had a long conversation after dinner.",
+      "vi": "Chúng tôi đã trò chuyện lâu sau bữa tối."
+    },
+    "exampleUsage": {
+      "en": "She started a conversation with the new student.",
+      "vi": "Cô ấy bắt chuyện với học sinh mới.",
+      "note": "Have a conversation and start a conversation with someone are common patterns."
+    },
+    "acceptedAnswers": [
+      "conversation"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000167",
+    "sourceIndex": 167,
+    "word": "cook",
+    "ipa": "/kʊk/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "nấu; nấu ăn",
+    "enDefinition": "to prepare food using heat",
+    "exampleMeaning": {
+      "en": "I cook dinner every evening.",
+      "vi": "Tôi nấu bữa tối mỗi tối."
+    },
+    "exampleUsage": {
+      "en": "She cooked a meal for her family.",
+      "vi": "Cô ấy nấu một bữa ăn cho gia đình.",
+      "note": "Cook something for someone states who receives the food."
+    },
+    "acceptedAnswers": [
+      "cook"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000168",
+    "sourceIndex": 168,
+    "word": "cooking",
+    "ipa": "/ˈkʊkɪŋ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "việc nấu ăn",
+    "enDefinition": "the activity of preparing food",
+    "exampleMeaning": {
+      "en": "Cooking takes time and practice.",
+      "vi": "Nấu ăn cần thời gian và luyện tập."
+    },
+    "exampleUsage": {
+      "en": "My brother does most of the cooking at home.",
+      "vi": "Anh trai tôi làm phần lớn việc nấu ăn ở nhà.",
+      "note": "Cooking is uncountable when it means the activity."
+    },
+    "acceptedAnswers": [
+      "cooking"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000169",
+    "sourceIndex": 169,
+    "word": "cool",
+    "ipa": "/kul/",
+    "partOfSpeech": "adj.",
+    "cefr": "A1",
+    "viMeaning": "mát; ngầu; tuyệt",
+    "enDefinition": "pleasantly cold, or informally very good",
+    "exampleMeaning": {
+      "en": "The evening air is cool.",
+      "vi": "Không khí buổi tối mát mẻ."
+    },
+    "exampleUsage": {
+      "en": "That's a cool idea!",
+      "vi": "Đó là một ý tưởng tuyệt đấy!",
+      "note": "Cool is informal when it means fashionable or excellent."
+    },
+    "acceptedAnswers": [
+      "cool"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000170",
+    "sourceIndex": 170,
+    "word": "correct",
+    "ipa": "/kəˈrekt/",
+    "partOfSpeech": "adj., v.",
+    "cefr": "A1",
+    "viMeaning": "đúng; sửa cho đúng",
+    "enDefinition": "accurate, or to remove an error",
+    "exampleMeaning": {
+      "en": "Your answer is correct.",
+      "vi": "Câu trả lời của bạn đúng."
+    },
+    "exampleUsage": {
+      "en": "Please correct the spelling mistake.",
+      "vi": "Vui lòng sửa lỗi chính tả.",
+      "note": "Correct can be an adjective or a verb."
+    },
+    "acceptedAnswers": [
+      "correct"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000171",
+    "sourceIndex": 171,
+    "word": "cost",
+    "ipa": "/kɔst/",
+    "partOfSpeech": "n., v.",
+    "cefr": "A1",
+    "viMeaning": "chi phí; có giá",
+    "enDefinition": "the amount paid for something, or to have a particular price",
+    "exampleMeaning": {
+      "en": "The total cost was fifty dollars.",
+      "vi": "Tổng chi phí là năm mươi đô-la."
+    },
+    "exampleUsage": {
+      "en": "How much does the ticket cost?",
+      "vi": "Vé có giá bao nhiêu?",
+      "note": "Cost is a noun; as a verb it does not use do twice beyond the question helper."
+    },
+    "acceptedAnswers": [
+      "cost"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000172",
+    "sourceIndex": 172,
+    "word": "could",
+    "ipa": "/kʊd/",
+    "partOfSpeech": "modal v.",
+    "cefr": "A1",
+    "viMeaning": "có thể; đã có thể",
+    "enDefinition": "used to express past ability, possibility, or a polite request",
+    "exampleMeaning": {
+      "en": "I could swim when I was five.",
+      "vi": "Tôi đã biết bơi khi năm tuổi."
+    },
+    "exampleUsage": {
+      "en": "Could you open the door, please?",
+      "vi": "Bạn có thể mở cửa giúp tôi được không?",
+      "note": "Could is followed by the base verb and often makes requests more polite."
+    },
+    "acceptedAnswers": [
+      "could"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000173",
+    "sourceIndex": 173,
+    "word": "country",
+    "ipa": "/ˈkʌntri/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "đất nước; quốc gia",
+    "enDefinition": "a nation with its own government and borders",
+    "exampleMeaning": {
+      "en": "Vietnam is a beautiful country.",
+      "vi": "Việt Nam là một đất nước xinh đẹp."
+    },
+    "exampleUsage": {
+      "en": "She moved to another country for work.",
+      "vi": "Cô ấy chuyển đến một nước khác để làm việc.",
+      "note": "Country is countable for a nation; the country can also mean rural land."
+    },
+    "acceptedAnswers": [
+      "country"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000174",
+    "sourceIndex": 174,
+    "word": "course",
+    "ipa": "/kɔrs/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "khóa học",
+    "enDefinition": "a series of lessons in a subject",
+    "exampleMeaning": {
+      "en": "I'm taking an English course.",
+      "vi": "Tôi đang học một khóa tiếng Anh."
+    },
+    "exampleUsage": {
+      "en": "The course lasts for ten weeks.",
+      "vi": "Khóa học kéo dài mười tuần.",
+      "note": "Take a course means study it; a course in a subject names the field."
+    },
+    "acceptedAnswers": [
+      "course"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000175",
+    "sourceIndex": 175,
+    "word": "cousin",
+    "ipa": "/ˈkəzən/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "anh/chị/em họ",
+    "enDefinition": "a child of your aunt or uncle",
+    "exampleMeaning": {
+      "en": "My cousin lives in Da Nang.",
+      "vi": "Anh họ tôi sống ở Đà Nẵng."
+    },
+    "exampleUsage": {
+      "en": "I spent the weekend with my cousins.",
+      "vi": "Tôi dành cuối tuần với các anh chị em họ.",
+      "note": "Cousin does not show gender; add male or female only when necessary."
+    },
+    "acceptedAnswers": [
+      "cousin"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000176",
+    "sourceIndex": 176,
+    "word": "cow",
+    "ipa": "/kaʊ/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "con bò",
+    "enDefinition": "a large farm animal kept for milk or meat",
+    "exampleMeaning": {
+      "en": "The cow is eating grass.",
+      "vi": "Con bò đang ăn cỏ."
+    },
+    "exampleUsage": {
+      "en": "This farm has twenty dairy cows.",
+      "vi": "Trang trại này có hai mươi con bò sữa.",
+      "note": "Cow is countable; dairy cow means a cow kept for milk."
+    },
+    "acceptedAnswers": [
+      "cow"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000177",
+    "sourceIndex": 177,
+    "word": "cream",
+    "ipa": "/krim/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "kem; lớp kem; kem sữa",
+    "enDefinition": "the thick fatty part of milk, or a soft substance used in food and cosmetics",
+    "exampleMeaning": {
+      "en": "She put cream in her coffee.",
+      "vi": "Cô ấy cho kem sữa vào cà phê."
+    },
+    "exampleUsage": {
+      "en": "The cake has chocolate cream on top.",
+      "vi": "Chiếc bánh có lớp kem sô-cô-la ở trên.",
+      "note": "Cream is usually uncountable."
+    },
+    "acceptedAnswers": [
+      "cream"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000178",
+    "sourceIndex": 178,
+    "word": "create",
+    "ipa": "/kriˈeɪt/",
+    "partOfSpeech": "v.",
+    "cefr": "A1",
+    "viMeaning": "tạo ra",
+    "enDefinition": "to make something new",
+    "exampleMeaning": {
+      "en": "The activity helped create a friendly atmosphere.",
+      "vi": "Hoạt động giúp tạo ra bầu không khí thân thiện."
+    },
+    "exampleUsage": {
+      "en": "You can create an account in a few minutes.",
+      "vi": "Bạn có thể tạo một tài khoản trong vài phút.",
+      "note": "Create is followed directly by the thing made."
+    },
+    "acceptedAnswers": [
+      "create"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000179",
+    "sourceIndex": 179,
+    "word": "culture",
+    "ipa": "/ˈkʌltʃər/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "văn hóa",
+    "enDefinition": "the ideas, customs, and way of life of a group of people",
+    "exampleMeaning": {
+      "en": "Food is an important part of culture.",
+      "vi": "Ẩm thực là một phần quan trọng của văn hóa."
+    },
+    "exampleUsage": {
+      "en": "The course teaches students about Japanese culture.",
+      "vi": "Khóa học dạy học sinh về văn hóa Nhật Bản.",
+      "note": "Use the culture of a group or a named culture such as Japanese culture."
+    },
+    "acceptedAnswers": [
+      "culture"
+    ],
+    "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000180",
+    "sourceIndex": 180,
+    "word": "cup",
+    "ipa": "/kəp/",
+    "partOfSpeech": "n.",
+    "cefr": "A1",
+    "viMeaning": "cốc; tách",
+    "enDefinition": "a small container used for drinking",
+    "exampleMeaning": {
+      "en": "There is a cup on the table.",
+      "vi": "Có một chiếc cốc trên bàn."
+    },
+    "exampleUsage": {
+      "en": "Would you like a cup of tea?",
+      "vi": "Bạn có muốn một tách trà không?",
+      "note": "A cup of describes both the container and an amount of drink."
+    },
+    "acceptedAnswers": [
+      "cup"
+    ],
+    "extras": {}
+  }
+]

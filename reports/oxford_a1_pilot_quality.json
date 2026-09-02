@@ -1,0 +1,551 @@
+{
+  "generatedAt": "2026-09-02T00:28:31.767198+00:00",
+  "seed": 1802026,
+  "targetCount": 180,
+  "sampleSize": 20,
+  "automaticSamplePass": 20,
+  "allAudioVerified": 180,
+  "audioErrors": [],
+  "samples": [
+    {
+      "sourceIndex": 6,
+      "sourceKey": "oxford3000:a1:000006",
+      "word": "activity",
+      "ipa": "/ækˈtɪvəti/",
+      "partOfSpeech": "n.",
+      "viMeaning": "hoạt động",
+      "enDefinition": "something that you do, often for work, learning, or enjoyment",
+      "exampleMeaning": {
+        "en": "Reading is a quiet activity.",
+        "vi": "Đọc sách là một hoạt động yên tĩnh."
+      },
+      "exampleUsage": {
+        "en": "The camp offers many outdoor activities.",
+        "vi": "Khu trại có nhiều hoạt động ngoài trời.",
+        "note": "Activity is countable when referring to a particular thing people do."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 12,
+      "sourceKey": "oxford3000:a1:000012",
+      "word": "advice",
+      "ipa": "/ədˈvaɪs/",
+      "partOfSpeech": "n.",
+      "viMeaning": "lời khuyên",
+      "enDefinition": "an opinion about what someone should do",
+      "exampleMeaning": {
+        "en": "Her advice helped me choose a course.",
+        "vi": "Lời khuyên của cô ấy giúp tôi chọn khóa học."
+      },
+      "exampleUsage": {
+        "en": "Can you give me some advice?",
+        "vi": "Bạn có thể cho tôi một vài lời khuyên không?",
+        "note": "Advice is uncountable; say some advice, not an advice."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 15,
+      "sourceKey": "oxford3000:a1:000015",
+      "word": "afternoon",
+      "ipa": "/ˌæftərˈnun/",
+      "partOfSpeech": "n.",
+      "viMeaning": "buổi chiều",
+      "enDefinition": "the part of the day between noon and evening",
+      "exampleMeaning": {
+        "en": "I have a class this afternoon.",
+        "vi": "Tôi có một lớp học vào chiều nay."
+      },
+      "exampleUsage": {
+        "en": "She works in the afternoon.",
+        "vi": "Cô ấy làm việc vào buổi chiều.",
+        "note": "Say this afternoon, but in the afternoon."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 23,
+      "sourceKey": "oxford3000:a1:000023",
+      "word": "also",
+      "ipa": "/ˈɔlsoʊ/",
+      "partOfSpeech": "adv.",
+      "viMeaning": "cũng; còn",
+      "enDefinition": "in addition",
+      "exampleMeaning": {
+        "en": "She speaks English and also French.",
+        "vi": "Cô ấy nói tiếng Anh và cả tiếng Pháp."
+      },
+      "exampleUsage": {
+        "en": "He is kind, and he is also very patient.",
+        "vi": "Anh ấy tốt bụng và cũng rất kiên nhẫn.",
+        "note": "Also normally comes before the main verb but after be."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 29,
+      "sourceKey": "oxford3000:a1:000029",
+      "word": "another",
+      "ipa": "/əˈnəðər/",
+      "partOfSpeech": "det./pron.",
+      "viMeaning": "một cái/người khác; thêm một",
+      "enDefinition": "one more person or thing, or a different one",
+      "exampleMeaning": {
+        "en": "Can I have another cup of tea?",
+        "vi": "Tôi có thể uống thêm một tách trà không?"
+      },
+      "exampleUsage": {
+        "en": "This pen is broken; give me another.",
+        "vi": "Cây bút này hỏng rồi; đưa tôi cây khác nhé.",
+        "note": "Another can stand before a singular noun or alone as a pronoun."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 31,
+      "sourceKey": "oxford3000:a1:000031",
+      "word": "any",
+      "ipa": "/ˈeni/",
+      "partOfSpeech": "det., pron.",
+      "viMeaning": "bất kỳ; một chút nào",
+      "enDefinition": "one or some, without saying exactly which or how many",
+      "exampleMeaning": {
+        "en": "Do you have any questions?",
+        "vi": "Bạn có câu hỏi nào không?"
+      },
+      "exampleUsage": {
+        "en": "I don't have any money with me.",
+        "vi": "Tôi không mang theo chút tiền nào.",
+        "note": "Any is common in questions and negative sentences."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 36,
+      "sourceKey": "oxford3000:a1:000036",
+      "word": "April",
+      "ipa": "/ˈeɪprəl/",
+      "partOfSpeech": "n.",
+      "viMeaning": "tháng Tư",
+      "enDefinition": "the fourth month of the year",
+      "exampleMeaning": {
+        "en": "My course starts in April.",
+        "vi": "Khóa học của tôi bắt đầu vào tháng Tư."
+      },
+      "exampleUsage": {
+        "en": "Her birthday is on April 12.",
+        "vi": "Sinh nhật của cô ấy là ngày 12 tháng Tư.",
+        "note": "Use in with a month and on with a full date."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 65,
+      "sourceKey": "oxford3000:a1:000065",
+      "word": "beach",
+      "ipa": "/biʧ/",
+      "partOfSpeech": "n.",
+      "viMeaning": "bãi biển",
+      "enDefinition": "a sandy or stony area beside the sea or a lake",
+      "exampleMeaning": {
+        "en": "We walked along the beach.",
+        "vi": "Chúng tôi đi bộ dọc bãi biển."
+      },
+      "exampleUsage": {
+        "en": "They spent the day at the beach.",
+        "vi": "Họ dành cả ngày ở bãi biển.",
+        "note": "Use at the beach for being there and on the beach for the surface."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 73,
+      "sourceKey": "oxford3000:a1:000073",
+      "word": "begin",
+      "ipa": "/bɪˈgɪn/",
+      "partOfSpeech": "v.",
+      "viMeaning": "bắt đầu",
+      "enDefinition": "to start happening or doing something",
+      "exampleMeaning": {
+        "en": "The movie begins at seven.",
+        "vi": "Bộ phim bắt đầu lúc bảy giờ."
+      },
+      "exampleUsage": {
+        "en": "She began to learn English last year.",
+        "vi": "Cô ấy bắt đầu học tiếng Anh năm ngoái.",
+        "note": "Begin can be followed by to + verb or an -ing form."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 82,
+      "sourceKey": "oxford3000:a1:000082",
+      "word": "big",
+      "ipa": "/bɪg/",
+      "partOfSpeech": "adj.",
+      "viMeaning": "to; lớn",
+      "enDefinition": "large in size or amount",
+      "exampleMeaning": {
+        "en": "They live in a big house.",
+        "vi": "Họ sống trong một ngôi nhà lớn."
+      },
+      "exampleUsage": {
+        "en": "Moving abroad was a big decision.",
+        "vi": "Chuyển ra nước ngoài là một quyết định lớn.",
+        "note": "Big can describe physical size or importance."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 95,
+      "sourceKey": "oxford3000:a1:000095",
+      "word": "bored",
+      "ipa": "/bɔrd/",
+      "partOfSpeech": "adj.",
+      "viMeaning": "chán; cảm thấy buồn chán",
+      "enDefinition": "feeling tired and unhappy because something is not interesting",
+      "exampleMeaning": {
+        "en": "The children are bored at home.",
+        "vi": "Bọn trẻ cảm thấy chán ở nhà."
+      },
+      "exampleUsage": {
+        "en": "I'm bored with this game.",
+        "vi": "Tôi chán trò chơi này rồi.",
+        "note": "A person is bored; a thing is boring."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 97,
+      "sourceKey": "oxford3000:a1:000097",
+      "word": "born",
+      "ipa": "/bɔrn/",
+      "partOfSpeech": "v.",
+      "viMeaning": "được sinh ra",
+      "enDefinition": "brought into life by birth",
+      "exampleMeaning": {
+        "en": "She was born in 2005.",
+        "vi": "Cô ấy sinh năm 2005."
+      },
+      "exampleUsage": {
+        "en": "He was born in Vietnam but grew up in Canada.",
+        "vi": "Anh ấy sinh ra ở Việt Nam nhưng lớn lên tại Canada.",
+        "note": "Born is normally used with be: was born in a place or on a date."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 102,
+      "sourceKey": "oxford3000:a1:000102",
+      "word": "boyfriend",
+      "ipa": "/ˈbɔɪˌfrɛnd/",
+      "partOfSpeech": "n.",
+      "viMeaning": "bạn trai",
+      "enDefinition": "a male person with whom someone has a romantic relationship",
+      "exampleMeaning": {
+        "en": "Her boyfriend works at the airport.",
+        "vi": "Bạn trai của cô ấy làm việc ở sân bay."
+      },
+      "exampleUsage": {
+        "en": "She went to the concert with her boyfriend.",
+        "vi": "Cô ấy đi xem hòa nhạc cùng bạn trai.",
+        "note": "Boyfriend is countable."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 116,
+      "sourceKey": "oxford3000:a1:000116",
+      "word": "buy",
+      "ipa": "/baɪ/",
+      "partOfSpeech": "v.",
+      "viMeaning": "mua",
+      "enDefinition": "to get something by paying money for it",
+      "exampleMeaning": {
+        "en": "I need to buy a new coat.",
+        "vi": "Tôi cần mua một chiếc áo khoác mới."
+      },
+      "exampleUsage": {
+        "en": "She bought the book for ten dollars.",
+        "vi": "Cô ấy mua cuốn sách với giá mười đô-la.",
+        "note": "Buy something for an amount states its price."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 124,
+      "sourceKey": "oxford3000:a1:000124",
+      "word": "cannot",
+      "ipa": "/ˈkænɑt/",
+      "partOfSpeech": "modal v.",
+      "viMeaning": "không thể",
+      "enDefinition": "used to say that someone is not able or allowed to do something",
+      "exampleMeaning": {
+        "en": "I cannot hear you.",
+        "vi": "Tôi không thể nghe thấy bạn."
+      },
+      "exampleUsage": {
+        "en": "You cannot park here.",
+        "vi": "Bạn không được đỗ xe ở đây.",
+        "note": "Cannot is one word; can't is its common short form."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 128,
+      "sourceKey": "oxford3000:a1:000128",
+      "word": "career",
+      "ipa": "/kəˈrɪr/",
+      "partOfSpeech": "n.",
+      "viMeaning": "sự nghiệp; nghề nghiệp lâu dài",
+      "enDefinition": "the series of jobs someone has during their working life",
+      "exampleMeaning": {
+        "en": "She wants a career in medicine.",
+        "vi": "Cô ấy muốn theo đuổi sự nghiệp trong ngành y."
+      },
+      "exampleUsage": {
+        "en": "He began his teaching career at 24.",
+        "vi": "Anh ấy bắt đầu sự nghiệp giảng dạy ở tuổi 24.",
+        "note": "Use a career in a field and begin a career."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 131,
+      "sourceKey": "oxford3000:a1:000131",
+      "word": "cat",
+      "ipa": "/kæt/",
+      "partOfSpeech": "n.",
+      "viMeaning": "con mèo",
+      "enDefinition": "a small animal often kept as a pet",
+      "exampleMeaning": {
+        "en": "The cat is sleeping on the chair.",
+        "vi": "Con mèo đang ngủ trên ghế."
+      },
+      "exampleUsage": {
+        "en": "Our cat likes to play with boxes.",
+        "vi": "Con mèo của chúng tôi thích chơi với hộp.",
+        "note": "Cat is countable."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 138,
+      "sourceKey": "oxford3000:a1:000138",
+      "word": "cheap",
+      "ipa": "/ʧip/",
+      "partOfSpeech": "adj.",
+      "viMeaning": "rẻ; rẻ tiền",
+      "enDefinition": "costing little money",
+      "exampleMeaning": {
+        "en": "This restaurant is good and cheap.",
+        "vi": "Nhà hàng này ngon và rẻ."
+      },
+      "exampleUsage": {
+        "en": "We found a cheap flight to Bangkok.",
+        "vi": "Chúng tôi tìm được một chuyến bay giá rẻ đến Bangkok.",
+        "note": "Cheap describes price, but can sound negative about quality in some contexts."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 153,
+      "sourceKey": "oxford3000:a1:000153",
+      "word": "club",
+      "ipa": "/kləb/",
+      "partOfSpeech": "n.",
+      "viMeaning": "câu lạc bộ; hội",
+      "enDefinition": "a group of people who meet for a shared activity",
+      "exampleMeaning": {
+        "en": "I joined the school music club.",
+        "vi": "Tôi tham gia câu lạc bộ âm nhạc của trường."
+      },
+      "exampleUsage": {
+        "en": "The club meets every Friday.",
+        "vi": "Câu lạc bộ gặp nhau vào mỗi thứ Sáu.",
+        "note": "Join a club means become a member."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    },
+    {
+      "sourceIndex": 167,
+      "sourceKey": "oxford3000:a1:000167",
+      "word": "cook",
+      "ipa": "/kʊk/",
+      "partOfSpeech": "v.",
+      "viMeaning": "nấu; nấu ăn",
+      "enDefinition": "to prepare food using heat",
+      "exampleMeaning": {
+        "en": "I cook dinner every evening.",
+        "vi": "Tôi nấu bữa tối mỗi tối."
+      },
+      "exampleUsage": {
+        "en": "She cooked a meal for her family.",
+        "vi": "Cô ấy nấu một bữa ăn cho gia đình.",
+        "note": "Cook something for someone states who receives the food."
+      },
+      "checks": {
+        "deterministicCard": true,
+        "distinctExampleRoles": true,
+        "imported": true,
+        "audioVerified": true,
+        "fixedVoice": true
+      },
+      "errors": [],
+      "automaticPass": true
+    }
+  ]
+}

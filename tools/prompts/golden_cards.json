@@ -1,0 +1,82 @@
+[
+  {
+    "sourceKey": "oxford3000:a1:000001", "sourceIndex": 1, "word": "a, an", "ipa": "/ə, eɪ; ən, æn/", "partOfSpeech": "indefinite article", "cefr": "A1",
+    "viMeaning": "một (đứng trước danh từ số ít chưa xác định)",
+    "enDefinition": "used before a singular countable noun when the person or thing is not specific",
+    "exampleMeaning": {"en": "I saw a dog near the gate.", "vi": "Tôi thấy một con chó gần cổng."},
+    "exampleUsage": {"en": "She ate an apple after lunch.", "vi": "Cô ấy ăn một quả táo sau bữa trưa.", "note": "Use an before a vowel sound and a before a consonant sound."},
+    "acceptedAnswers": ["a", "an"], "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000002", "sourceIndex": 2, "word": "about", "ipa": "/əˈbaʊt/", "partOfSpeech": "prep., adv.", "cefr": "A1",
+    "viMeaning": "về; liên quan đến",
+    "enDefinition": "on the subject of someone or something",
+    "exampleMeaning": {"en": "This book is about space.", "vi": "Cuốn sách này nói về không gian."},
+    "exampleUsage": {"en": "What are you talking about?", "vi": "Bạn đang nói về chuyện gì vậy?", "note": "Common pattern: talk, think, or ask about something."},
+    "acceptedAnswers": ["about"], "extras": {"collocations": ["talk about", "think about"]}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000003", "sourceIndex": 3, "word": "above", "ipa": "/əˈbʌv/", "partOfSpeech": "prep., adv.", "cefr": "A1",
+    "viMeaning": "ở trên; cao hơn",
+    "enDefinition": "at or to a higher position than someone or something",
+    "exampleMeaning": {"en": "The clock is above the door.", "vi": "Chiếc đồng hồ ở phía trên cánh cửa."},
+    "exampleUsage": {"en": "Today the temperature is above 20 degrees.", "vi": "Hôm nay nhiệt độ cao hơn 20 độ.", "note": "Use above before a number to mean higher than that number."},
+    "acceptedAnswers": ["above"], "extras": {}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000004", "sourceIndex": 4, "word": "across", "ipa": "/əˈkrɔs/", "partOfSpeech": "prep., adv.", "cefr": "A1",
+    "viMeaning": "qua; từ bên này sang bên kia",
+    "enDefinition": "from one side of a place or area to the other side",
+    "exampleMeaning": {"en": "We walked across the bridge.", "vi": "Chúng tôi đi bộ qua cây cầu."},
+    "exampleUsage": {"en": "The bank is across from the station.", "vi": "Ngân hàng nằm đối diện nhà ga.", "note": "In American English, across from means on the opposite side."},
+    "acceptedAnswers": ["across"], "extras": {"collocations": ["across the street", "across from"]}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000005", "sourceIndex": 5, "word": "action", "ipa": "/ˈækʃən/", "partOfSpeech": "n.", "cefr": "A1",
+    "viMeaning": "hành động; việc làm",
+    "enDefinition": "something that a person does",
+    "exampleMeaning": {"en": "His quick action saved the child.", "vi": "Hành động nhanh chóng của anh ấy đã cứu đứa trẻ."},
+    "exampleUsage": {"en": "The school took action to stop the problem.", "vi": "Nhà trường đã hành động để ngăn chặn vấn đề.", "note": "Take action means to do something practical about a problem."},
+    "acceptedAnswers": ["action"], "extras": {"collocations": ["take action", "quick action"]}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000006", "sourceIndex": 6, "word": "activity", "ipa": "/ækˈtɪvəti/", "partOfSpeech": "n.", "cefr": "A1",
+    "viMeaning": "hoạt động",
+    "enDefinition": "something that you do, often for work, learning, or enjoyment",
+    "exampleMeaning": {"en": "Reading is a quiet activity.", "vi": "Đọc sách là một hoạt động yên tĩnh."},
+    "exampleUsage": {"en": "The camp offers many outdoor activities.", "vi": "Khu trại có nhiều hoạt động ngoài trời.", "note": "Activity is countable when referring to a particular thing people do."},
+    "acceptedAnswers": ["activity"], "extras": {"collocations": ["outdoor activity", "class activity"]}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000007", "sourceIndex": 7, "word": "actor", "ipa": "/ˈæktər/", "partOfSpeech": "n.", "cefr": "A1",
+    "viMeaning": "diễn viên",
+    "enDefinition": "a person who performs a character in a play, movie, or television show",
+    "exampleMeaning": {"en": "The actor plays a young doctor in the movie.", "vi": "Nam diễn viên đóng vai một bác sĩ trẻ trong bộ phim."},
+    "exampleUsage": {"en": "He wants to become an actor.", "vi": "Anh ấy muốn trở thành diễn viên.", "note": "Become an actor is a common pattern for entering the profession."},
+    "acceptedAnswers": ["actor"], "extras": {"collocations": ["movie actor", "lead actor"]}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000008", "sourceIndex": 8, "word": "actress", "ipa": "/ˈæktrəs/", "partOfSpeech": "n.", "cefr": "A1",
+    "viMeaning": "nữ diễn viên",
+    "enDefinition": "a woman who performs a character in a play, movie, or television show",
+    "exampleMeaning": {"en": "The actress smiles at the camera.", "vi": "Nữ diễn viên mỉm cười trước máy quay."},
+    "exampleUsage": {"en": "She works as an actress in New York.", "vi": "Cô ấy làm diễn viên tại New York.", "note": "Work as + job names a person's occupation."},
+    "acceptedAnswers": ["actress"], "extras": {"usage_note": "Actor is also commonly used for performers of any gender."}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000009", "sourceIndex": 9, "word": "add", "ipa": "/æd/", "partOfSpeech": "v.", "cefr": "A1",
+    "viMeaning": "thêm; cộng",
+    "enDefinition": "to put something with something else so that there is more",
+    "exampleMeaning": {"en": "Please add your name to the list.", "vi": "Vui lòng thêm tên của bạn vào danh sách."},
+    "exampleUsage": {"en": "Add two spoons of sugar to the tea.", "vi": "Thêm hai thìa đường vào trà.", "note": "Common pattern: add something to something."},
+    "acceptedAnswers": ["add"], "extras": {"collocations": ["add to a list", "add sugar"]}
+  },
+  {
+    "sourceKey": "oxford3000:a1:000010", "sourceIndex": 10, "word": "address", "ipa": "/ˈædres/", "partOfSpeech": "n.", "cefr": "A1",
+    "viMeaning": "địa chỉ",
+    "enDefinition": "the details that show where a person lives or where a place is",
+    "exampleMeaning": {"en": "Please write your address on the form.", "vi": "Vui lòng viết địa chỉ của bạn vào biểu mẫu."},
+    "exampleUsage": {"en": "I sent the message to her email address.", "vi": "Tôi đã gửi tin nhắn đến địa chỉ email của cô ấy.", "note": "Address also appears in home address and email address."},
+    "acceptedAnswers": ["address"], "extras": {"collocations": ["home address", "email address"]}
+  }
+]

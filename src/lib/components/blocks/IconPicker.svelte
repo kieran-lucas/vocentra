@@ -1,0 +1,3 @@
+<script lang="ts">import { icons,iconOptions } from '../../icons/registry';let { value, onchange }=$props<{value:string;onchange:(key:string)=>void}>();</script>
+<div class="picker">{#each iconOptions as key}{@const I=icons[key]}<button class:active={value===key} title={key} aria-label={key} onclick={()=>onchange(key)}><I size={20}/></button>{/each}</div>
+<style>.picker{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.picker button{display:grid;place-items:center;height:42px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;color:var(--text-secondary)}.picker button:hover,.picker button.active{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 55%,transparent);background:var(--accent-soft)}</style>

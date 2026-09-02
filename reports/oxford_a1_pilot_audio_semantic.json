@@ -1,0 +1,275 @@
+{
+  "models": [
+    "faster-whisper tiny.en",
+    "faster-whisper base.en"
+  ],
+  "sampleCount": 29,
+  "matched": 21,
+  "matchedAfterReview": 22,
+  "manualInterpretationNeeded": 7,
+  "results": [
+    {
+      "sourceIndex": 1,
+      "word": "a, an",
+      "ipa": "/ə, eɪ; ən, æn/",
+      "transcript": "Okay.",
+      "asrMatched": false,
+      "pronunciationSensitive": true,
+      "reviewTranscript": "Aye.",
+      "reviewAsrMatched": false,
+      "repeatedTranscript": "A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A A",
+      "repeatedAsrMatched": false
+    },
+    {
+      "sourceIndex": 6,
+      "word": "activity",
+      "ipa": "/ækˈtɪvəti/",
+      "transcript": "activity.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 10,
+      "word": "address",
+      "ipa": "/ˈædres/",
+      "transcript": "Address.",
+      "asrMatched": true,
+      "pronunciationSensitive": true
+    },
+    {
+      "sourceIndex": 12,
+      "word": "advice",
+      "ipa": "/ədˈvaɪs/",
+      "transcript": "advice.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 15,
+      "word": "afternoon",
+      "ipa": "/ˌæftərˈnun/",
+      "transcript": "afternoon.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 23,
+      "word": "also",
+      "ipa": "/ˈɔlsoʊ/",
+      "transcript": "Also.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 29,
+      "word": "another",
+      "ipa": "/əˈnəðər/",
+      "transcript": "another.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 31,
+      "word": "any",
+      "ipa": "/ˈeni/",
+      "transcript": "any.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 36,
+      "word": "April",
+      "ipa": "/ˈeɪprəl/",
+      "transcript": "April.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 47,
+      "word": "August",
+      "ipa": "/ˈɔɡəst/",
+      "transcript": "August.",
+      "asrMatched": true,
+      "pronunciationSensitive": true
+    },
+    {
+      "sourceIndex": 48,
+      "word": "aunt",
+      "ipa": "/ænt/",
+      "transcript": "and.",
+      "asrMatched": false,
+      "pronunciationSensitive": true,
+      "reviewTranscript": "and",
+      "reviewAsrMatched": false,
+      "repeatedTranscript": "Ant- Ant- Ant- Ant- Ant",
+      "repeatedAsrMatched": false
+    },
+    {
+      "sourceIndex": 58,
+      "word": "bank",
+      "ipa": "/bæŋk/",
+      "transcript": "Thank you.",
+      "asrMatched": false,
+      "pronunciationSensitive": true,
+      "reviewTranscript": "Thank you for watching, and I'll see you in the next video.",
+      "reviewAsrMatched": false,
+      "repeatedTranscript": "Dank, dank, dank, dank, dank, dank",
+      "repeatedAsrMatched": false
+    },
+    {
+      "sourceIndex": 65,
+      "word": "beach",
+      "ipa": "/biʧ/",
+      "transcript": "teach.",
+      "asrMatched": false,
+      "pronunciationSensitive": false,
+      "reviewTranscript": "Each",
+      "reviewAsrMatched": false,
+      "repeatedTranscript": "Each, each, each, each, each, each.",
+      "repeatedAsrMatched": false
+    },
+    {
+      "sourceIndex": 73,
+      "word": "begin",
+      "ipa": "/bɪˈgɪn/",
+      "transcript": "begin.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 82,
+      "word": "big",
+      "ipa": "/bɪg/",
+      "transcript": "Big.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 95,
+      "word": "bored",
+      "ipa": "/bɔrd/",
+      "transcript": "board.",
+      "asrMatched": false,
+      "pronunciationSensitive": false,
+      "reviewTranscript": "Board.",
+      "reviewAsrMatched": false,
+      "repeatedTranscript": "Board. Board. Board. Board. Board.",
+      "repeatedAsrMatched": false
+    },
+    {
+      "sourceIndex": 97,
+      "word": "born",
+      "ipa": "/bɔrn/",
+      "transcript": "Born.",
+      "asrMatched": true,
+      "pronunciationSensitive": true
+    },
+    {
+      "sourceIndex": 102,
+      "word": "boyfriend",
+      "ipa": "/ˈbɔɪˌfrɛnd/",
+      "transcript": "Boyfriend.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 116,
+      "word": "buy",
+      "ipa": "/baɪ/",
+      "transcript": "Bye.",
+      "asrMatched": false,
+      "pronunciationSensitive": false,
+      "reviewTranscript": "Bye.",
+      "reviewAsrMatched": false,
+      "repeatedTranscript": "Bye! Bye! Bye! Bye! Bye! Bye! Bye!",
+      "repeatedAsrMatched": false
+    },
+    {
+      "sourceIndex": 123,
+      "word": "can",
+      "ipa": "/kæn/",
+      "transcript": "Can.",
+      "asrMatched": true,
+      "pronunciationSensitive": true
+    },
+    {
+      "sourceIndex": 124,
+      "word": "cannot",
+      "ipa": "/ˈkænɑt/",
+      "transcript": "Cannot.",
+      "asrMatched": true,
+      "pronunciationSensitive": true
+    },
+    {
+      "sourceIndex": 128,
+      "word": "career",
+      "ipa": "/kəˈrɪr/",
+      "transcript": "career.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 131,
+      "word": "cat",
+      "ipa": "/kæt/",
+      "transcript": "Kate.",
+      "asrMatched": false,
+      "pronunciationSensitive": false,
+      "reviewTranscript": "Kate?",
+      "reviewAsrMatched": false,
+      "repeatedTranscript": "Kate Kate Kate Kate Kate",
+      "repeatedAsrMatched": false
+    },
+    {
+      "sourceIndex": 132,
+      "word": "CD",
+      "ipa": "/ˌsiː ˈdiː/",
+      "transcript": "CD.",
+      "asrMatched": true,
+      "pronunciationSensitive": true
+    },
+    {
+      "sourceIndex": 138,
+      "word": "cheap",
+      "ipa": "/ʧip/",
+      "transcript": "cheap.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 151,
+      "word": "close",
+      "ipa": "/kloʊz/",
+      "transcript": "Close.",
+      "asrMatched": true,
+      "pronunciationSensitive": true
+    },
+    {
+      "sourceIndex": 152,
+      "word": "clothes",
+      "ipa": "/kloʊðz/",
+      "transcript": "Close.",
+      "asrMatched": false,
+      "pronunciationSensitive": true,
+      "reviewTranscript": "Clothes",
+      "reviewAsrMatched": true
+    },
+    {
+      "sourceIndex": 153,
+      "word": "club",
+      "ipa": "/kləb/",
+      "transcript": "club.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    },
+    {
+      "sourceIndex": 167,
+      "word": "cook",
+      "ipa": "/kʊk/",
+      "transcript": "cook.",
+      "asrMatched": true,
+      "pronunciationSensitive": false
+    }
+  ],
+  "note": "ASR is an auxiliary pronunciation sanity check; isolated function words may require manual interpretation."
+}
