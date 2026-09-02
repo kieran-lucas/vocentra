@@ -1,0 +1,15 @@
+configuration                                    n  bad  miss stress    logP   minP  s/char     cv  trail     hf   cent  f0rng
+------------------------------------------------------------------------------------------------------------------------------
+en-US-AvaNeural | audio-24khz-96kbitrate-mono-mp3  20    0     2      0  -0.347  -0.93  0.0849  0.226     93 0.0126    721   12.5
+en-US-AriaNeural | audio-24khz-48kbitrate-mono-mp3  20    0     2      0  -0.462  -1.14  0.0962  0.301     99 0.0162    827   13.6
+en-US-JennyNeural | audio-24khz-96kbitrate-mono-mp3  20    0     4      0  -0.369  -1.08  0.0837  0.274     86 0.0301    815   11.3
+en-US-JennyNeural | audio-24khz-48kbitrate-mono-mp3  20    0     4      0  -0.404  -1.05  0.0839  0.276     85 0.0320    827   11.0
+
+en-US-AvaNeural | audio-24khz-96kbitrate-mono-mp3:
+    asr: ['cell->So.', 'gaze->days.']
+en-US-AriaNeural | audio-24khz-48kbitrate-mono-mp3:
+    asr: ['gaze->gays.', 'sixth->6th']
+en-US-JennyNeural | audio-24khz-96kbitrate-mono-mp3:
+    asr: ['clothes->close.', 'colonel->kernel.', 'gaze->days.', 'mix->MX.']
+en-US-JennyNeural | audio-24khz-48kbitrate-mono-mp3:
+    asr: ['colonel->kernel.', 'gaze->days.', 'mix->X.', 'sixth->6.']

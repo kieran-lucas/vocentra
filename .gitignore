@@ -11,3 +11,11 @@ data/audio-master/
 data/audio-final/
 __pycache__/
 *.pyc
+data/audio-benchmark/**/master/
+data/audio-benchmark/**/final/
+data/audio-benchmark/**/probe/
+data/audio-benchmark/analysis/
+data/audio-benchmark/**/metrics.partial.jsonl
+src-tauri/binaries/
+src-tauri/ffmpeg/
+tools/vendor/

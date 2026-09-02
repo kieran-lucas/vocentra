@@ -25,7 +25,19 @@ def stable_id(value: str) -> str:
     return str(uuid.uuid5(NAMESPACE, value))
 
 
+# Set by callers that already know the app-data directory (the Tauri bridge
+# passes --app-data) so path resolution is never guessed from the environment.
+APP_DATA_OVERRIDE: Path | None = None
+
+
+def set_app_data(path: Path) -> None:
+    global APP_DATA_OVERRIDE
+    APP_DATA_OVERRIDE = Path(path)
+
+
 def default_app_data() -> Path:
+    if APP_DATA_OVERRIDE is not None:
+        return APP_DATA_OVERRIDE
     return Path(os.environ.get("APPDATA", Path.home() / "AppData/Roaming")) / "com.lexium.desktop"
 
 
@@ -37,6 +49,18 @@ def connect(path: Path | None = None) -> sqlite3.Connection:
     connection.execute("PRAGMA foreign_keys=ON")
     connection.execute("PRAGMA journal_mode=WAL")
     return connection
+
+
+def apply_migrations(connection: sqlite3.Connection) -> None:
+    """Apply the app's forward migrations to a bare database (tests and tooling).
+
+    The shipped app applies these through sqlx; this mirrors that order so a
+    temporary database matches production without launching Tauri.
+    """
+    root = Path(__file__).resolve().parents[2] / "src-tauri/migrations"
+    for migration in sorted(root.glob("*.sql")):
+        connection.executescript(migration.read_text(encoding="utf-8"))
+    connection.commit()
 
 
 def require_ingestion_schema(connection: sqlite3.Connection) -> None:

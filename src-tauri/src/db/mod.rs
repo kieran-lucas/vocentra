@@ -57,4 +57,23 @@ mod tests {
         .unwrap();
         assert_eq!(count, 2);
     }
+
+    #[tokio::test]
+    async fn migrations_create_the_lexical_model_and_card_backlink() {
+        let pool = super::memory().await.unwrap();
+        let tables: i64 = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name IN              ('lexical_entries','lexical_forms','lexical_pronunciations','lexical_senses',              'lexical_glosses','lexical_examples','lexical_example_translations',              'lexical_additional_items','lexical_audio_assets','lexical_import_batches','lexical_import_items')",
+        )
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+        assert_eq!(tables, 11);
+        let backlink: i64 = sqlx::query_scalar(
+            "SELECT COUNT(*) FROM pragma_table_info('vocabulary_entries') WHERE name='sense_id'",
+        )
+        .fetch_one(&pool)
+        .await
+        .unwrap();
+        assert_eq!(backlink, 1);
+    }
 }

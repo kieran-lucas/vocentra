@@ -39,6 +39,8 @@ pub fn run() {
             commands::vocabulary::remove_vocabulary,
             commands::import::preview_import,
             commands::import::import_vocabulary,
+            commands::external_import::import_external_json,
+            commands::external_import::speech_profile,
             commands::study::start_study,
             commands::study::study_next,
             commands::study::rate_card

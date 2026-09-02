@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from tools.ingest import audio_encode, audio_microsoft, critic, db
+from tools.ingest import audio_encode, audio_microsoft, audio_profile, audio_service, critic, db
 from tools.ingest.generator import load_authored_cards, write_normalized
 from tools.ingest.source_manifest import SOURCE_URL, SOURCE_VERSION, read_manifest
 from tools.ingest.status import format_status
@@ -97,23 +97,21 @@ def prepare_text(connection: sqlite3.Connection, row: sqlite3.Row, source: dict,
 
 def process_audio_and_import(connection: sqlite3.Connection, row: sqlite3.Row, card: dict) -> None:
     stem = row["source_key"].replace(":", "_")
-    master = ROOT / f"data/audio-master/en-US/{stem}.mp3"
+    master = ROOT / f"data/audio-master/en-US/{stem}{audio_microsoft.MASTER_SUFFIX}"
     final = ROOT / f"data/audio-final/en-US/{stem}.ogg"
     app_relative = f"audio/en-US/{stem}.ogg"
     app_audio = db.default_app_data() / app_relative
     current = connection.execute("SELECT * FROM ingestion_items WHERE source_key=?", (row["source_key"],)).fetchone()
-    if not master.exists():
-        update_item(connection, row["source_key"], status="AUDIO_REQUESTED", stage="audio", audio_voice=audio_microsoft.VOICE)
-        audio_microsoft.synthesize(card, master)
-    update_item(connection, row["source_key"], status="AUDIO_DONE", stage="audio", audio_master_path=master.relative_to(ROOT).as_posix(), audio_voice=audio_microsoft.VOICE)
     if not final.exists():
-        audio_encode.encode(master, final)
+        update_item(connection, row["source_key"], status="AUDIO_REQUESTED", stage="audio", audio_voice=audio_profile.VOICE)
+        audio_service.generate_production_audio(audio_microsoft.card_synthesis_text(card), master, final)
+    update_item(connection, row["source_key"], status="AUDIO_DONE", stage="audio", audio_master_path=master.relative_to(ROOT).as_posix(), audio_voice=audio_profile.VOICE)
     metadata = audio_encode.verify(final)
     app_audio.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(final, app_audio)
     update_item(connection, row["source_key"], status="ENCODED", stage="encode", audio_path=app_relative, audio_checksum=metadata["sha256"], audio_verified=1, validation_json=current["validation_json"])
     refreshed = connection.execute("SELECT * FROM ingestion_items WHERE source_key=?", (row["source_key"],)).fetchone()
-    db.import_card(connection, card, refreshed, app_relative, audio_microsoft.VOICE, metadata["sha256"])
+    db.import_card(connection, card, refreshed, app_relative, audio_profile.VOICE, metadata["sha256"])
 
 
 def export_failures(connection: sqlite3.Connection, job_id: str) -> None:
@@ -131,7 +129,9 @@ def write_report(connection: sqlite3.Connection, job_id: str, note: str) -> None
         f"- Target: {snapshot['target']}\n- Generated: {snapshot['generated']}\n- Reviewed PASS: {snapshot['reviewed']}\n"
         f"- Validated: {snapshot['validated']}\n- Audio generated: {snapshot['audio_generated']}\n- Audio verified: {snapshot['audio_verified']}\n"
         f"- Imported: {snapshot['imported']}\n- Last contiguous: {snapshot['last_contiguous']}\n- Next pending: {snapshot['next_pending']}\n"
-        f"- Voice: `{audio_microsoft.VOICE}` ({audio_microsoft.PROVIDER})\n- Final format: Ogg Opus, 64 kbps target, mono\n",
+        f"- Voice: `{audio_microsoft.VOICE}` ({audio_microsoft.PROVIDER})\n"
+        f"- Edge source format: `{audio_microsoft.SOURCE_FORMAT}`\n"
+        "- Final format: Ogg Opus, 64 kbps target, mono\n",
         encoding="utf-8",
     )
 

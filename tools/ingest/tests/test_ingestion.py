@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.ingest import db
+from tools.ingest import audio_microsoft, db
 from tools.ingest.audio_encode import encode, find_binary, verify
 from tools.ingest.source_manifest import parse_a1_lines, source_key
 from tools.ingest.validator import validate_batch, validate_card
@@ -93,6 +93,38 @@ class IngestionTests(unittest.TestCase):
             self.assertEqual(metadata["streams"][0]["codec_name"], "opus")
             self.assertEqual(metadata["streams"][0]["channels"], 1)
             self.assertEqual(metadata["encoding_target_bps"], 64000)
+
+    def test_speech_configuration_is_the_benchmarked_one(self):
+        self.assertEqual(audio_microsoft.VOICE, "en-US-JennyNeural")
+        self.assertEqual(audio_microsoft.SOURCE_FORMAT, "audio-24khz-48kbitrate-mono-mp3")
+        self.assertEqual(audio_microsoft.MASTER_SUFFIX, ".mp3")
+        audio_microsoft.assert_source_format()
+
+    def test_speech_smoke_produces_encodable_audio(self):
+        try:
+            import edge_tts  # noqa: F401
+        except ImportError:
+            self.skipTest("edge-tts is not installed")
+        with tempfile.TemporaryDirectory() as temporary:
+            master = Path(temporary) / f"smoke{audio_microsoft.MASTER_SUFFIX}"
+            final = Path(temporary) / "smoke.ogg"
+            try:
+                audio_microsoft.synthesize({"word": "world"}, master, retries=2)
+            except Exception as error:  # noqa: BLE001 - offline runs must not fail the suite
+                self.skipTest(f"Microsoft Edge speech is unreachable: {error}")
+            probe = subprocess.run(
+                [find_binary("ffprobe"), "-v", "error", "-show_entries",
+                 "stream=codec_name,sample_rate,channels", "-of", "default=nw=1", str(master)],
+                check=True, capture_output=True, text=True,
+            ).stdout
+            self.assertIn("codec_name=mp3", probe)
+            self.assertIn("sample_rate=24000", probe)
+            self.assertIn("channels=1", probe)
+            encode(master, final)
+            metadata = verify(final)
+            self.assertEqual(metadata["streams"][0]["codec_name"], "opus")
+            self.assertEqual(metadata["streams"][0]["channels"], 1)
+            self.assertGreater(float(metadata["format"]["duration"]), 0.2)
 
 
 if __name__ == "__main__":

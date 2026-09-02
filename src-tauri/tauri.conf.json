@@ -6,12 +6,42 @@
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "pnpm build",
+    "beforeBuildCommand": "pnpm build && powershell -NoProfile -ExecutionPolicy Bypass -File tools/build_importer_sidecar.ps1",
     "frontendDist": "../dist"
   },
   "app": {
-    "windows": [{ "title": "Lexium", "width": 1180, "height": 760, "minWidth": 900, "minHeight": 600, "maximized": true, "resizable": true, "decorations": true, "backgroundColor": "#f4f6f9" }],
-    "security": { "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; media-src 'self' data:" }
+    "windows": [
+      {
+        "title": "Lexium",
+        "width": 1180,
+        "height": 760,
+        "minWidth": 900,
+        "minHeight": 600,
+        "maximized": true,
+        "resizable": true,
+        "decorations": true,
+        "backgroundColor": "#f4f6f9"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; media-src 'self' data:"
+    }
   },
-  "bundle": { "active": true, "targets": ["nsis", "msi"], "icon": ["icons/icon.ico", "icons/icon.png"] }
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis",
+      "msi"
+    ],
+    "icon": [
+      "icons/icon.ico",
+      "icons/icon.png"
+    ],
+    "externalBin": [
+      "binaries/lexium-import"
+    ],
+    "resources": [
+      "ffmpeg/*"
+    ]
+  }
 }

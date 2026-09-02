@@ -1,0 +1,217 @@
+{
+  "en-US-AvaNeural|audio-24khz-48kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 10656
+  },
+  "en-US-AvaNeural|audio-24khz-96kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 21312
+  },
+  "en-US-AvaNeural|audio-48khz-192kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AvaNeural / audio-48khz-192kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-192kbitrate-mono-mp3'"
+  },
+  "en-US-AvaNeural|riff-48khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AvaNeural / riff-48khz-16bit-mono-pcm: No audio returned for outputFormat='riff-48khz-16bit-mono-pcm'"
+  },
+  "en-US-AvaNeural|riff-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AvaNeural / riff-24khz-16bit-mono-pcm: No audio returned for outputFormat='riff-24khz-16bit-mono-pcm'"
+  },
+  "en-US-AvaNeural|raw-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AvaNeural / raw-24khz-16bit-mono-pcm: No audio returned for outputFormat='raw-24khz-16bit-mono-pcm'"
+  },
+  "en-US-AvaNeural|audio-24khz-160kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AvaNeural / audio-24khz-160kbitrate-mono-mp3: No audio returned for outputFormat='audio-24khz-160kbitrate-mono-mp3'"
+  },
+  "en-US-AvaNeural|audio-48khz-96kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AvaNeural / audio-48khz-96kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-96kbitrate-mono-mp3'"
+  },
+  "en-US-AvaNeural|webm-24khz-16bit-mono-opus": {
+    "accepted": true,
+    "content_type": "audio/webm; codec=opus",
+    "bytes": 11384
+  },
+  "en-US-AvaNeural|ogg-48khz-16bit-mono-opus": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AvaNeural / ogg-48khz-16bit-mono-opus: No audio returned for outputFormat='ogg-48khz-16bit-mono-opus'"
+  },
+  "en-US-JennyNeural|audio-24khz-48kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 10656
+  },
+  "en-US-JennyNeural|audio-24khz-96kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 21312
+  },
+  "en-US-JennyNeural|audio-48khz-192kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-JennyNeural / audio-48khz-192kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-192kbitrate-mono-mp3'"
+  },
+  "en-US-JennyNeural|riff-48khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-JennyNeural / riff-48khz-16bit-mono-pcm: No audio returned for outputFormat='riff-48khz-16bit-mono-pcm'"
+  },
+  "en-US-JennyNeural|riff-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-JennyNeural / riff-24khz-16bit-mono-pcm: No audio returned for outputFormat='riff-24khz-16bit-mono-pcm'"
+  },
+  "en-US-JennyNeural|raw-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-JennyNeural / raw-24khz-16bit-mono-pcm: No audio returned for outputFormat='raw-24khz-16bit-mono-pcm'"
+  },
+  "en-US-JennyNeural|audio-24khz-160kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-JennyNeural / audio-24khz-160kbitrate-mono-mp3: No audio returned for outputFormat='audio-24khz-160kbitrate-mono-mp3'"
+  },
+  "en-US-JennyNeural|audio-48khz-96kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-JennyNeural / audio-48khz-96kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-96kbitrate-mono-mp3'"
+  },
+  "en-US-JennyNeural|webm-24khz-16bit-mono-opus": {
+    "accepted": true,
+    "content_type": "audio/webm; codec=opus",
+    "bytes": 11384
+  },
+  "en-US-JennyNeural|ogg-48khz-16bit-mono-opus": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-JennyNeural / ogg-48khz-16bit-mono-opus: No audio returned for outputFormat='ogg-48khz-16bit-mono-opus'"
+  },
+  "en-US-AndrewNeural|audio-24khz-48kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 10656
+  },
+  "en-US-AndrewNeural|audio-24khz-96kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 21312
+  },
+  "en-US-AndrewNeural|audio-48khz-192kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AndrewNeural / audio-48khz-192kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-192kbitrate-mono-mp3'"
+  },
+  "en-US-AndrewNeural|riff-48khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AndrewNeural / riff-48khz-16bit-mono-pcm: No audio returned for outputFormat='riff-48khz-16bit-mono-pcm'"
+  },
+  "en-US-AndrewNeural|riff-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AndrewNeural / riff-24khz-16bit-mono-pcm: No audio returned for outputFormat='riff-24khz-16bit-mono-pcm'"
+  },
+  "en-US-AndrewNeural|raw-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AndrewNeural / raw-24khz-16bit-mono-pcm: No audio returned for outputFormat='raw-24khz-16bit-mono-pcm'"
+  },
+  "en-US-AndrewNeural|audio-24khz-160kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AndrewNeural / audio-24khz-160kbitrate-mono-mp3: No audio returned for outputFormat='audio-24khz-160kbitrate-mono-mp3'"
+  },
+  "en-US-AndrewNeural|audio-48khz-96kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AndrewNeural / audio-48khz-96kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-96kbitrate-mono-mp3'"
+  },
+  "en-US-AndrewNeural|webm-24khz-16bit-mono-opus": {
+    "accepted": true,
+    "content_type": "audio/webm; codec=opus",
+    "bytes": 11384
+  },
+  "en-US-AndrewNeural|ogg-48khz-16bit-mono-opus": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AndrewNeural / ogg-48khz-16bit-mono-opus: No audio returned for outputFormat='ogg-48khz-16bit-mono-opus'"
+  },
+  "en-US-AriaNeural|audio-24khz-48kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 10656
+  },
+  "en-US-AriaNeural|audio-24khz-96kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 21312
+  },
+  "en-US-AriaNeural|audio-48khz-192kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AriaNeural / audio-48khz-192kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-192kbitrate-mono-mp3'"
+  },
+  "en-US-AriaNeural|riff-48khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AriaNeural / riff-48khz-16bit-mono-pcm: No audio returned for outputFormat='riff-48khz-16bit-mono-pcm'"
+  },
+  "en-US-AriaNeural|riff-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AriaNeural / riff-24khz-16bit-mono-pcm: No audio returned for outputFormat='riff-24khz-16bit-mono-pcm'"
+  },
+  "en-US-AriaNeural|raw-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AriaNeural / raw-24khz-16bit-mono-pcm: No audio returned for outputFormat='raw-24khz-16bit-mono-pcm'"
+  },
+  "en-US-AriaNeural|audio-24khz-160kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AriaNeural / audio-24khz-160kbitrate-mono-mp3: No audio returned for outputFormat='audio-24khz-160kbitrate-mono-mp3'"
+  },
+  "en-US-AriaNeural|audio-48khz-96kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AriaNeural / audio-48khz-96kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-96kbitrate-mono-mp3'"
+  },
+  "en-US-AriaNeural|webm-24khz-16bit-mono-opus": {
+    "accepted": true,
+    "content_type": "audio/webm; codec=opus",
+    "bytes": 11384
+  },
+  "en-US-AriaNeural|ogg-48khz-16bit-mono-opus": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-AriaNeural / ogg-48khz-16bit-mono-opus: No audio returned for outputFormat='ogg-48khz-16bit-mono-opus'"
+  },
+  "en-US-EmmaNeural|audio-24khz-48kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 10656
+  },
+  "en-US-EmmaNeural|audio-24khz-96kbitrate-mono-mp3": {
+    "accepted": true,
+    "content_type": "audio/mpeg",
+    "bytes": 21312
+  },
+  "en-US-EmmaNeural|audio-48khz-192kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-EmmaNeural / audio-48khz-192kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-192kbitrate-mono-mp3'"
+  },
+  "en-US-EmmaNeural|riff-48khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-EmmaNeural / riff-48khz-16bit-mono-pcm: No audio returned for outputFormat='riff-48khz-16bit-mono-pcm'"
+  },
+  "en-US-EmmaNeural|riff-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-EmmaNeural / riff-24khz-16bit-mono-pcm: No audio returned for outputFormat='riff-24khz-16bit-mono-pcm'"
+  },
+  "en-US-EmmaNeural|raw-24khz-16bit-mono-pcm": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-EmmaNeural / raw-24khz-16bit-mono-pcm: No audio returned for outputFormat='raw-24khz-16bit-mono-pcm'"
+  },
+  "en-US-EmmaNeural|audio-24khz-160kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-EmmaNeural / audio-24khz-160kbitrate-mono-mp3: No audio returned for outputFormat='audio-24khz-160kbitrate-mono-mp3'"
+  },
+  "en-US-EmmaNeural|audio-48khz-96kbitrate-mono-mp3": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-EmmaNeural / audio-48khz-96kbitrate-mono-mp3: No audio returned for outputFormat='audio-48khz-96kbitrate-mono-mp3'"
+  },
+  "en-US-EmmaNeural|webm-24khz-16bit-mono-opus": {
+    "accepted": true,
+    "content_type": "audio/webm; codec=opus",
+    "bytes": 11384
+  },
+  "en-US-EmmaNeural|ogg-48khz-16bit-mono-opus": {
+    "accepted": false,
+    "error": "synthesis failed for 'world' / en-US-EmmaNeural / ogg-48khz-16bit-mono-opus: No audio returned for outputFormat='ogg-48khz-16bit-mono-opus'"
+  }
+}

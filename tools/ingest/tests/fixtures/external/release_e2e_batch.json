@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "batchId": "release_e2e_v1",
+  "destination": {
+    "blockId": null,
+    "blockPath": ["Import Test", "Release E2E"],
+    "createIfMissing": true
+  },
+  "entries": [
+    {
+      "entryId": "entry_e2e_lattice",
+      "lemma": "lattice",
+      "entryType": "word",
+      "forms": [
+        {
+          "formId": "form_e2e_lattice_01",
+          "written": "lattice",
+          "morphology": null,
+          "pronunciations": [
+            {"pronunciationId": "pron_e2e_lattice_en_us_01", "locale": "en-US", "ipa": "/ˈlætɪs/"}
+          ]
+        }
+      ],
+      "senses": [
+        {
+          "senseId": "sense_e2e_lattice_noun_01",
+          "pos": "noun",
+          "formId": "form_e2e_lattice_01",
+          "pronunciationId": "pron_e2e_lattice_en_us_01",
+          "glosses": [{"locale": "vi", "text": "mạng tinh thể; giàn mắt cáo"}],
+          "definition": "a regular repeating arrangement of points, bars or atoms",
+          "examples": [
+            {
+              "exampleId": "ex_e2e_lattice_01",
+              "type": "meaning",
+              "en": "The atoms sit at fixed points in a crystal lattice.",
+              "note": null,
+              "translations": [{"locale": "vi", "text": "Các nguyên tử nằm ở những điểm cố định trong mạng tinh thể."}]
+            },
+            {
+              "exampleId": "ex_e2e_lattice_02",
+              "type": "usage",
+              "en": "Roses grew up the wooden lattice beside the door.",
+              "note": "Countable in the garden sense, usually uncountable in physics.",
+              "translations": [{"locale": "vi", "text": "Những bông hồng leo lên giàn mắt cáo bằng gỗ bên cạnh cửa."}]
+            }
+          ],
+          "additional": {
+            "schemaVersion": 1,
+            "items": [
+              {
+                "id": "add_e2e_lattice_collocation_01",
+                "kind": "collocation",
+                "salience": 1,
+                "text": "crystal lattice",
+                "note": null,
+                "target": null,
+                "attributes": {"relation": "noun+noun"}
+              },
+              {
+                "id": "add_e2e_lattice_usage_01",
+                "kind": "usage",
+                "salience": 2,
+                "text": null,
+                "note": "In physics and chemistry the word is usually uncountable.",
+                "target": null,
+                "attributes": {"usageType": "domain", "value": "science"}
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "entryId": "entry_e2e_threshold",
+      "lemma": "threshold",
+      "entryType": "word",
+      "forms": [
+        {
+          "formId": "form_e2e_threshold_01",
+          "written": "threshold",
+          "morphology": null,
+          "pronunciations": [
+            {"pronunciationId": "pron_e2e_threshold_en_us_01", "locale": "en-US", "ipa": "/ˈθreʃhoʊld/"}
+          ]
+        }
+      ],
+      "senses": [
+        {
+          "senseId": "sense_e2e_threshold_noun_01",
+          "pos": "noun",
+          "formId": "form_e2e_threshold_01",
+          "pronunciationId": "pron_e2e_threshold_en_us_01",
+          "glosses": [{"locale": "vi", "text": "ngưỡng; mức tối thiểu"}],
+          "definition": "the level at which something starts to happen or take effect",
+          "examples": [
+            {
+              "exampleId": "ex_e2e_threshold_01",
+              "type": "meaning",
+              "en": "Pain begins once the signal passes a certain threshold.",
+              "note": null,
+              "translations": [{"locale": "vi", "text": "Cơn đau bắt đầu khi tín hiệu vượt qua một ngưỡng nhất định."}]
+            },
+            {
+              "exampleId": "ex_e2e_threshold_02",
+              "type": "usage",
+              "en": "Earnings above the tax threshold are reported separately.",
+              "note": "Common with above, below, cross and set.",
+              "translations": [{"locale": "vi", "text": "Thu nhập trên ngưỡng chịu thuế được kê khai riêng."}]
+            }
+          ],
+          "additional": {
+            "schemaVersion": 1,
+            "items": [
+              {
+                "id": "add_e2e_threshold_collocation_01",
+                "kind": "collocation",
+                "salience": 1,
+                "text": "cross a threshold",
+                "note": null,
+                "target": null,
+                "attributes": {"relation": "verb+noun"}
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

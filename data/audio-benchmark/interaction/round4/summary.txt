@@ -1,0 +1,9 @@
+configuration                                    n  bad  miss stress    logP   minP  s/char     cv  trail     hf   cent  f0rng
+------------------------------------------------------------------------------------------------------------------------------
+en-US-AvaNeural | audio-24khz-96kbitrate-mono-mp3  10    0     0      0  -0.198  -0.42  0.0729  0.209     92 0.0038    669   12.8
+en-US-AvaNeural | audio-24khz-48kbitrate-mono-mp3  10    0     0      0  -0.215  -0.40  0.0731  0.210     89 0.0040    673   12.8
+en-US-JennyNeural | audio-24khz-96kbitrate-mono-mp3  10    0     0      0  -0.235  -0.50  0.0663  0.118     86 0.0122    675   10.0
+en-US-JennyNeural | audio-24khz-48kbitrate-mono-mp3  10    0     0      0  -0.243  -0.46  0.0664  0.116     86 0.0135    682   11.4
+en-US-AriaNeural | audio-24khz-96kbitrate-mono-mp3  10    0     0      0  -0.246  -0.37  0.0784  0.232     92 0.0065    771   13.4
+en-US-AriaNeural | audio-24khz-48kbitrate-mono-mp3  10    0     0      0  -0.268  -0.37  0.0784  0.229     94 0.0067    774   12.6
+

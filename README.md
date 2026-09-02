@@ -29,8 +29,9 @@ pnpm build
 cargo fmt --manifest-path src-tauri/Cargo.toml -- --check
 cargo test --manifest-path src-tauri/Cargo.toml
 cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings
-uv run python -m unittest discover -s tools/ingest/tests -v
-pnpm tauri build
+uv run --with edge-tts --with jsonschema python -m unittest discover -s tools/ingest/tests -v
+powershell -File tools/build_importer_sidecar.ps1
+pnpm tauri build            # builds the importer sidecar first, then the installers
 ```
 
 Installers are written under `src-tauri/target/release/bundle/`.
@@ -63,7 +64,80 @@ uv run tools/ingest/ingest_oxford_a1_pilot.py --source-index 4
 uv run tools/ingest/ingest_oxford_a1_pilot.py --source-key oxford3000:a1:000004 --regenerate-audio
 ```
 
-The pilot uses `en-US-AriaNeural` through the Microsoft Edge neural speech service during dataset generation. It needs no Google billing or API key. The returned audio is retained as an intermediate master, normalized conservatively, encoded locally with FFmpeg, and copied into app data. The shipped app remains fully offline and never calls a speech service at runtime. The provider adapter is isolated in `tools/ingest/audio_microsoft.py` so it can be replaced without changing validation, encoding, import, or app playback.
+The pilot uses `en-US-JennyNeural` with the Edge source format `audio-24khz-48kbitrate-mono-mp3` through the Microsoft Edge neural speech service during dataset generation; both were selected by the benchmark recorded in `data/audio-benchmark/report.md`. It needs no Google billing or API key. The returned audio is retained as an intermediate master, normalized conservatively, encoded locally with FFmpeg, and copied into app data. The shipped app remains fully offline and never calls a speech service at runtime. The provider adapter is isolated in `tools/ingest/audio_microsoft.py` so it can be replaced without changing validation, encoding, import, or app playback.
+
+## External vocabulary JSON import
+
+One JSON file in, usable cards out. Ask any LLM for a file matching
+`tools/prompts/external_vocab_generation_v1.md` (a self-contained contract - the
+model never needs this repository), then import it. Lexium validates it, resolves
+or creates the destination block, generates the pronunciation audio with the
+locked production voice, encodes and verifies it, and upserts the lexical data.
+
+- Contract for the generating LLM: `tools/prompts/external_vocab_generation_v1.md`
+- Machine-readable schema: `tools/schemas/external_vocabulary_import.v1.schema.json`
+- Importer (the only one): `tools/ingest/import_external_vocabulary.py`
+- Audio source of truth: `tools/ingest/audio_profile.py`
+
+In the app, use **Import JSON** in the header, choose the file, and watch the
+progress. From a terminal:
+
+```powershell
+# Import into the app database
+uv run tools/ingest/import_external_vocabulary.py my_words.json
+
+# Check a file without writing anything or contacting the speech service
+uv run tools/ingest/import_external_vocabulary.py my_words.json --validate-only
+```
+
+The file carries words and a destination only. Any attempt to set a voice,
+source format, codec, audio path or learner state is rejected before validation
+completes, and the production profile always wins. Re-importing the same file
+changes nothing and re-synthesises nothing; changing a definition updates the
+card and keeps the audio; changing what is spoken regenerates just that clip.
+Mastery, review history and block membership are never reset by an import.
+
+### How the importer ships
+
+The app runs the importer as a child process, only while an import is in
+progress: there is no daemon, no localhost server and no startup cost.
+
+`tools/build_importer_sidecar.ps1` freezes `import_external_vocabulary.py` with
+PyInstaller into a single `lexium-import.exe`, smoke-tests it with
+`--validate-only`, and stages it plus a slim LGPL FFmpeg build:
+
+```text
+src-tauri/binaries/lexium-import-x86_64-pc-windows-msvc.exe   (externalBin)
+src-tauri/ffmpeg/{ffmpeg.exe, ffprobe.exe, *.dll}             (resources)
+```
+
+`pnpm tauri build` runs that script from `beforeBuildCommand`, so a release
+either contains a working importer or fails before packaging. The installed
+layout is:
+
+```text
+<install>/lexium.exe
+<install>/lexium-import.exe
+<install>/ffmpeg/...
+```
+
+`resolve_importer()` takes the bundled sidecar first, so release behaviour never
+depends on the environment; `LEXIUM_IMPORTER` and the checked-out script are
+development fallbacks. `find_binary()` likewise prefers `<install>/ffmpeg` over
+`PATH`. The importer writes its intermediate masters under app data when frozen
+and into the repository when run from a checkout.
+
+Put a slim FFmpeg in `tools/vendor/ffmpeg/` to control installer size; the build
+script falls back to whatever FFmpeg the build machine has, which for a static
+build is far larger.
+
+To re-run the installed-build acceptance check, launch the app with
+`WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS=--remote-debugging-port=9222` and run:
+
+```powershell
+node scripts/release-import-smoke.mjs tools/ingest/tests/fixtures/external/release_e2e_batch.json tools/ingest/tests/fixtures/external/release_e2e_forbidden_voice.json
+powershell -File scripts/verify-release-import.ps1
+```
 
 ## Architecture
 

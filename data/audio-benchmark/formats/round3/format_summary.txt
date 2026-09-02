@@ -1,0 +1,14 @@
+source format                       n     codec     sr ch     kB   src_bw   fin_bw  LSD_src  LSD_fin  fin_kB
+------------------------------------------------------------------------------------------------------------
+audio-24khz-48kbitrate-mono-mp3    10       mp3  24000  1   10.9    11210    11210     1.12     1.68     6.6
+audio-24khz-96kbitrate-mono-mp3    10       mp3  24000  1   21.7    11077    11205      nan      nan     6.8
+webm-24khz-16bit-mono-opus         10      opus  48000  1   11.6    11210    11170     1.46     1.73     6.8
+
+src_bw/fin_bw = highest frequency above -60 dB (Hz); LSD = mean log-spectral
+distance in dB against audio-24khz-96kbitrate-mono-mp3 (lower = closer to the reference).
+configuration                                    n  bad  miss stress    logP   minP  s/char     cv  trail     hf   cent  f0rng
+------------------------------------------------------------------------------------------------------------------------------
+audio-24khz-96kbitrate-mono-mp3                 10    0     0      0  -0.224  -0.41  0.0927  0.858     85 0.0124    641    9.7
+webm-24khz-16bit-mono-opus                      10    0     0      0  -0.234  -0.44  0.0927  0.858     79 0.0091    619    9.4
+audio-24khz-48kbitrate-mono-mp3                 10    0     0      0  -0.258  -0.50  0.0928  0.857     85 0.0129    645   10.8
+
