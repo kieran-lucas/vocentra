@@ -40,7 +40,7 @@ function Resolve-FfmpegSource {
 
 # --- inputs -----------------------------------------------------------------
 $entry = Join-Path $repo 'tools/ingest/import_external_vocabulary.py'
-$schema = Join-Path $repo 'tools/schemas/external_vocabulary_import.v1.schema.json'
+$schema = Join-Path $repo 'tools/schemas/external_vocabulary_import.v2.schema.json'
 foreach ($required in @($entry, $schema)) {
     if (-not (Test-Path $required)) { throw "Missing input: $required" }
 }

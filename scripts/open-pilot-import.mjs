@@ -25,15 +25,13 @@ async function waitFor(expression, timeout = 10000) {
   }
   throw new Error(`Timed out: ${expression}`);
 }
-if (!await evaluate(`document.querySelector('.manager')?.innerText.includes('A1 Pilot')`)) {
-  await evaluate(`document.querySelector('[aria-label="Home"]')?.click()`);
-  await waitFor(`document.querySelector('[aria-label="Open Oxford 5000"]')`);
-  await evaluate(`document.querySelector('[aria-label="Open Oxford 5000"]')?.click()`);
-  await waitFor(`document.querySelector('[aria-label="Open A1 Pilot"]')`);
-  await evaluate(`document.querySelector('[aria-label="Open A1 Pilot"]')?.click()`);
-  await waitFor(`document.querySelector('.manager')`);
-}
-await evaluate(`([...document.querySelectorAll('button')].find(button => button.textContent.includes('Import JSON')))?.click()`);
-await waitFor(`document.querySelector('[role="dialog"] textarea')`);
-console.log('Oxford 5000 / A1 Pilot / Import JSON opened');
+await evaluate(`document.querySelector('[aria-label="Home"]')?.click()`);
+await waitFor(`document.querySelector('[aria-label="Open Oxford 5000"]')`);
+await evaluate(`document.querySelector('[aria-label="Open Oxford 5000"]')?.click()`);
+await waitFor(`document.querySelector('[aria-label="Open A1 Pilot"]')`);
+await evaluate(`(() => { const tile=[...document.querySelectorAll('.tile')].find(node=>node.querySelector('h3')?.textContent==='A1 Pilot'); tile?.querySelector('[aria-label="Block actions"]')?.click(); })()`);
+await waitFor(`document.querySelector('.tile .menu')?.textContent.includes('Import vocabulary')`);
+await evaluate(`([...document.querySelectorAll('.tile .menu button')].find(button => button.textContent.includes('Import vocabulary')))?.click()`);
+await waitFor(`document.querySelector('[role="dialog"] .picker')`);
+console.log('Oxford 5000 / A1 Pilot / Import vocabulary opened');
 socket.close();

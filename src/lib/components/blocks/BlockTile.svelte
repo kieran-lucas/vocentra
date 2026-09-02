@@ -1,14 +1,15 @@
 <script lang="ts">
-  import { MoreHorizontal, Plus, ChevronRight } from 'lucide-svelte';
+  import { MoreHorizontal, Plus, ChevronRight, Upload } from 'lucide-svelte';
   import { icons } from '../../icons/registry';
   import heroArtwork from '../../../assets/lexium-library-hero.jpg';
   import type { BlockSummary } from '../../api/types';
 
-  let { block, onopen, onedit, onadd, ondelete } = $props<{
+  let { block, onopen, onedit, onadd, onimport, ondelete } = $props<{
     block: BlockSummary;
     onopen: () => void;
     onedit: () => void;
     onadd: () => void;
+    onimport: () => void;
     ondelete: () => void;
   }>();
   let menu = $state(false);
@@ -25,7 +26,7 @@
   </button>
   <div class="actions">
     <button class="icon-button" aria-label="Block actions" onclick={()=>menu=!menu}><MoreHorizontal size={18}/></button>
-    {#if menu}<div class="menu"><button onclick={()=>{menu=false;onedit()}}>Rename & icon</button><button onclick={()=>{menu=false;onadd()}}><Plus size={14}/> Add child</button><button class="danger-text" onclick={()=>{menu=false;ondelete()}}>Delete</button></div>{/if}
+    {#if menu}<div class="menu"><button onclick={()=>{menu=false;onedit()}}>Rename & icon</button>{#if block.childCount===0}<button onclick={()=>{menu=false;onimport()}}><Upload size={14}/> Import vocabulary</button>{/if}<button onclick={()=>{menu=false;onadd()}}><Plus size={14}/> Add child</button><button class="danger-text" onclick={()=>{menu=false;ondelete()}}>Delete</button></div>{/if}
   </div>
 </article>
 

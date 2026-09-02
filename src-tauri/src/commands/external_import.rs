@@ -28,10 +28,29 @@ pub async fn import_external_json(
     app: AppHandle,
     state: State<'_, AppState>,
     json: String,
+    target_block_id: String,
 ) -> AppResult<Value> {
     if json.trim().is_empty() {
         return Err(AppError::Validation(
             "Choose a vocabulary JSON file first".into(),
+        ));
+    }
+    let exists: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM blocks WHERE id=?")
+        .bind(&target_block_id)
+        .fetch_one(&state.pool)
+        .await?;
+    if exists == 0 {
+        return Err(AppError::Validation(
+            "The selected target block no longer exists".into(),
+        ));
+    }
+    let children: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM blocks WHERE parent_id=?")
+        .bind(&target_block_id)
+        .fetch_one(&state.pool)
+        .await?;
+    if children > 0 {
+        return Err(AppError::Validation(
+            "Vocabulary can only be imported into a leaf block".into(),
         ));
     }
     let staging = state.app_data_dir.join("imports");
@@ -45,9 +64,15 @@ pub async fn import_external_json(
 
     let database = state.app_data_dir.join("lexium.sqlite3");
     let handle = app.clone();
-    let outcome = external_import::run(&file, &database, &state.app_data_dir, move |event| {
-        let _ = handle.emit(external_import::PROGRESS_EVENT, event);
-    })
+    let outcome = external_import::run(
+        &file,
+        &target_block_id,
+        &database,
+        &state.app_data_dir,
+        move |event| {
+            let _ = handle.emit(external_import::PROGRESS_EVENT, event);
+        },
+    )
     .await;
     let _ = tokio::fs::remove_file(&file).await;
     outcome

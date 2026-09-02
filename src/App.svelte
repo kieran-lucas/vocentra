@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import gsap from 'gsap';
-  import { ChevronRight, Home, Plus, Upload, WifiOff, Layers3, BookOpenCheck, Gauge } from 'lucide-svelte';
+  import { ArrowLeft, ArrowRight, ChevronRight, Home, Plus, WifiOff, Layers3, BookOpenCheck, Gauge } from 'lucide-svelte';
   import heroArtwork from './assets/lexium-library-hero.jpg';
-  import type { BlockSummary } from './lib/api/types';
+  import type { BlockSummary, ExternalImportSummary } from './lib/api/types';
   import { createBlock, deleteBlock, listBlocks, updateBlock } from './lib/api/blocks';
   import BlockGrid from './lib/components/blocks/BlockGrid.svelte';
   import BlockDialog from './lib/components/blocks/BlockDialog.svelte';
@@ -17,35 +17,94 @@
   let mode = $state<'grid'|'manage'|'study'>('grid');
   let active = $state<BlockSummary|null>(null);
   let dialog = $state<{kind:'create'|'edit';parent:string|null;block?:BlockSummary}|null>(null);
-  let importing = $state(false);
+  let importTarget = $state<{block:BlockSummary;label:string}|null>(null);
   let loading = $state(true);
   let toast = $state<{message:string;kind:'info'|'error'|'success'}|null>(null);
   let view = $state<HTMLElement>();
+  let historyIndex = $state(0);
+  let historyEnd = $state(0);
+  let navigationReady = $state(false);
+  let navigationSession = '';
+  let loadVersion = 0;
   const totalWords = $derived(blocks.reduce((total,block)=>total+block.wordCount,0));
   const averageMastery = $derived(blocks.length?Math.round(blocks.reduce((total,block)=>total+block.averageMastery,0)/blocks.length):0);
+  const canGoBack = $derived(navigationReady&&historyIndex>0);
+  const canGoForward = $derived(navigationReady&&historyIndex<historyEnd);
+
+  type Screen = 'grid'|'manage'|'study';
+  type NavigationRoute = { mode:Screen;path:BlockSummary[];active:BlockSummary|null };
+  type NavigationEntry = { app:'lexium';version:1;session:string;index:number;route:NavigationRoute };
+  const navigationStorageKey = 'lexium:navigation-end';
 
   function currentParent() { return path.at(-1)?.id ?? null; }
   function notify(message:string,kind:'info'|'error'|'success'='info') {
     toast={message,kind};
     setTimeout(()=>{if(toast?.message===message)toast=null},3200);
   }
+  function copyBlock(block:BlockSummary) { return {...block}; }
+  function isSameRoute(next:NavigationRoute) {
+    return mode===next.mode&&active?.id===next.active?.id&&path.map(item=>item.id).join('/')===next.path.map(item=>item.id).join('/');
+  }
+  function isNavigationEntry(value:unknown):value is NavigationEntry {
+    if(!value||typeof value!=='object')return false;
+    const candidate=value as Partial<NavigationEntry>;
+    return candidate.app==='lexium'&&candidate.version===1&&typeof candidate.session==='string'&&typeof candidate.index==='number'&&!!candidate.route;
+  }
+  function rememberHistoryEnd() {
+    try{sessionStorage.setItem(`${navigationStorageKey}:${navigationSession}`,String(historyEnd))}catch{/* History still works without persisted bounds. */}
+  }
+  function storedHistoryEnd(session:string,index:number) {
+    try{return Math.max(index,Number(sessionStorage.getItem(`${navigationStorageKey}:${session}`))||index)}catch{return index}
+  }
+  function navigationEntry(route:NavigationRoute,index:number):NavigationEntry {
+    return {app:'lexium',version:1,session:navigationSession,index,route};
+  }
   async function load(parent:string|null=currentParent(),direction:1|-1=1) {
+    const version=++loadVersion;
     loading=true;
     try {
       const next=await listBlocks(parent);
-      if(view)await gsap.to(view,{x:-18*direction,opacity:0,duration:.12,ease:'power1.in'});
+      if(version!==loadVersion)return;
+      if(view){
+        gsap.killTweensOf(view);
+        await gsap.to(view,{x:-18*direction,opacity:0,duration:.12,ease:'power1.in'});
+      }
+      if(version!==loadVersion)return;
       blocks=next;
       requestAnimationFrame(()=>view&&gsap.fromTo(view,{x:22*direction,opacity:0},{x:0,opacity:1,duration:.25,ease:'power3.out'}));
     } catch(error) { notify((error as Error).message,'error'); }
-    finally { loading=false; }
+    finally { if(version===loadVersion)loading=false; }
+  }
+  async function applyRoute(next:NavigationRoute,direction:1|-1) {
+    path=next.path.map(copyBlock);
+    active=next.active?copyBlock(next.active):null;
+    mode=next.mode;
+    if(next.mode==='grid')await load(next.path.at(-1)?.id??null,direction);
+    else ++loadVersion;
+  }
+  async function navigate(next:NavigationRoute,direction:1|-1=1) {
+    if(isSameRoute(next))return;
+    historyIndex+=1;
+    historyEnd=historyIndex;
+    history.pushState(navigationEntry(next,historyIndex),'');
+    rememberHistoryEnd();
+    await applyRoute(next,direction);
+  }
+  function goBack() { if(canGoBack)history.back(); }
+  function goForward() { if(canGoForward)history.forward(); }
+  function goHome() { void navigate({mode:'grid',path:[],active:null},-1); }
+  function restoreHistory(event:PopStateEvent) {
+    if(!isNavigationEntry(event.state)||event.state.session!==navigationSession)return;
+    const direction:1|-1=event.state.index<historyIndex?-1:1;
+    historyIndex=event.state.index;
+    void applyRoute(event.state.route,direction);
   }
   async function open(block:BlockSummary) {
-    if(block.childCount){path=[...path,block];await load(block.id,1)}
-    else{active=block;mode='manage'}
+    if(block.childCount)await navigate({mode:'grid',path:[...path.map(copyBlock),copyBlock(block)],active:null},1);
+    else await navigate({mode:'manage',path:path.map(copyBlock),active:copyBlock(block)},1);
   }
   async function crumb(index:number) {
-    if(index<0){path=[];await load(null,-1)}
-    else{path=path.slice(0,index+1);await load(path.at(-1)!.id,-1)}
+    await navigate({mode:'grid',path:index<0?[]:path.slice(0,index+1).map(copyBlock),active:null},-1);
   }
   async function save(name:string,icon:string) {
     if(!dialog)return;
@@ -60,25 +119,50 @@
     try{await deleteBlock(block.id);await load();notify('Block deleted','success')}
     catch(error){notify((error as Error).message,'error')}
   }
-  async function imported(summary:{imported:number;updated:number;alreadyCurrent:number;destination:string;failed:unknown[]}) {
+  async function imported(summary:ExternalImportSummary) {
     await load();
-    const changed=summary.imported+summary.updated;
-    notify(`${changed} entr${changed===1?'y':'ies'} into ${summary.destination}${summary.failed.length?`, ${summary.failed.length} failed`:''}`,summary.failed.length?'error':'success');
+    const changed=summary.added+summary.reused;
+    notify(`${changed} card${changed===1?'':'s'} added to ${summary.destination}${summary.conflicts?`, ${summary.conflicts} conflict${summary.conflicts===1?'':'s'}`:''}${summary.failed.length?`, ${summary.failed.length} failed`:''}`,summary.failed.length||summary.conflicts?'error':'success');
   }
-  onMount(()=>load(null));
+  onMount(()=>{
+    const existing=history.state;
+    if(isNavigationEntry(existing)){
+      navigationSession=existing.session;
+      historyIndex=existing.index;
+      historyEnd=storedHistoryEnd(existing.session,existing.index);
+      void applyRoute(existing.route,1);
+    }else{
+      navigationSession=globalThis.crypto?.randomUUID?.()??`${Date.now()}-${Math.random()}`;
+      const root:NavigationRoute={mode:'grid',path:[],active:null};
+      history.replaceState(navigationEntry(root,0),'');
+      void load(null);
+    }
+    navigationReady=true;
+    window.addEventListener('popstate',restoreHistory);
+    return()=>window.removeEventListener('popstate',restoreHistory);
+  });
 </script>
 
 {#if mode==='study'&&active}
-  <StudyScreen block={active} onexit={()=>mode='manage'} onerror={(message)=>notify(message,'error')}/>
+  <StudyScreen block={active} onexit={goBack} onerror={(message)=>notify(message,'error')}/>
 {:else if mode==='manage'&&active}
-  <main class="page"><VocabularyManager block={active} onback={()=>{mode='grid';active=null;load()}} onstudy={()=>mode='study'} onchange={()=>load()} onerror={(message)=>notify(message,'error')}/></main>
+  <main class="page"><VocabularyManager block={active} onback={goBack} onforward={goForward} onhome={goHome} canback={canGoBack} canforward={canGoForward} onstudy={()=>navigate({mode:'study',path:path.map(copyBlock),active:active?copyBlock(active):null})} onchange={()=>load()} onerror={(message)=>notify(message,'error')}/></main>
 {:else}
   <div class="shell">
     <header class="app-header">
       <div class="brand"><span>lx</span><div><strong>LEXIUM</strong><small>VOCABULARY DESKTOP</small></div></div>
-      <nav aria-label="Breadcrumb"><button onclick={()=>crumb(-1)} aria-label="Home"><Home size={15}/></button>{#each path as item,index}<ChevronRight size={13}/><button onclick={()=>crumb(index)}>{item.name}</button>{/each}</nav>
+      <nav aria-label="Library navigation">
+        <div class="history-controls">
+          <button onclick={goBack} aria-label="Back" title="Back" disabled={!canGoBack}><ArrowLeft size={16}/></button>
+          <button onclick={goForward} aria-label="Forward" title="Forward" disabled={!canGoForward}><ArrowRight size={16}/></button>
+          <button onclick={goHome} aria-label="Home" title="Home" disabled={!path.length}><Home size={15}/></button>
+        </div>
+        <div class="breadcrumbs" aria-label="Breadcrumb">
+          <span>Library</span>
+          {#each path as item,index}<ChevronRight size={13}/><button onclick={()=>crumb(index)} aria-current={index===path.length-1?'page':undefined}>{item.name}</button>{/each}
+        </div>
+      </nav>
       <div class="offline"><WifiOff size={13}/><span>Offline</span></div>
-      <button class="ghost" onclick={()=>importing=true}><Upload size={15}/>Import JSON</button>
       <button class="primary" onclick={()=>dialog={kind:'create',parent:currentParent()}}><Plus size={16}/>New block</button>
     </header>
     <main class="content">
@@ -95,19 +179,19 @@
         </section>
       {/if}
       <div class="section-title"><div><span>{path.length?'SUB-COLLECTIONS':'YOUR LIBRARY'}</span><h2>{path.length?path.at(-1)?.name:'Browse collections'}</h2></div><small>{blocks.length} available</small></div>
-      <section bind:this={view}>{#if loading&&!blocks.length}<div class="loading">Loading library…</div>{:else}<BlockGrid {blocks} onopen={open} oncreate={()=>dialog={kind:'create',parent:currentParent()}} onedit={(block)=>dialog={kind:'edit',parent:block.parentId,block}} onadd={(block)=>dialog={kind:'create',parent:block.id}} ondelete={remove}/>{/if}</section>
+      <section bind:this={view}>{#if loading&&!blocks.length}<div class="loading">Loading library…</div>{:else}<BlockGrid {blocks} onopen={open} oncreate={()=>dialog={kind:'create',parent:currentParent()}} onedit={(block)=>dialog={kind:'edit',parent:block.parentId,block}} onadd={(block)=>dialog={kind:'create',parent:block.id}} onimport={(block)=>importTarget={block:copyBlock(block),label:[...path.map(item=>item.name),block.name].join(' / ')}} ondelete={remove}/>{/if}</section>
     </main>
   </div>
 {/if}
 
-{#if importing}<ExternalImportDialog onclose={()=>importing=false} onimported={imported}/>{/if}
+{#if importTarget}<ExternalImportDialog targetBlockId={importTarget.block.id} targetLabel={importTarget.label} onclose={()=>importTarget=null} onimported={imported}/>{/if}
 {#if dialog}<BlockDialog title={dialog.kind==='create'?'Create block':'Edit block'} initialName={dialog.block?.name} initialIcon={dialog.block?.iconKey} onsave={save} onclose={()=>dialog=null}/>{/if}
 {#if toast}<Toast message={toast.message} kind={toast.kind}/>{/if}
 
 <style>
   .shell{height:100%;display:grid;grid-template-rows:70px 1fr;background:linear-gradient(180deg,#f5f7fa,var(--surface-0))}
   .app-header{display:flex;align-items:center;padding:0 30px;border-bottom:1px solid var(--border);background:#fffffff5;box-shadow:0 1px 12px #263b580d}.brand{display:flex;align-items:center;gap:11px;margin-right:40px}.brand>span{display:grid;place-items:center;width:34px;height:34px;background:linear-gradient(145deg,#4389e2,var(--accent-strong));color:#ffffff;border-radius:7px;box-shadow:0 7px 18px #2f73ce2b;font-family:var(--font-display);font-weight:800;letter-spacing:-.08em}.brand>div{display:grid;gap:1px}.brand strong{font-family:var(--font-display);font-size:14px;letter-spacing:.08em}.brand small{font-size:8px;color:var(--text-muted);letter-spacing:.14em}
-  nav{min-width:0;display:flex;align-items:center;gap:5px;color:var(--text-muted)}nav button{max-width:180px;padding:7px 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:none;border:0;color:inherit;border-radius:6px;font-size:12px}nav button:hover{color:var(--text-primary);background:var(--surface-hover)}.offline{margin-left:auto;margin-right:16px;display:flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid var(--border);border-radius:5px;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:.09em}.app-header>.primary,.app-header>.ghost{min-height:36px}.app-header>.ghost{margin-right:9px}
+  nav{min-width:0;display:flex;align-items:center;gap:13px;color:var(--text-muted)}nav button{max-width:180px;padding:7px 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:none;border:0;color:inherit;border-radius:6px;font-size:12px}nav button:hover:not(:disabled){color:var(--text-primary);background:var(--surface-hover)}nav button:disabled{opacity:.32}.history-controls{display:flex;align-items:center;padding-right:12px;border-right:1px solid var(--border)}.history-controls button{width:30px;height:30px;display:grid;place-items:center;padding:0}.breadcrumbs{min-width:0;display:flex;align-items:center;gap:4px}.breadcrumbs>span{padding:7px 2px;font-size:12px}.breadcrumbs button[aria-current='page']{color:var(--text-primary);font-weight:650}.offline{margin-left:auto;margin-right:16px;display:flex;align-items:center;gap:6px;padding:6px 9px;border:1px solid var(--border);border-radius:5px;color:var(--text-muted);font-size:10px;text-transform:uppercase;letter-spacing:.09em}.app-header>.primary{min-height:36px}
   .content,.page{height:100%;overflow:auto;padding:clamp(24px,3.2vw,42px)}.content{max-width:1420px;width:100%;margin:auto}.heading{margin-bottom:28px}.heading span,.section-title span{font-size:9px;color:var(--accent);text-transform:uppercase;letter-spacing:.18em;font-weight:700}.heading h1{margin:7px 0;font-size:clamp(29px,4vw,42px);letter-spacing:-.025em}.heading p{color:var(--text-muted)}
   .hero{position:relative;isolation:isolate;min-height:278px;margin-bottom:31px;display:flex;align-items:flex-end;padding:34px 38px;overflow:hidden;border:1px solid var(--border);border-radius:var(--radius-xl);background:#dce6f0;box-shadow:var(--shadow-lg)}.hero::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--hero-art);background-size:cover;background-position:center 66%}.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,#f8fbff 0%,#f8fbfff3 31%,#f8fbffba 51%,#f8fbff12 74%)}.hero-copy{max-width:520px}.eyebrow{font-size:9px;color:var(--accent-strong);font-weight:750;letter-spacing:.2em}.hero h1{margin:11px 0 12px;font-size:clamp(38px,5vw,58px);line-height:.98;letter-spacing:-.035em}.hero-copy>p{max-width:455px;color:var(--text-secondary);font-size:13px;line-height:1.6}.metrics{position:absolute;right:22px;bottom:20px;display:flex;padding:7px;background:#ffffffec;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-lg)}.metrics>div{min-width:122px;display:flex;align-items:center;gap:9px;padding:8px 12px;border-right:1px solid var(--border)}.metrics>div:last-child{border:0}.metric-icon{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;color:var(--accent);background:var(--accent-soft)}.metrics p{display:grid}.metrics strong{font-family:var(--font-display);font-size:17px}.metrics small{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em}
   .section-title{display:flex;align-items:flex-end;justify-content:space-between;margin:0 2px 14px}.section-title>div{display:grid;gap:4px}.section-title h2{font-size:18px;letter-spacing:-.01em}.section-title>small{color:var(--text-muted);font-size:11px}.loading{min-height:300px;display:grid;place-items:center;color:var(--text-muted)}

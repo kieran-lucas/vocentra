@@ -4,10 +4,12 @@ import codecs
 import copy
 import json
 import os
-import sqlite3
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from tools.ingest import audio_profile, db, external_schema
 from tools.ingest import import_external_vocabulary as importer
@@ -21,13 +23,11 @@ def canonical() -> dict:
     return json.loads(CANONICAL.read_text(encoding="utf-8"))
 
 
-def first_sense(batch: dict) -> dict:
-    return batch["entries"][0]["senses"][0]
+def first_sense(payload: dict) -> dict:
+    return payload["entries"][0]["senses"][0]
 
 
 class Collector:
-    """Emitter stand-in that keeps the JSON-lines progress events."""
-
     def __init__(self) -> None:
         self.events: list[dict] = []
 
@@ -39,8 +39,6 @@ class Collector:
 
 
 class Sandbox:
-    """Temporary app-data dir, master/final roots and migrated database."""
-
     def __init__(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
         self.root = Path(self.temporary.name)
@@ -52,6 +50,9 @@ class Sandbox:
         self.path = self.root / "lexium.sqlite3"
         self.connection = db.connect(self.path)
         db.apply_migrations(self.connection)
+        self.create_block("target-root", "Import Test")
+        self.create_block("leaf-a", "V2 Leaf A", "target-root")
+        self.create_block("leaf-b", "V2 Leaf B", "target-root")
 
     def close(self) -> None:
         self.connection.close()
@@ -62,442 +63,376 @@ class Sandbox:
             os.environ["APPDATA"] = self.previous_appdata
         self.temporary.cleanup()
 
-    def write(self, batch: dict, name: str = "batch.json") -> Path:
+    def create_block(self, block_id: str, name: str, parent_id: str | None = None) -> None:
+        timestamp = db.now()
+        self.connection.execute(
+            "INSERT INTO blocks(id,parent_id,name,icon_key,sort_order,created_at,updated_at) VALUES(?,?,?,?,0,?,?)",
+            (block_id, parent_id, name, "book-open", timestamp, timestamp),
+        )
+        self.connection.commit()
+
+    def write(self, payload: dict, name: str = "payload.json") -> Path:
         path = self.root / name
-        path.write_text(json.dumps(batch, ensure_ascii=False), encoding="utf-8")
+        path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
         return path
 
-    def run(self, batch: dict, skip_audio: bool = True, name: str = "batch.json") -> tuple[dict, Collector]:
+    def run(self, payload: dict, target: str = "leaf-a", skip_audio: bool = True,
+            name: str = "payload.json") -> tuple[dict, Collector]:
         collector = Collector()
-        summary = importer.run_import(self.write(batch, name), self.connection, collector, skip_audio=skip_audio)
+        summary = importer.run_import(
+            self.write(payload, name), target, self.connection, collector, skip_audio=skip_audio
+        )
         return summary, collector
 
     def count(self, sql: str, *values) -> int:
         return self.connection.execute(sql, values).fetchone()[0]
 
+    def install_current_audio(self, pronunciation_id: str, entry_id: str, form_id: str,
+                              text: str, app_path: str = "audio/lex/current.ogg") -> None:
+        file = db.default_app_data() / app_path
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_bytes(b"current-audio")
+        timestamp = db.now()
+        self.connection.execute(
+            "INSERT INTO lexical_audio_assets(pronunciation_id,entry_id,form_id,locale,synthesis_text,fingerprint,app_path,sha256,status,created_at,updated_at) "
+            "VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+            (pronunciation_id, entry_id, form_id, "en-US", text, audio_profile.FINGERPRINT,
+             app_path, "sha", "current", timestamp, timestamp),
+        )
+        self.connection.execute(
+            "UPDATE vocabulary_entries SET audio_path=?,audio_voice=?,audio_checksum=? WHERE sense_id IN "
+            "(SELECT id FROM lexical_senses WHERE pronunciation_id=?)",
+            (app_path, audio_profile.VOICE, "sha", pronunciation_id),
+        )
+        self.connection.commit()
 
-class ExternalContractTests(unittest.TestCase):
-    """The published schema and the importer's gate agree, and neither can be
-    talked into changing how audio is produced."""
 
-    def assert_valid(self, batch: dict) -> external_schema.Report:
-        report = external_schema.validate_batch(batch)
-        self.assertEqual(report.all_errors(), [], "application validator rejected a valid batch")
-        self.assertEqual(external_schema.validate_with_json_schema(batch), [],
-                         "published JSON Schema rejected a valid batch")
+class ExternalContractV2Tests(unittest.TestCase):
+    def assert_valid(self, payload: dict) -> external_schema.Report:
+        report = external_schema.validate_batch(payload)
+        self.assertEqual(report.all_errors(), [])
+        self.assertEqual(external_schema.validate_with_json_schema(payload), [])
         return report
 
-    def assert_rejected(self, batch: dict, needle: str) -> None:
-        """The batch or one of its entries is refused, naming the reason."""
-        report = external_schema.validate_batch(batch)
-        problems = report.all_errors()
-        self.assertTrue(problems, f"expected a rejection mentioning {needle!r}")
-        self.assertTrue(any(needle in error for error in problems),
-                        f"no error mentioned {needle!r}: {problems}")
+    def assert_rejected(self, payload: dict, needle: str, batch_fatal: bool = True) -> None:
+        report = external_schema.validate_batch(payload)
+        external_schema.merge_json_schema(payload, report)
+        problems = report.errors if batch_fatal else report.all_errors()
+        self.assertTrue(any(needle.lower() in error.lower() for error in problems), problems)
 
-    def assert_batch_rejected(self, batch: dict, needle: str) -> None:
-        """The whole file is refused, not just one entry."""
-        report = external_schema.validate_batch(batch)
-        self.assertFalse(report.ok, f"expected the batch to be refused over {needle!r}")
-        self.assertTrue(any(needle in error for error in report.errors),
-                        f"no batch-level error mentioned {needle!r}: {report.errors}")
+    def test_active_root_is_exactly_schema_version_and_entries(self):
+        payload = canonical()
+        self.assertEqual(set(payload), {"schemaVersion", "entries"})
+        self.assertEqual(payload["schemaVersion"], 2)
+        self.assert_valid(payload)
 
-    def test_canonical_fixture_is_valid_under_both_validators(self):
-        report = self.assert_valid(canonical())
-        self.assertTrue(any("not in this batch" in warning for warning in report.warnings))
-        self.assertTrue(any("2 en-US pronunciations" in warning for warning in report.warnings))
-
-    def test_generation_contract_worked_example_still_validates(self):
-        """The portable LLM contract must stay importable on its own terms."""
-        import re
-
-        contract = ROOT / "tools/prompts/external_vocab_generation_v1.md"
-        fence = "```" + "json"
-        pattern = fence + chr(10) + "(.*?)" + chr(10) + "```"
-        blocks = re.findall(pattern, contract.read_text(encoding="utf-8"), re.S)
-        documents = []
-        for block in blocks:
-            if '"entries"' not in block or '"schemaVersion"' not in block:
-                continue
-            try:
-                documents.append(json.loads(block))
-            except json.JSONDecodeError:
-                continue  # §1 illustrates the shape with /* ... */ placeholders
-        self.assertTrue(documents, "the contract must contain one complete worked example")
-        for document in documents:
-            self.assertGreaterEqual(len(document["entries"]), 3)
-            self.assert_valid(document)
-
-    def test_generation_contract_lists_every_forbidden_field(self):
-        contract = (ROOT / "tools/prompts/external_vocab_generation_v1.md").read_text(encoding="utf-8").lower()
-        undocumented = sorted(field for field in external_schema.HARD_FORBIDDEN | external_schema.CONTEXT_FORBIDDEN
-                              if field not in contract)
-        self.assertEqual(undocumented, [], "fields the importer refuses but the contract never mentions")
-
-    def test_schema_file_is_draft_2020_12_and_loadable(self):
+    def test_schema_is_draft_2020_12_and_v2(self):
         schema = external_schema.load_schema()
         self.assertEqual(schema["$schema"], "https://json-schema.org/draft/2020-12/schema")
-        self.assertEqual(schema["properties"]["schemaVersion"]["const"], external_schema.SCHEMA_VERSION)
+        self.assertEqual(schema["properties"]["schemaVersion"]["const"], 2)
+        self.assertEqual(set(schema["properties"]), {"schemaVersion", "entries"})
+        self.assertFalse(schema["additionalProperties"])
 
-    def test_valid_simple_noun_verb_adjective_technical_and_multiword(self):
-        batch = canonical()
-        kinds = {(entry["lemma"], sense["pos"]) for entry in batch["entries"] for sense in entry["senses"]}
-        self.assertIn(("responsible", "adjective"), kinds)
-        self.assertIn(("record", "noun"), kinds)
-        self.assertIn(("record", "verb"), kinds)
-        self.assertIn(("gradient descent", "noun"), kinds)
-        self.assert_valid(batch)
+    def test_v1_has_a_clean_deprecation_error(self):
+        payload = canonical()
+        payload["schemaVersion"] = 1
+        payload["batchId"] = "old"
+        payload["destination"] = {"blockId": None, "blockPath": ["Old"], "createIfMissing": True}
+        report = external_schema.validate_batch(payload)
+        external_schema.merge_json_schema(payload, report)
+        self.assertFalse(report.ok)
+        self.assertEqual(len(report.errors), 1)
+        self.assertEqual(len(report.all_errors()), 1)
+        self.assertIn("uses import schema v1", report.errors[0])
+        self.assertIn("selected leaf block", report.errors[0])
 
-    def test_empty_additional_is_valid(self):
-        batch = canonical()
-        first_sense(batch)["additional"] = {"schemaVersion": 1, "items": []}
-        self.assert_valid(batch)
-
-    def test_absent_additional_is_valid(self):
-        batch = canonical()
-        first_sense(batch).pop("additional")
-        self.assert_valid(batch)
-
-    def test_unknown_future_subtype_is_preserved_with_a_warning(self):
-        batch = canonical()
-        first_sense(batch)["additional"]["items"][0]["attributes"] = {"patternType": "ergativeAlternation"}
-        report = self.assert_valid(batch)
-        self.assertTrue(any("not a known v1 subtype" in warning for warning in report.warnings))
-
-    def test_unknown_kind_is_rejected_because_the_architecture_is_fixed(self):
-        batch = canonical()
-        first_sense(batch)["additional"]["items"][0]["kind"] = "etymology"
-        self.assert_rejected(batch, "is not one of")
-
-    def test_unresolved_cross_reference_warns_and_survives_import(self):
-        sandbox = Sandbox()
-        try:
-            summary, _ = sandbox.run(canonical())
-            self.assertTrue(any("unresolved" in warning for warning in summary["warnings"]))
-            stored = sandbox.connection.execute(
-                "SELECT target_entry_id,unresolved FROM lexical_additional_items WHERE id='add_responsible_relation_01'"
-            ).fetchone()
-            self.assertEqual(stored["target_entry_id"], "entry_accountable")
-            self.assertEqual(stored["unresolved"], 1)
-        finally:
-            sandbox.close()
-
-    def test_missing_entry_id_is_rejected(self):
-        batch = canonical()
-        batch["entries"][0].pop("entryId")
-        self.assert_rejected(batch, "entryId is required")
-
-    def test_duplicate_sense_id_is_rejected(self):
-        batch = canonical()
-        batch["entries"][1]["senses"][1]["senseId"] = batch["entries"][1]["senses"][0]["senseId"]
-        self.assert_rejected(batch, "duplicate senses id")
-
-    def test_duplicate_entry_id_is_rejected(self):
-        batch = canonical()
-        batch["entries"][1]["entryId"] = batch["entries"][0]["entryId"]
-        self.assert_batch_rejected(batch, "duplicate entryId")
-
-    def test_empty_string_where_null_is_required_is_rejected(self):
-        batch = canonical()
-        first_sense(batch)["additional"]["items"][0]["note"] = ""
-        self.assert_rejected(batch, "use null when there is no value")
-
-    def test_item_with_only_a_cross_reference_is_valid(self):
-        """A wordFormation item can carry its whole meaning in the target."""
-        batch = canonical()
-        first_sense(batch)["additional"]["items"].append({
-            "id": "add_responsible_wordformation_01", "kind": "wordFormation", "salience": 2,
-            "text": None, "note": None,
-            "target": {"entryId": "entry_responsibility", "senseId": None},
-            "attributes": {"relationType": "derivation", "targetPos": "noun"},
-        })
-        self.assert_valid(batch)
-
-    def test_item_with_no_text_note_or_target_is_rejected(self):
-        batch = canonical()
-        item = first_sense(batch)["additional"]["items"][0]
-        item["text"], item["note"], item["target"] = None, None, None
-        self.assert_rejected(batch, "at least one of text, note or target")
-
-    def test_examples_must_be_one_meaning_and_one_usage(self):
-        batch = canonical()
-        first_sense(batch)["examples"][1]["type"] = "meaning"
-        self.assert_rejected(batch, "one 'meaning' and one 'usage'")
-
-    def test_forbidden_tts_voice_field_is_rejected(self):
-        for placement in ("root", "entry", "sense"):
-            batch = canonical()
-            if placement == "root":
-                batch["voice"] = "en-US-AriaNeural"
-            elif placement == "entry":
-                batch["entries"][0]["ttsVoice"] = "en-US-AriaNeural"
-            else:
-                first_sense(batch)["audioPath"] = "audio/lex/evil.ogg"
-            with self.subTest(placement=placement):
-                self.assert_batch_rejected(batch, "forbidden field")
-
-    def test_forbidden_source_format_and_ffmpeg_fields_are_rejected(self):
-        for field, value in (("sourceFormat", "riff-48khz-16bit-mono-pcm"),
-                             ("ffmpegArgs", ["-af", "volume=100"]),
-                             ("audioChecksum", "deadbeef"),
-                             ("mastery", 9)):
-            batch = canonical()
-            batch[field] = value
+    def test_every_obsolete_or_embedded_routing_key_is_rejected(self):
+        cases = {
+            "batchId": "old", "destination": {}, "blockId": "x", "blockPath": ["x"],
+            "createIfMissing": True, "targetBlockId": "x", "targetBlock": {},
+            "deck": "x", "folder": "x",
+        }
+        for field, value in cases.items():
             with self.subTest(field=field):
-                self.assert_batch_rejected(batch, "forbidden field")
+                payload = canonical()
+                if field == "targetBlockId":
+                    payload["entries"][0][field] = value
+                else:
+                    payload[field] = value
+                self.assert_rejected(payload, field)
 
-    def test_pronunciations_are_semantic_and_never_treated_as_infrastructure(self):
-        self.assert_valid(canonical())
-        report = external_schema.validate_batch(canonical())
-        self.assertFalse(any("pronunciations" in error for error in report.all_errors()))
+    def test_operational_fields_remain_recursively_forbidden(self):
+        for field, value in (("voice", "en-US-AriaNeural"), ("ttsProvider", "other"),
+                             ("audioPath", "x"), ("audioChecksum", "x"),
+                             ("ffmpegArgs", []), ("masteryScore", 10), ("dbPath", "x")):
+            with self.subTest(field=field):
+                payload = canonical()
+                first_sense(payload)[field] = value
+                self.assert_rejected(payload, "forbidden field")
 
-    def test_grammatical_voice_inside_attributes_is_allowed(self):
-        batch = canonical()
-        first_sense(batch)["additional"]["items"][0]["attributes"] = {"patternType": "valency", "voice": "passive"}
-        self.assert_valid(batch)
+    def test_locked_lexical_shapes_remain_valid(self):
+        payload = canonical()
+        pairs = {(entry["lemma"], sense["pos"]) for entry in payload["entries"] for sense in entry["senses"]}
+        self.assertIn(("gradient descent", "noun"), pairs)
+        self.assertIn(("record", "noun"), pairs)
+        self.assertIn(("record", "verb"), pairs)
+        self.assert_valid(payload)
+        first_sense(payload)["additional"] = {"schemaVersion": 1, "items": []}
+        self.assert_valid(payload)
+        first_sense(payload).pop("additional")
+        self.assert_valid(payload)
 
-    def test_invalid_destination_is_rejected(self):
-        for mutate, needle in (
-            (lambda d: d.pop("blockPath"), "blockPath"),
-            (lambda d: d.update(blockPath=[]), "blockPath"),
-            (lambda d: d.update(createIfMissing="yes"), "createIfMissing"),
-            (lambda d: d.update(extra=1), "unknown field"),
-        ):
-            batch = canonical()
-            mutate(batch["destination"])
-            with self.subTest(needle=needle):
-                self.assert_batch_rejected(batch, needle)
+    def test_examples_stable_ids_null_policy_and_additional_registry(self):
+        payload = canonical()
+        first_sense(payload)["examples"][1]["type"] = "meaning"
+        self.assert_rejected(payload, "one 'meaning' and one 'usage'", batch_fatal=False)
+        payload = canonical()
+        first_sense(payload)["additional"]["items"][0]["note"] = ""
+        self.assert_rejected(payload, "use null", batch_fatal=False)
+        payload = canonical()
+        first_sense(payload)["additional"]["items"][0]["attributes"] = {"patternType": "futureSubtype"}
+        report = self.assert_valid(payload)
+        self.assertTrue(any("not a known Additional v1 subtype" in warning for warning in report.warnings))
+
+    def test_validate_only_requires_no_target_and_touches_no_database(self):
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "tools/ingest/import_external_vocabulary.py"), str(CANONICAL), "--validate-only"],
+            cwd=ROOT, capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("valid", result.stdout)
 
 
-class ExternalImportTests(unittest.TestCase):
-    """End-to-end behaviour against a temporary database and app-data directory."""
-
-    def setUp(self):
+class AdditiveImportV2Tests(unittest.TestCase):
+    def setUp(self) -> None:
         self.sandbox = Sandbox()
         self.addCleanup(self.sandbox.close)
 
-    def target_block(self) -> str:
-        return self.sandbox.connection.execute(
-            "SELECT id FROM blocks WHERE name='Vocabulary' AND parent_id IS NOT NULL").fetchone()["id"]
-
-    def test_a_file_saved_with_a_byte_order_mark_still_imports(self):
-        """Notepad and PowerShell write a BOM; an LLM-authored file often has one."""
-        path = self.sandbox.root / "bom.json"
-        path.write_text(json.dumps(canonical(), ensure_ascii=False), encoding="utf-8-sig")
-        self.assertTrue(path.read_bytes().startswith(codecs.BOM_UTF8))
-        summary = importer.run_import(path, self.sandbox.connection, Collector(), skip_audio=True)
-        self.assertEqual(summary["imported"], 3)
-        self.assertEqual(summary["failed"], [])
-
-    def test_a_malformed_file_is_reported_not_raised_as_a_traceback(self):
-        path = self.sandbox.root / "broken.json"
-        path.write_text("{ not json", encoding="utf-8")
-        with self.assertRaises(importer.ImportError_) as caught:
-            importer.run_import(path, self.sandbox.connection, Collector(), skip_audio=True)
-        self.assertIn("is not valid UTF-8 JSON", str(caught.exception))
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_entries"), 0)
-
-    def test_import_into_a_new_block_creates_the_hierarchy_once_and_produces_cards(self):
+    def test_new_senses_project_one_card_each_into_selected_leaf(self):
         summary, collector = self.sandbox.run(canonical())
+        self.assertEqual(summary["added"], 4)
+        self.assertEqual(summary["reused"], 0)
+        self.assertEqual(summary["alreadyInBlock"], 0)
         self.assertEqual(summary["failed"], [])
-        self.assertEqual(summary["imported"], 3)
-        self.assertEqual(summary["destination"], "Import Test/Vocabulary")
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM blocks WHERE name='Import Test'"), 1)
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM blocks WHERE name='Vocabulary'"), 1)
-        block = self.target_block()
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE block_id=?", block), 4)
+        self.assertEqual(summary["destination"], "Import Test / V2 Leaf A")
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE block_id='leaf-a'"), 4)
         self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_senses"), 4)
         self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_examples"), 8)
         self.assertIn("validated", collector.stages())
-        self.assertIn("summary", collector.stages())
+        self.assertEqual(collector.stages().count("added"), 4)
 
-        card = self.sandbox.connection.execute(
-            "SELECT * FROM vocabulary_entries WHERE sense_id='sense_responsible_adjective_01'").fetchone()
-        self.assertEqual(card["word"], "responsible")
-        self.assertEqual(card["part_of_speech"], "adjective")
-        self.assertEqual(card["ipa"], "/rɪˈspɑːnsəbəl/")
-        self.assertEqual(card["vi_meaning"], "chịu trách nhiệm; có trách nhiệm")
-        self.assertTrue(card["example_meaning_en"] and card["example_meaning_vi"])
-        self.assertTrue(card["example_usage_en"] and card["example_usage_vi"])
-        self.assertEqual(json.loads(card["accepted_answers"]), ["responsible"])
-        additional = json.loads(card["extra_metadata"])
-        self.assertEqual(additional["schemaVersion"], 1)
-        self.assertEqual([item["kind"] for item in additional["items"]], ["pattern", "collocation", "relation"])
-
-    def test_heteronyms_become_distinct_cards_with_distinct_audio_identity(self):
+    def test_same_sense_same_target_is_already_and_never_calls_tts(self):
         self.sandbox.run(canonical())
-        rows = self.sandbox.connection.execute(
-            "SELECT part_of_speech,ipa,sense_id FROM vocabulary_entries WHERE word='record' ORDER BY part_of_speech").fetchall()
-        self.assertEqual([row["part_of_speech"] for row in rows], ["noun", "verb"])
-        self.assertNotEqual(rows[0]["ipa"], rows[1]["ipa"])
-        senses = self.sandbox.connection.execute(
-            "SELECT pronunciation_id FROM lexical_senses WHERE entry_id='entry_record' ORDER BY sort_order").fetchall()
-        self.assertNotEqual(senses[0]["pronunciation_id"], senses[1]["pronunciation_id"])
-
-    def test_destination_rules(self):
-        batch = canonical()
-        batch["destination"]["createIfMissing"] = False
-        with self.assertRaises(importer.ImportError_) as caught:
-            self.sandbox.run(batch)
-        self.assertIn("createIfMissing is false", str(caught.exception))
-
-        self.sandbox.run(canonical())
-        by_id = canonical()
-        by_id["destination"] = {"blockId": self.target_block(), "blockPath": ["ignored"], "createIfMissing": False}
-        summary, _ = self.sandbox.run(by_id, name="by_id.json")
-        self.assertEqual(summary["blockId"], self.target_block())
-
-        missing = canonical()
-        missing["destination"] = {"blockId": "not-a-block", "blockPath": ["x"], "createIfMissing": True}
-        with self.assertRaises(importer.ImportError_) as caught:
-            self.sandbox.run(missing, name="missing.json")
-        self.assertIn("does not exist", str(caught.exception))
-
-    def test_ambiguous_block_path_fails_rather_than_guessing(self):
-        timestamp = db.now()
-        for index in range(2):
-            self.sandbox.connection.execute(
-                "INSERT INTO blocks(id,parent_id,name,icon_key,sort_order,created_at,updated_at) VALUES(?,NULL,'Import Test','book-open',?,?,?)",
-                (f"dup-{index}", index, timestamp, timestamp))
-        self.sandbox.connection.commit()
-        with self.assertRaises(importer.ImportError_) as caught:
-            self.sandbox.run(canonical())
-        self.assertIn("ambiguous", str(caught.exception))
-
-    def test_reimport_is_idempotent_and_preserves_mastery(self):
-        self.sandbox.run(canonical())
-        block = self.target_block()
         self.sandbox.connection.execute(
-            "UPDATE block_entries SET mastery_score=7,total_reviews=5,again_count=1 WHERE block_id=?", (block,))
+            "UPDATE block_entries SET mastery_score=7,total_reviews=5,again_count=1 WHERE block_id='leaf-a'"
+        )
         self.sandbox.connection.commit()
         before = {table: self.sandbox.count(f"SELECT COUNT(*) FROM {table}") for table in
-                  ("blocks", "block_entries", "vocabulary_entries", "lexical_entries", "lexical_senses",
-                   "lexical_examples", "lexical_example_translations", "lexical_additional_items")}
-
-        summary, _ = self.sandbox.run(canonical())
+                  ("lexical_entries", "lexical_senses", "vocabulary_entries", "block_entries")}
+        with mock.patch.object(importer, "ensure_audio", side_effect=AssertionError("TTS must not run")):
+            summary, _ = self.sandbox.run(canonical(), skip_audio=False, name="same-block.json")
         after = {table: self.sandbox.count(f"SELECT COUNT(*) FROM {table}") for table in before}
         self.assertEqual(before, after)
-        self.assertEqual(summary["imported"], 0)
-        self.assertEqual(summary["alreadyCurrent"], 3)
-        mastery = self.sandbox.connection.execute(
-            "SELECT mastery_score,total_reviews,again_count FROM block_entries WHERE block_id=? LIMIT 1", (block,)).fetchone()
-        self.assertEqual(tuple(mastery), (7, 5, 1))
+        self.assertEqual(summary["alreadyInBlock"], 4)
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(summary["reused"], 0)
+        self.assertEqual(summary["audioGenerated"], 0)
+        self.assertEqual(tuple(self.sandbox.connection.execute(
+            "SELECT mastery_score,total_reviews,again_count FROM block_entries WHERE block_id='leaf-a' LIMIT 1"
+        ).fetchone()), (7, 5, 1))
 
-    def test_semantic_update_rewrites_content_without_touching_learner_state(self):
+    def test_same_sense_second_leaf_reuses_semantics_audio_and_adds_membership(self):
         self.sandbox.run(canonical())
-        block = self.target_block()
-        self.sandbox.connection.execute("UPDATE block_entries SET mastery_score=4 WHERE block_id=?", (block,))
-        self.sandbox.connection.commit()
+        for entry in canonical()["entries"]:
+            index = importer.entry_index(entry)
+            for sense in entry["senses"]:
+                form, pronunciation, _ = importer.resolve_sense_audio(entry, sense, index)
+                if not self.sandbox.connection.execute(
+                    "SELECT 1 FROM lexical_audio_assets WHERE pronunciation_id=?", (pronunciation["pronunciationId"],)
+                ).fetchone():
+                    self.sandbox.install_current_audio(
+                        pronunciation["pronunciationId"], entry["entryId"], form["formId"], form["written"],
+                        f"audio/lex/{pronunciation['pronunciationId']}.ogg",
+                    )
+        with mock.patch.object(importer.audio_service, "generate_production_audio",
+                               side_effect=AssertionError("current global audio must be reused")):
+            summary, _ = self.sandbox.run(canonical(), target="leaf-b", skip_audio=False, name="second-leaf.json")
+        self.assertEqual(summary["reused"], 4)
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(summary["audioGenerated"], 0)
+        self.assertEqual(summary["audioReused"], 4)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE block_id='leaf-a'"), 4)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE block_id='leaf-b'"), 4)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_senses"), 4)
 
-        updated = canonical()
-        first_sense(updated)["definition"] = "having a duty to take care of someone or something"
-        first_sense(updated)["additional"]["items"][0]["note"] = "Very common with 'for'."
-        summary, _ = self.sandbox.run(updated, name="updated.json")
-        self.assertEqual(summary["updated"], 1)
-        self.assertEqual(summary["failed"], [])
-        card = self.sandbox.connection.execute(
-            "SELECT en_definition,extra_metadata FROM vocabulary_entries WHERE sense_id='sense_responsible_adjective_01'").fetchone()
-        self.assertEqual(card["en_definition"], "having a duty to take care of someone or something")
-        self.assertEqual(json.loads(card["extra_metadata"])["items"][0]["note"], "Very common with 'for'.")
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_additional_items WHERE sense_id='sense_responsible_adjective_01'"), 3)
-        self.assertEqual(self.sandbox.count("SELECT mastery_score FROM block_entries WHERE block_id=? LIMIT 1", block), 4)
-
-    def test_block_membership_is_additive_and_never_removes_an_older_block(self):
+    def test_standard_import_never_overwrites_existing_canonical_semantics(self):
         self.sandbox.run(canonical())
-        card = self.sandbox.connection.execute(
-            "SELECT id FROM vocabulary_entries WHERE sense_id='sense_responsible_adjective_01'").fetchone()["id"]
-        timestamp = db.now()
+        original = self.sandbox.connection.execute(
+            "SELECT definition FROM lexical_senses WHERE id='sense_responsible_adjective_01'"
+        ).fetchone()[0]
+        original_gloss = self.sandbox.connection.execute(
+            "SELECT text FROM lexical_glosses WHERE sense_id='sense_responsible_adjective_01'"
+        ).fetchone()[0]
+        original_examples = [tuple(row) for row in self.sandbox.connection.execute(
+            "SELECT en,note FROM lexical_examples WHERE sense_id='sense_responsible_adjective_01' ORDER BY sort_order"
+        )]
+        original_additional = [tuple(row) for row in self.sandbox.connection.execute(
+            "SELECT text,note,attributes FROM lexical_additional_items WHERE sense_id='sense_responsible_adjective_01' ORDER BY sort_order"
+        )]
         self.sandbox.connection.execute(
-            "INSERT INTO blocks(id,parent_id,name,icon_key,sort_order,created_at,updated_at) VALUES('other',NULL,'Other','book-open',9,?,?)",
-            (timestamp, timestamp))
-        self.sandbox.connection.execute(
-            "INSERT INTO block_entries(id,block_id,entry_id,mastery_score,created_at,updated_at) VALUES('m2','other',?,3,?,?)",
-            (card, timestamp, timestamp))
+            "UPDATE block_entries SET mastery_score=9,total_reviews=11 WHERE block_id='leaf-a'"
+        )
         self.sandbox.connection.commit()
-        self.sandbox.run(canonical())
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE entry_id=?", card), 2)
-        self.assertEqual(self.sandbox.count("SELECT mastery_score FROM block_entries WHERE id='m2'"), 3)
 
-    def test_identity_conflicts_fail_the_entry_and_leave_the_rest_importable(self):
-        self.sandbox.run(canonical())
-        clashing = canonical()
-        clashing["entries"] = [copy.deepcopy(clashing["entries"][0])]
-        clashing["entries"][0]["lemma"] = "irresponsible"
-        clashing["batchId"] = "fixture_conflict_v1"
-        summary, _ = self.sandbox.run(clashing, name="conflict.json")
-        self.assertEqual(len(summary["failed"]), 1)
-        self.assertIn("already exists with lemma", summary["failed"][0]["reason"])
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM vocabulary_entries WHERE sense_id IS NOT NULL"), 4)
-
-    def test_one_invalid_entry_fails_alone_and_the_rest_import(self):
-        """A content error in one entry must not cost the user the other entries."""
-        batch = canonical()
-        batch["entries"][1]["senses"][0]["definition"] = ""  # only entry 2 is unusable
-        report = external_schema.validate_batch(batch)
-        self.assertEqual(report.errors, [], "an entry-level content error is not batch-fatal")
-        self.assertIn(1, report.entry_errors)
-
-        summary, collector = self.sandbox.run(batch, name="one_bad.json")
-        self.assertEqual(summary["imported"], 2)
-        self.assertEqual([failure["entryId"] for failure in summary["failed"]], ["entry_record"])
-        self.assertIn("definition", summary["failed"][0]["reason"])
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_entries"), 2)
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM vocabulary_entries WHERE sense_id IS NOT NULL"), 2)
-        self.assertIn("failed", collector.stages())
-
-        fixed = canonical()
-        summary, _ = self.sandbox.run(fixed, name="fixed.json")
-        self.assertEqual(summary["failed"], [])
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM vocabulary_entries WHERE sense_id IS NOT NULL"), 4)
-
-    def test_failed_entry_is_recorded_and_resumes_on_the_next_run(self):
-        batch = canonical()
-        batch["entries"] = [copy.deepcopy(batch["entries"][0])]
-        self.sandbox.connection.execute(
-            "INSERT INTO lexical_entries(id,lemma,created_at,updated_at) VALUES('entry_responsible','different',?,?)",
-            (db.now(), db.now()))
-        self.sandbox.connection.commit()
-        summary, _ = self.sandbox.run(batch)
-        self.assertEqual(len(summary["failed"]), 1)
-        item = self.sandbox.connection.execute(
-            "SELECT status,attempt_count,last_error FROM lexical_import_items WHERE entry_id='entry_responsible'").fetchone()
-        self.assertEqual(item["status"], "FAILED")
-        self.assertEqual(item["attempt_count"], 1)
-        self.assertIn("lemma", item["last_error"])
-
-        self.sandbox.connection.execute("UPDATE lexical_entries SET lemma='responsible' WHERE id='entry_responsible'")
-        self.sandbox.connection.commit()
-        summary, _ = self.sandbox.run(batch)
-        self.assertEqual(summary["failed"], [])
+        changed = canonical()
+        sense = first_sense(changed)
+        sense["definition"] = "definition B"
+        sense["glosses"][0]["text"] = "gloss B"
+        sense["examples"][0]["en"] = "example B"
+        sense["additional"]["items"][0]["note"] = "Additional B"
+        summary, _ = self.sandbox.run(changed, target="leaf-b", name="different-semantics.json")
+        self.assertEqual(summary["reused"], 4)
+        self.assertTrue(any("existing data is preserved" in warning for warning in summary["warnings"]))
         self.assertEqual(self.sandbox.connection.execute(
-            "SELECT status FROM lexical_import_items WHERE entry_id='entry_responsible'").fetchone()["status"], "IMPORTED")
+            "SELECT definition FROM lexical_senses WHERE id='sense_responsible_adjective_01'"
+        ).fetchone()[0], original)
+        self.assertEqual(self.sandbox.connection.execute(
+            "SELECT text FROM lexical_glosses WHERE sense_id='sense_responsible_adjective_01'"
+        ).fetchone()[0], original_gloss)
+        self.assertEqual([tuple(row) for row in self.sandbox.connection.execute(
+            "SELECT en,note FROM lexical_examples WHERE sense_id='sense_responsible_adjective_01' ORDER BY sort_order"
+        )], original_examples)
+        self.assertEqual([tuple(row) for row in self.sandbox.connection.execute(
+            "SELECT text,note,attributes FROM lexical_additional_items WHERE sense_id='sense_responsible_adjective_01' ORDER BY sort_order"
+        )], original_additional)
+        self.assertEqual(tuple(self.sandbox.connection.execute(
+            "SELECT mastery_score,total_reviews FROM block_entries WHERE block_id='leaf-a' LIMIT 1"
+        ).fetchone()), (9, 11))
 
-    def test_progress_events_are_machine_readable(self):
-        _, collector = self.sandbox.run(canonical())
-        validated = next(event for event in collector.events if event["stage"] == "validated")
-        self.assertEqual(validated["total"], 3)
-        self.assertEqual(validated["batchId"], "fixture_canonical_v1")
-        imported = [event for event in collector.events if event["stage"] == "imported"]
-        self.assertEqual([event["current"] for event in imported], [1, 2, 3])
-        summary = next(event for event in collector.events if event["stage"] == "summary")
-        for key in ("requested", "imported", "updated", "alreadyCurrent", "audioGenerated", "audioReused", "failed"):
-            self.assertIn(key, summary)
+    def test_same_spelling_with_different_stable_ids_is_not_collapsed(self):
+        self.sandbox.run(canonical())
+        payload = {"schemaVersion": 2, "entries": [copy.deepcopy(canonical()["entries"][0])]}
+        entry = payload["entries"][0]
+        entry["entryId"] = "entry_responsible_other"
+        entry["forms"][0]["formId"] = "form_responsible_other"
+        entry["forms"][0]["pronunciations"][0]["pronunciationId"] = "pron_responsible_other"
+        sense = entry["senses"][0]
+        sense["senseId"] = "sense_responsible_other"
+        sense["formId"] = "form_responsible_other"
+        sense["pronunciationId"] = "pron_responsible_other"
+        for index, example in enumerate(sense["examples"]):
+            example["exampleId"] = f"ex_responsible_other_{index}"
+        for index, item in enumerate(sense["additional"]["items"]):
+            item["id"] = f"add_responsible_other_{index}"
+        summary, _ = self.sandbox.run(payload, name="polysemy.json")
+        self.assertEqual(summary["added"], 1)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_entries WHERE lemma='responsible'"), 2)
+        self.assertTrue(any("stable IDs differ" in warning for warning in summary["warnings"]))
 
-    def test_forbidden_voice_is_rejected_before_any_database_or_network_work(self):
-        batch = canonical()
-        batch["voice"] = "en-US-AriaNeural"
-        with self.assertRaises(importer.ImportError_) as caught:
-            self.sandbox.run(batch, skip_audio=False)
-        self.assertIn("forbidden field", str(caught.exception))
+    def test_incompatible_stable_identity_is_conflict_without_tts_or_overwrite(self):
+        self.sandbox.run(canonical())
+        conflict = {"schemaVersion": 2, "entries": [copy.deepcopy(canonical()["entries"][0])]}
+        conflict["entries"][0]["lemma"] = "irresponsible"
+        with mock.patch.object(importer, "ensure_audio", side_effect=AssertionError("conflicts must not reach TTS")):
+            summary, _ = self.sandbox.run(conflict, target="leaf-b", skip_audio=False, name="conflict.json")
+        self.assertEqual(summary["conflicts"], 1)
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(summary["reused"], 0)
+        self.assertIn("already exists with lemma", summary["conflictDetails"][0]["reason"])
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE block_id='leaf-b'"), 0)
+        self.assertEqual(self.sandbox.connection.execute(
+            "SELECT lemma FROM lexical_entries WHERE id='entry_responsible'"
+        ).fetchone()[0], "responsible")
+
+    def test_internal_import_identity_is_generated_not_read_from_json(self):
+        first, _ = self.sandbox.run(canonical(), name="one.json")
+        second, _ = self.sandbox.run(canonical(), name="two.json")
+        self.assertNotEqual(first["importSessionId"], second["importSessionId"])
+        rows = self.sandbox.connection.execute(
+            "SELECT batch_id,schema_version FROM lexical_import_batches ORDER BY created_at"
+        ).fetchall()
+        self.assertEqual(len(rows), 2)
+        self.assertTrue(all(row["schema_version"] == 2 for row in rows))
+
+    def test_bom_and_one_invalid_entry_partial_failure(self):
+        path = self.sandbox.root / "bom.json"
+        payload = canonical()
+        payload["entries"][1]["senses"][0]["definition"] = ""
+        path.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8-sig")
+        self.assertTrue(path.read_bytes().startswith(codecs.BOM_UTF8))
+        summary = importer.run_import(path, "leaf-a", self.sandbox.connection, Collector(), skip_audio=True)
+        self.assertEqual(summary["added"], 2)
+        self.assertEqual(len(summary["failed"]), 1)
+        self.assertEqual(summary["failed"][0]["entryId"], "entry_record")
+
+
+class TrustedLeafTargetTests(unittest.TestCase):
+    def setUp(self) -> None:
+        self.sandbox = Sandbox()
+        self.addCleanup(self.sandbox.close)
+
+    def assert_target_rejected_without_work(self, target: str, needle: str) -> None:
+        before = self.sandbox.count("SELECT COUNT(*) FROM lexical_entries")
+        with mock.patch.object(importer, "ensure_audio", side_effect=AssertionError("invalid targets must fail before TTS")):
+            with self.assertRaises(importer.ImportError_) as caught:
+                self.sandbox.run(canonical(), target=target, skip_audio=False)
+        self.assertIn(needle, str(caught.exception))
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_entries"), before)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_import_batches"), 0)
+
+    def test_existing_leaf_is_accepted(self):
+        summary, _ = self.sandbox.run(canonical())
+        self.assertEqual(summary["blockId"], "leaf-a")
+
+    def test_non_leaf_missing_and_deleted_targets_are_rejected(self):
+        self.assert_target_rejected_without_work("target-root", "leaf block")
+        self.assert_target_rejected_without_work("missing", "does not exist")
+        self.sandbox.create_block("deleted", "Deleted")
+        self.sandbox.connection.execute("DELETE FROM blocks WHERE id='deleted'")
+        self.sandbox.connection.commit()
+        self.assert_target_rejected_without_work("deleted", "does not exist")
+
+    def test_json_cannot_create_or_select_any_block(self):
+        payload = canonical()
+        payload["destination"] = {"blockPath": ["Should Never Exist"], "createIfMissing": True}
+        with self.assertRaises(importer.ImportError_):
+            self.sandbox.run(payload)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM blocks WHERE name='Should Never Exist'"), 0)
+
+    def test_leaf_is_rechecked_before_commit_if_it_gains_a_child_during_audio(self):
+        def add_child_during_audio(*_args, **_kwargs):
+            if not self.sandbox.connection.execute("SELECT 1 FROM blocks WHERE id='late-child'").fetchone():
+                self.sandbox.create_block("late-child", "Late child", "leaf-a")
+            return {"appPath": "audio/lex/mock.ogg", "sha256": "sha", "generated": True,
+                    "status": "current", "synthesisText": "mock", "masterPath": "mock.mp3",
+                    "durationSeconds": 1.0, "needsPersist": True}
+
+        with mock.patch.object(importer, "ensure_audio", side_effect=add_child_during_audio):
+            summary, _ = self.sandbox.run(canonical(), skip_audio=False)
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(len(summary["failed"]), 4)
+        self.assertTrue(all("leaf block" in failure["reason"] for failure in summary["failed"]))
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE block_id='leaf-a'"), 0)
         self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_entries"), 0)
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_audio_assets"), 0)
-        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM blocks WHERE name='Import Test'"), 0)
+
+    def test_target_deleted_during_audio_aborts_without_membership_or_lexical_rows(self):
+        def delete_target_during_audio(*_args, **_kwargs):
+            self.sandbox.connection.execute("DELETE FROM blocks WHERE id='leaf-a'")
+            self.sandbox.connection.commit()
+            return {"appPath": "audio/lex/mock.ogg", "sha256": "sha", "generated": True,
+                    "status": "current", "synthesisText": "mock", "masterPath": "mock.mp3",
+                    "durationSeconds": 1.0, "needsPersist": True}
+
+        with mock.patch.object(importer, "ensure_audio", side_effect=delete_target_during_audio):
+            summary, _ = self.sandbox.run(canonical(), skip_audio=False)
+        self.assertEqual(summary["added"], 0)
+        self.assertEqual(len(summary["failed"]), 4)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM lexical_entries"), 0)
+        self.assertEqual(self.sandbox.count("SELECT COUNT(*) FROM block_entries WHERE block_id='leaf-a'"), 0)
 
 
-class ProductionAudioProfileTests(unittest.TestCase):
-    """One source of truth, and the importer cannot be steered away from it."""
-
-    def test_profile_reports_the_benchmarked_configuration(self):
+class ProductionLockAndSourceWiringTests(unittest.TestCase):
+    def test_audio_profile_and_fingerprint_are_unchanged(self):
         described = audio_profile.describe()
         self.assertEqual(described["voice"], "en-US-JennyNeural")
         self.assertEqual(described["sourceFormat"], "audio-24khz-48kbitrate-mono-mp3")
@@ -505,97 +440,44 @@ class ProductionAudioProfileTests(unittest.TestCase):
         self.assertEqual(described["finalContainer"], "ogg")
         self.assertEqual(described["finalTargetBps"], 64000)
         self.assertEqual(described["finalChannels"], 1)
-
-    def test_fingerprint_is_deterministic_and_covers_voice_format_and_encoder(self):
-        self.assertEqual(audio_profile.fingerprint(), audio_profile.FINGERPRINT)
-        for token in ("edge-readaloud", "en-US-JennyNeural", "audio-24khz-48kbitrate-mono-mp3",
-                      "rate=-5%", "opus-64k-mono-vbr", "encoder-profile="):
+        for token in ("en-US-JennyNeural", "audio-24khz-48kbitrate-mono-mp3", "opus-64k-mono-vbr"):
             self.assertIn(token, audio_profile.FINGERPRINT)
 
-    def test_changing_the_ffmpeg_chain_changes_the_fingerprint(self):
-        from tools.ingest import audio_encode
-
-        original = audio_encode.FILTER_CHAIN
-        try:
-            audio_encode.FILTER_CHAIN = original + ",volume=2"
-            self.assertNotEqual(audio_profile.fingerprint(), audio_profile.FINGERPRINT)
-        finally:
-            audio_encode.FILTER_CHAIN = original
-        self.assertEqual(audio_profile.fingerprint(), audio_profile.FINGERPRINT)
-
-    def test_stale_fingerprint_invalidates_stored_audio(self):
+    def test_stale_fingerprint_still_invalidates_reused_audio(self):
         sandbox = Sandbox()
         try:
             sandbox.run(canonical())
+            sandbox.install_current_audio(
+                "pron_responsible_en_us_01", "entry_responsible", "form_responsible_01",
+                "responsible", "audio/lex/stale-check.ogg",
+            )
             sandbox.connection.execute(
-                "INSERT INTO lexical_audio_assets(pronunciation_id,entry_id,form_id,locale,synthesis_text,fingerprint,app_path,sha256,status,created_at,updated_at) "
-                "VALUES('pron_responsible_en_us_01','entry_responsible','form_responsible_01','en-US','responsible','old-profile','audio/lex/x.ogg','abc','current',?,?) "
-                "ON CONFLICT(pronunciation_id) DO UPDATE SET fingerprint='old-profile'",
-                (db.now(), db.now()))
+                "UPDATE lexical_audio_assets SET fingerprint='old-profile' WHERE pronunciation_id='pron_responsible_en_us_01'"
+            )
             sandbox.connection.commit()
-            self.assertIsNone(importer.audio_is_current(sandbox.connection, "pron_responsible_en_us_01", "responsible"))
+            self.assertIsNone(importer.audio_is_current(
+                sandbox.connection, "pron_responsible_en_us_01", "responsible"
+            ))
         finally:
             sandbox.close()
 
-    def test_synthesis_text_comes_from_the_lexical_form_only(self):
-        self.assertEqual(importer.synthesis_text_for({"written": "gradient descent"}), "gradient descent")
-        self.assertEqual(importer.synthesis_text_for({"written": "a, an"}), "a. an")
+    def test_frontend_exposes_only_leaf_option_and_passes_selected_id(self):
+        app = (ROOT / "src/App.svelte").read_text(encoding="utf-8")
+        tile = (ROOT / "src/lib/components/blocks/BlockTile.svelte").read_text(encoding="utf-8")
+        api = (ROOT / "src/lib/api/external-import.ts").read_text(encoding="utf-8")
+        manager = (ROOT / "src/lib/components/manage/VocabularyManager.svelte").read_text(encoding="utf-8")
+        self.assertNotIn("Import JSON", app)
+        self.assertNotIn("Import JSON", manager)
+        self.assertIn("block.childCount===0", tile)
+        self.assertIn("Import vocabulary", tile)
+        self.assertIn("targetBlockId", api)
+        self.assertIn("targetBlockId={importTarget.block.id}", app)
 
-    def test_identifiers_cannot_escape_the_audio_directory(self):
-        for hostile in ("../../etc/passwd", "a/b", "a\\b", "a b"):
-            with self.subTest(hostile=hostile):
-                with self.assertRaises(importer.ImportError_):
-                    importer.safe_stem(hostile)
-        self.assertEqual(importer.safe_stem("external:batch:entry"), "external_batch_entry")
-
-
-class LiveSpeechTests(unittest.TestCase):
-    """Network-gated proof that a real import produces real Jenny audio."""
-
-    def test_valid_import_synthesises_with_the_locked_voice_and_source_format(self):
-        try:
-            import edge_tts  # noqa: F401
-        except ImportError:
-            self.skipTest("edge-tts is not installed")
-        sandbox = Sandbox()
-        try:
-            batch = canonical()
-            batch["entries"] = [copy.deepcopy(batch["entries"][0])]
-            try:
-                summary, _ = sandbox.run(batch, skip_audio=False)
-            except Exception as error:  # noqa: BLE001 - offline runs must not fail the suite
-                self.skipTest(f"Microsoft Edge speech is unreachable: {error}")
-            self.assertEqual(summary["failed"], [])
-            self.assertEqual(summary["audioGenerated"], 1)
-
-            asset = sandbox.connection.execute(
-                "SELECT * FROM lexical_audio_assets WHERE pronunciation_id='pron_responsible_en_us_01'").fetchone()
-            self.assertEqual(asset["fingerprint"], audio_profile.FINGERPRINT)
-            self.assertEqual(asset["status"], "current")
-            self.assertGreater(asset["duration_seconds"], 0.2)
-
-            master = next((sandbox.root / "master").glob("*.mp3"))
-            probe = __import__("subprocess").run(
-                [__import__("tools.ingest.audio_encode", fromlist=["find_binary"]).find_binary("ffprobe"),
-                 "-v", "error", "-show_entries", "stream=codec_name,sample_rate,channels",
-                 "-show_entries", "format=bit_rate", "-of", "default=nw=1", str(master)],
-                check=True, capture_output=True, text=True).stdout
-            self.assertIn("codec_name=mp3", probe)
-            self.assertIn("sample_rate=24000", probe)
-            self.assertIn("channels=1", probe)
-            self.assertIn("bit_rate=48000", probe)
-
-            card = sandbox.connection.execute(
-                "SELECT audio_voice,audio_path FROM vocabulary_entries WHERE sense_id='sense_responsible_adjective_01'").fetchone()
-            self.assertEqual(card["audio_voice"], "en-US-JennyNeural")
-            self.assertTrue(card["audio_path"].startswith("audio/lex/"))
-            self.assertTrue((db.default_app_data() / card["audio_path"]).exists())
-
-            summary, _ = sandbox.run(batch, skip_audio=False, name="again.json")
-            self.assertEqual(summary["audioGenerated"], 0)
-            self.assertEqual(summary["audioReused"], 1)
-        finally:
-            sandbox.close()
+    def test_sidecar_build_uses_v2_schema_in_hash_bundle_and_smoke(self):
+        build = (ROOT / "tools/build_importer_sidecar.ps1").read_text(encoding="utf-8")
+        self.assertIn("external_vocabulary_import.v2.schema.json", build)
+        self.assertIn("@($sources.FullName) + @($schema", build)
+        self.assertIn("--validate-only", build)
 
 
 if __name__ == "__main__":

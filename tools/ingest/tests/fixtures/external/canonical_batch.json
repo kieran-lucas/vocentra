@@ -1,11 +1,5 @@
 {
-  "schemaVersion": 1,
-  "batchId": "fixture_canonical_v1",
-  "destination": {
-    "blockId": null,
-    "blockPath": ["Import Test", "Vocabulary"],
-    "createIfMissing": true
-  },
+  "schemaVersion": 2,
   "entries": [
     {
       "entryId": "entry_responsible",

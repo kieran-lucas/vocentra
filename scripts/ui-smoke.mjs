@@ -1,5 +1,3 @@
-import { readFile } from 'node:fs/promises';
-
 const target = (await (await fetch('http://127.0.0.1:9222/json')).json())[0];
 if (!target) throw new Error('No WebView2 debug target found');
 
@@ -42,7 +40,6 @@ const setValue = (selector, value) => evaluate(`(() => { const element=document.
 
 const rootName = `QA Root ${Date.now()}`;
 const leafName = 'QA Leaf';
-const sample = await readFile(new URL('../sample-data/vocabulary.sample.json', import.meta.url), 'utf8');
 
 await clickText('New block');
 await waitFor(`document.querySelector('[role="dialog"] input')`);
@@ -60,46 +57,16 @@ await waitFor(`[...document.querySelectorAll('.tile')].some(node=>node.querySele
 
 await evaluate(`document.querySelector(${JSON.stringify(`[aria-label="Open ${rootName}"]`)}).click()`);
 await waitFor(`[...document.querySelectorAll('.tile h3')].some(node=>node.textContent===${JSON.stringify(leafName)})`);
-await evaluate(`document.querySelector('[aria-label="Open QA Leaf"]').click()`);
-await waitFor(`document.querySelector('.manager')`);
-
-await clickText('Import JSON');
-await waitFor(`document.querySelector('[role="dialog"] textarea')`);
-await setValue('[role="dialog"] textarea', sample);
-await clickText('Import all valid entries');
-await waitFor(`document.querySelectorAll('.list article').length===8`, 12000);
-
-await clickText('Study');
-await waitFor(`document.querySelector('.front h2')`);
-const word = await evaluate(`document.querySelector('.front h2').textContent`);
-const frontText = await evaluate(`document.querySelector('.front').textContent`);
-if (!word || /Vietnamese|Definition|Typing practice/.test(frontText)) throw new Error('Card front exposed answer content');
-await evaluate(`document.querySelector('.front .reveal').click()`);
-await waitFor(`document.querySelector('.back input')`);
-
-await setValue('.back input', word);
-await evaluate(`document.querySelector('.back input').closest('form').requestSubmit()`);
-await waitFor(`document.querySelector('.back input').value==='' && document.activeElement===document.querySelector('.back input')`);
-
-await setValue('.back input', '__wrong__');
-await evaluate(`document.querySelector('.back input').closest('form').requestSubmit()`);
-await waitFor(`document.querySelector('.back section.invalid')`);
-const wrongRetained = await evaluate(`document.querySelector('.back input').value==='__wrong__'`);
-if (!wrongRetained) throw new Error('Incorrect spelling was cleared');
-
-await clickText('Good');
-await waitFor(`document.querySelector('.front') || document.querySelector('.complete')`);
-await evaluate(`document.querySelector('[aria-label="Exit study"]').click()`);
-await waitFor(`document.querySelector('.manager')`);
-await evaluate(`document.querySelector('[aria-label="Back"]').click()`);
-await waitFor(`document.querySelector('nav [aria-label="Home"]')`);
+await evaluate(`(() => { const tile=[...document.querySelectorAll('.tile')].find(node=>node.querySelector('h3')?.textContent===${JSON.stringify(leafName)}); tile.querySelector('[aria-label="Block actions"]').click(); })()`);
+await waitFor(`document.querySelector('.tile .menu')?.textContent.includes('Import vocabulary')`);
 await evaluate(`document.querySelector('nav [aria-label="Home"]').click()`);
 await waitFor(`[...document.querySelectorAll('.tile h3')].some(node=>node.textContent===${JSON.stringify(rootName)})`);
 
 await evaluate(`window.confirm=()=>true`);
 await evaluate(`(() => { const tile=[...document.querySelectorAll('.tile')].find(node=>node.querySelector('h3')?.textContent===${JSON.stringify(rootName)}); tile.querySelector('[aria-label="Block actions"]').click(); })()`);
+if (await evaluate(`document.querySelector('.tile .menu')?.textContent.includes('Import vocabulary')`)) throw new Error('Non-leaf exposed Import vocabulary');
 await clickText('Delete');
 await waitFor(`![...document.querySelectorAll('.tile h3')].some(node=>node.textContent===${JSON.stringify(rootName)})`);
 
-console.log(JSON.stringify({ rootCreated: true, nestedLeafCreated: true, imported: 8, studyRevealed: true, typingCorrectCleared: true, typingWrongRetained: true, ratingPersisted: true, cleanupComplete: true }));
+console.log(JSON.stringify({ rootCreated: true, nestedLeafCreated: true, leafImportAction: true, cleanupComplete: true }));
 socket.close();

@@ -27,12 +27,15 @@ impl Importer {
     fn program_and_args(
         &self,
         file: &Path,
+        target_block_id: &str,
         database: &Path,
         app_data: &Path,
     ) -> (String, Vec<String>) {
         let common = |mut args: Vec<String>| {
             args.extend([
                 file.to_string_lossy().into_owned(),
+                "--target-block-id".into(),
+                target_block_id.to_owned(),
                 "--progress-json".into(),
                 "--db".into(),
                 database.to_string_lossy().into_owned(),
@@ -108,6 +111,7 @@ pub fn resolve_importer() -> AppResult<Importer> {
 /// Run one import, relaying every progress line through `on_event`.
 pub async fn run<F>(
     file: &Path,
+    target_block_id: &str,
     database: &Path,
     app_data: &Path,
     mut on_event: F,
@@ -118,7 +122,7 @@ where
     let importer = resolve_importer()?;
     let (route, location) = importer.describe();
     on_event(serde_json::json!({"stage": "importer", "route": route, "path": location}));
-    let (program, args) = importer.program_and_args(file, database, app_data);
+    let (program, args) = importer.program_and_args(file, target_block_id, database, app_data);
     let mut child = Command::new(&program)
         .args(&args)
         .stdout(Stdio::piped())
@@ -210,6 +214,7 @@ mod tests {
         let importer = Importer::Repository(PathBuf::from("/repo/import.py"));
         let (program, args) = importer.program_and_args(
             Path::new("/tmp/batch.json"),
+            "leaf-123",
             Path::new("/data/lexium.sqlite3"),
             Path::new("/data"),
         );
@@ -220,6 +225,10 @@ mod tests {
         assert!(args.iter().any(|value| value.ends_with("batch.json")));
         assert!(args.iter().any(|value| value.ends_with("lexium.sqlite3")));
         assert!(args.iter().any(|value| value == "--app-data"));
+        assert!(
+            args.windows(2)
+                .any(|pair| pair == ["--target-block-id", "leaf-123"])
+        );
     }
 
     #[test]
@@ -227,6 +236,7 @@ mod tests {
         let importer = Importer::Sidecar(PathBuf::from("/apps/lexium-import.exe"));
         let (program, args) = importer.program_and_args(
             Path::new("/tmp/batch.json"),
+            "leaf-123",
             Path::new("/data/lexium.sqlite3"),
             Path::new("/data"),
         );

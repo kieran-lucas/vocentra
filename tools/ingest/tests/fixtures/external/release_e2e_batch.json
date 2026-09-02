@@ -1,44 +1,38 @@
 {
-  "schemaVersion": 1,
-  "batchId": "release_e2e_v1",
-  "destination": {
-    "blockId": null,
-    "blockPath": ["Import Test", "Release E2E"],
-    "createIfMissing": true
-  },
+  "schemaVersion": 2,
   "entries": [
     {
-      "entryId": "entry_e2e_lattice",
+      "entryId": "entry_v2e2e_lattice",
       "lemma": "lattice",
       "entryType": "word",
       "forms": [
         {
-          "formId": "form_e2e_lattice_01",
+          "formId": "form_v2e2e_lattice_01",
           "written": "lattice",
           "morphology": null,
           "pronunciations": [
-            {"pronunciationId": "pron_e2e_lattice_en_us_01", "locale": "en-US", "ipa": "/ˈlætɪs/"}
+            {"pronunciationId": "pron_v2e2e_lattice_en_us_01", "locale": "en-US", "ipa": "/ˈlætɪs/"}
           ]
         }
       ],
       "senses": [
         {
-          "senseId": "sense_e2e_lattice_noun_01",
+          "senseId": "sense_v2e2e_lattice_noun_01",
           "pos": "noun",
-          "formId": "form_e2e_lattice_01",
-          "pronunciationId": "pron_e2e_lattice_en_us_01",
+          "formId": "form_v2e2e_lattice_01",
+          "pronunciationId": "pron_v2e2e_lattice_en_us_01",
           "glosses": [{"locale": "vi", "text": "mạng tinh thể; giàn mắt cáo"}],
           "definition": "a regular repeating arrangement of points, bars or atoms",
           "examples": [
             {
-              "exampleId": "ex_e2e_lattice_01",
+              "exampleId": "ex_v2e2e_lattice_01",
               "type": "meaning",
               "en": "The atoms sit at fixed points in a crystal lattice.",
               "note": null,
               "translations": [{"locale": "vi", "text": "Các nguyên tử nằm ở những điểm cố định trong mạng tinh thể."}]
             },
             {
-              "exampleId": "ex_e2e_lattice_02",
+              "exampleId": "ex_v2e2e_lattice_02",
               "type": "usage",
               "en": "Roses grew up the wooden lattice beside the door.",
               "note": "Countable in the garden sense, usually uncountable in physics.",
@@ -49,7 +43,7 @@
             "schemaVersion": 1,
             "items": [
               {
-                "id": "add_e2e_lattice_collocation_01",
+                "id": "add_v2e2e_lattice_collocation_01",
                 "kind": "collocation",
                 "salience": 1,
                 "text": "crystal lattice",
@@ -58,7 +52,7 @@
                 "attributes": {"relation": "noun+noun"}
               },
               {
-                "id": "add_e2e_lattice_usage_01",
+                "id": "add_v2e2e_lattice_usage_01",
                 "kind": "usage",
                 "salience": 2,
                 "text": null,
@@ -72,37 +66,37 @@
       ]
     },
     {
-      "entryId": "entry_e2e_threshold",
+      "entryId": "entry_v2e2e_threshold",
       "lemma": "threshold",
       "entryType": "word",
       "forms": [
         {
-          "formId": "form_e2e_threshold_01",
+          "formId": "form_v2e2e_threshold_01",
           "written": "threshold",
           "morphology": null,
           "pronunciations": [
-            {"pronunciationId": "pron_e2e_threshold_en_us_01", "locale": "en-US", "ipa": "/ˈθreʃhoʊld/"}
+            {"pronunciationId": "pron_v2e2e_threshold_en_us_01", "locale": "en-US", "ipa": "/ˈθreʃhoʊld/"}
           ]
         }
       ],
       "senses": [
         {
-          "senseId": "sense_e2e_threshold_noun_01",
+          "senseId": "sense_v2e2e_threshold_noun_01",
           "pos": "noun",
-          "formId": "form_e2e_threshold_01",
-          "pronunciationId": "pron_e2e_threshold_en_us_01",
+          "formId": "form_v2e2e_threshold_01",
+          "pronunciationId": "pron_v2e2e_threshold_en_us_01",
           "glosses": [{"locale": "vi", "text": "ngưỡng; mức tối thiểu"}],
           "definition": "the level at which something starts to happen or take effect",
           "examples": [
             {
-              "exampleId": "ex_e2e_threshold_01",
+              "exampleId": "ex_v2e2e_threshold_01",
               "type": "meaning",
               "en": "Pain begins once the signal passes a certain threshold.",
               "note": null,
               "translations": [{"locale": "vi", "text": "Cơn đau bắt đầu khi tín hiệu vượt qua một ngưỡng nhất định."}]
             },
             {
-              "exampleId": "ex_e2e_threshold_02",
+              "exampleId": "ex_v2e2e_threshold_02",
               "type": "usage",
               "en": "Earnings above the tax threshold are reported separately.",
               "note": "Common with above, below, cross and set.",
@@ -113,7 +107,7 @@
             "schemaVersion": 1,
             "items": [
               {
-                "id": "add_e2e_threshold_collocation_01",
+                "id": "add_v2e2e_threshold_collocation_01",
                 "kind": "collocation",
                 "salience": 1,
                 "text": "cross a threshold",

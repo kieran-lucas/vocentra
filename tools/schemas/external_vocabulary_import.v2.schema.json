@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lexium.local/schemas/external_vocabulary_import.v2.schema.json",
+  "title": "Vocentra external vocabulary import v2",
+  "description": "Canonical lexical content only. The selected leaf block is trusted runtime context and never appears in this document.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": {"const": 2},
+    "entries": {"type": "array", "minItems": 1, "maxItems": 500, "items": {"$ref": "#/$defs/entry"}}
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9._:-]+$"},
+    "nonEmpty": {"type": "string", "minLength": 1},
+    "optionalText": {"type": ["string", "null"], "minLength": 1},
+    "locale": {"type": "string", "pattern": "^[a-z]{2}(-[A-Z]{2})?$"},
+
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entryId", "lemma", "forms", "senses"],
+      "properties": {
+        "entryId": {"$ref": "#/$defs/id"},
+        "lemma": {"$ref": "#/$defs/nonEmpty"},
+        "entryType": {"type": ["string", "null"], "enum": ["word", "phrase", "idiom", "abbreviation", null]},
+        "forms": {"type": "array", "minItems": 1, "maxItems": 12, "items": {"$ref": "#/$defs/form"}},
+        "senses": {"type": "array", "minItems": 1, "maxItems": 12, "items": {"$ref": "#/$defs/sense"}}
+      }
+    },
+
+    "form": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["formId", "written", "pronunciations"],
+      "properties": {
+        "formId": {"$ref": "#/$defs/id"},
+        "written": {"$ref": "#/$defs/nonEmpty"},
+        "morphology": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "formType": {"type": ["string", "null"], "minLength": 1},
+            "irregular": {"type": ["boolean", "null"]},
+            "inflections": {"type": "array", "items": {"type": "string", "minLength": 1}}
+          }
+        },
+        "pronunciations": {"type": "array", "minItems": 1, "maxItems": 6, "items": {"$ref": "#/$defs/pronunciation"}}
+      }
+    },
+
+    "pronunciation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pronunciationId", "locale", "ipa"],
+      "properties": {
+        "pronunciationId": {"$ref": "#/$defs/id"},
+        "locale": {"$ref": "#/$defs/locale"},
+        "ipa": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+
+    "sense": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["senseId", "pos", "glosses", "definition", "examples"],
+      "properties": {
+        "senseId": {"$ref": "#/$defs/id"},
+        "pos": {"$ref": "#/$defs/nonEmpty"},
+        "formId": {"type": ["string", "null"], "minLength": 1},
+        "pronunciationId": {"type": ["string", "null"], "minLength": 1},
+        "glosses": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"$ref": "#/$defs/gloss"}},
+        "definition": {"$ref": "#/$defs/nonEmpty"},
+        "examples": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/example"}},
+        "additional": {"$ref": "#/$defs/additional"}
+      }
+    },
+
+    "gloss": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locale", "text"],
+      "properties": {"locale": {"$ref": "#/$defs/locale"}, "text": {"$ref": "#/$defs/nonEmpty"}}
+    },
+
+    "example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exampleId", "type", "en", "translations"],
+      "properties": {
+        "exampleId": {"$ref": "#/$defs/id"},
+        "type": {"enum": ["meaning", "usage"]},
+        "en": {"$ref": "#/$defs/nonEmpty"},
+        "note": {"$ref": "#/$defs/optionalText"},
+        "translations": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"$ref": "#/$defs/translation"}}
+      }
+    },
+
+    "translation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["locale", "text"],
+      "properties": {"locale": {"$ref": "#/$defs/locale"}, "text": {"$ref": "#/$defs/nonEmpty"}}
+    },
+
+    "additional": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "items"],
+      "properties": {
+        "schemaVersion": {"const": 1},
+        "items": {"type": "array", "maxItems": 24, "items": {"$ref": "#/$defs/additionalItem"}}
+      }
+    },
+
+    "additionalItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "salience", "text", "note", "target", "attributes"],
+      "properties": {
+        "id": {"$ref": "#/$defs/id"},
+        "kind": {"enum": ["pattern", "collocation", "usage", "relation", "wordFormation", "expression"]},
+        "salience": {"type": "integer", "minimum": 1, "maximum": 3},
+        "text": {"$ref": "#/$defs/optionalText"},
+        "note": {"$ref": "#/$defs/optionalText"},
+        "target": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["entryId", "senseId"],
+          "properties": {
+            "entryId": {"type": ["string", "null"], "minLength": 1},
+            "senseId": {"type": ["string", "null"], "minLength": 1}
+          }
+        },
+        "attributes": {"type": "object", "description": "Subtype registry values. Deliberately open: unknown but well-formed subtypes are preserved with a warning rather than rejected."}
+      }
+    }
+  }
+}

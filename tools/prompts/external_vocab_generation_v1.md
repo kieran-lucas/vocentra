@@ -1,4 +1,7 @@
-# Lexium vocabulary JSON — generation contract v1
+# Lexium vocabulary JSON — generation contract v1 (DEPRECATED)
+
+> Historical only. Production import now requires schema v2, where JSON contains
+> lexical content only and the selected leaf block supplies the destination.
 
 You are given a list of English words or expressions and a destination block
 path. Produce **one JSON document** that Lexium can import directly.

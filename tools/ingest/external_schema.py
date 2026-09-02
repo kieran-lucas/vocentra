@@ -1,6 +1,6 @@
 """Validation for the external vocabulary import contract.
 
-tools/schemas/external_vocabulary_import.v1.schema.json is the published
+tools/schemas/external_vocabulary_import.v2.schema.json is the published
 contract. This module is the importer's gate: it repeats the structure with
 precise, item-addressed messages, adds the checks JSON Schema cannot express
 (identity, ownership, cross-references, subtype registries) and refuses any
@@ -18,8 +18,8 @@ import sys
 # PyInstaller unpacks bundled data under sys._MEIPASS; a checkout resolves from
 # the repository root. Both must find the published contract.
 ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[2]))
-SCHEMA_PATH = ROOT / "tools/schemas/external_vocabulary_import.v1.schema.json"
-SCHEMA_VERSION = 1
+SCHEMA_PATH = ROOT / "tools/schemas/external_vocabulary_import.v2.schema.json"
+SCHEMA_VERSION = 2
 ADDITIONAL_SCHEMA_VERSION = 1
 
 # Infrastructure names the file may never carry, at any depth. The external file
@@ -33,6 +33,10 @@ HARD_FORBIDDEN = {
 # Ambiguous outside infrastructure context: "voice" is also a grammatical term, so
 # it is only forbidden as a key outside an Additional `attributes` object.
 CONTEXT_FORBIDDEN = {"voice", "provider", "rate", "format"}
+ROUTING_FORBIDDEN = {
+    "batchid", "destination", "blockid", "blockpath", "createifmissing",
+    "targetblockid", "targetblock", "deck", "folder",
+}
 
 KINDS = ("pattern", "collocation", "usage", "relation", "wordFormation", "expression")
 POS_HINT = ("noun", "verb", "adjective", "adverb", "preposition", "conjunction",
@@ -61,7 +65,7 @@ REGISTRIES: dict[str, dict[str, tuple[str, ...]]] = {
 class Report:
     """Batch-fatal problems, per-entry problems, and warnings.
 
-    `errors` stops the whole file: a broken envelope, an unusable destination,
+    `errors` stops the whole file: a broken lexical envelope,
     an identity clash between entries, or any attempt to steer the audio
     pipeline. `entry_errors` stops only that entry, so one bad word does not
     cost the user the other forty-nine.
@@ -100,7 +104,13 @@ def scan_forbidden(node: Any, where: str, report: Report, in_attributes: bool = 
     if isinstance(node, dict):
         for key, value in node.items():
             lowered = key.lower()
-            if lowered in HARD_FORBIDDEN or (lowered in CONTEXT_FORBIDDEN and not in_attributes):
+            if lowered in ROUTING_FORBIDDEN:
+                report.error(
+                    f"{where}.{key}",
+                    "forbidden routing field: a V2 file contains lexical content only; "
+                    "the selected leaf block supplies the destination",
+                )
+            elif lowered in HARD_FORBIDDEN or (lowered in CONTEXT_FORBIDDEN and not in_attributes):
                 report.error(
                     f"{where}.{key}",
                     "forbidden field: the import file may not set the TTS voice, source format, "
@@ -199,7 +209,7 @@ def validate_additional(additional: Any, where: str, report: Report) -> list[dic
             if value is None:
                 report.warn(spot, f"{kind} item has no {field}; it will be stored without a subtype")
             elif value not in known:
-                report.warn(spot, f"{field}={value!r} is not a known v1 subtype; preserved as an additive value")
+                report.warn(spot, f"{field}={value!r} is not a known Additional v1 subtype; preserved as an additive value")
     return [item for item in items if isinstance(item, dict)]
 
 
@@ -341,25 +351,20 @@ def validate_batch(payload: Any) -> Report:
     if not isinstance(payload, dict):
         report.error("$", "the file must contain a JSON object")
         return report
-    scan_forbidden(payload, "$", report)
+    if payload.get("schemaVersion") == 1:
+        report.error(
+            "$.schemaVersion",
+            "This vocabulary file uses import schema v1. Vocentra now uses schema v2, "
+            "where the selected leaf block determines the destination. Generate a v2 "
+            "vocabulary JSON file and try again.",
+        )
+        return report
     if payload.get("schemaVersion") != SCHEMA_VERSION:
         report.error("$.schemaVersion", f"must be {SCHEMA_VERSION}")
-    batch_id = _id(payload.get("batchId"), "$", "batchId", report)
-
-    destination = payload.get("destination")
-    if not isinstance(destination, dict):
-        report.error("$.destination", "destination is required")
-    else:
-        unknown = set(destination) - {"blockId", "blockPath", "createIfMissing"}
-        if unknown:
-            report.error("$.destination", f"unknown field(s): {', '.join(sorted(unknown))}")
-        block_id, path = destination.get("blockId"), destination.get("blockPath")
-        if block_id is not None and (not isinstance(block_id, str) or not block_id.strip()):
-            report.error("$.destination.blockId", "must be a non-empty string or null")
-        if not isinstance(path, list) or not path or not all(isinstance(p, str) and p.strip() for p in path):
-            report.error("$.destination.blockPath", "must be a non-empty array of non-empty names")
-        if not isinstance(destination.get("createIfMissing"), bool):
-            report.error("$.destination.createIfMissing", "must be true or false")
+    scan_forbidden(payload, "$", report)
+    unknown = set(payload) - {"schemaVersion", "entries"}
+    if unknown:
+        report.error("$", f"unknown root field(s): {', '.join(sorted(unknown))}")
 
     entries = payload.get("entries")
     if not isinstance(entries, list) or not entries:
@@ -404,7 +409,7 @@ def validate_batch(payload: Any) -> Report:
                 if target.get("senseId") and target["senseId"] not in seen["senses"]:
                     report.warn(spot, f"target senseId {target['senseId']!r} is not in this batch; "
                                       "the reference is kept and resolves when that sense is imported")
-    if batch_id and report.ok:
+    if report.ok:
         report.warnings.sort()
     return report
 
@@ -430,6 +435,10 @@ def merge_json_schema(payload: Any, report: Report) -> None:
     A structural failure inside one entry fails that entry; anything else fails
     the file.
     """
+    # V1 gets one purpose-built migration message instead of a cascade of V2
+    # additional-property/const errors that obscures the required user action.
+    if isinstance(payload, dict) and payload.get("schemaVersion") == 1:
+        return
     try:
         import jsonschema
     except ImportError:

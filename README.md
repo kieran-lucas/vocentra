@@ -8,7 +8,7 @@ Lexium is a Windows-only, offline-first vocabulary desktop app built with Tauri 
 - Leaf-block vocabulary management with search, editing, removal, JSON validation, and transactional batch import.
 - Modular front/back cards, persistent typing practice, local speaker playback, and Again / Hard / Good / Easy ratings.
 - Per-block mastery, durable review/typing history, unique-coverage turns, adaptive repeats, cooldown, fairness, and a termination cap.
-- Local SQLite and local app-data audio; the shipped app has no account, telemetry, remote font, or runtime cloud dependency.
+- Local SQLite and local app-data audio; no account, telemetry, or remote font, and only an explicit external import contacts the locked speech service.
 
 ## Windows development
 
@@ -64,38 +64,37 @@ uv run tools/ingest/ingest_oxford_a1_pilot.py --source-index 4
 uv run tools/ingest/ingest_oxford_a1_pilot.py --source-key oxford3000:a1:000004 --regenerate-audio
 ```
 
-The pilot uses `en-US-JennyNeural` with the Edge source format `audio-24khz-48kbitrate-mono-mp3` through the Microsoft Edge neural speech service during dataset generation; both were selected by the benchmark recorded in `data/audio-benchmark/report.md`. It needs no Google billing or API key. The returned audio is retained as an intermediate master, normalized conservatively, encoded locally with FFmpeg, and copied into app data. The shipped app remains fully offline and never calls a speech service at runtime. The provider adapter is isolated in `tools/ingest/audio_microsoft.py` so it can be replaced without changing validation, encoding, import, or app playback.
+The pilot uses `en-US-JennyNeural` with the Edge source format `audio-24khz-48kbitrate-mono-mp3` through the Microsoft Edge neural speech service during dataset generation; both were selected by the benchmark recorded in `data/audio-benchmark/report.md`. It needs no Google billing or API key. The returned audio is retained as an intermediate master, normalized conservatively, encoded locally with FFmpeg, and copied into app data. Normal browsing/study and app startup remain offline; an explicit external-vocabulary import calls the same production speech service only for missing or stale audio. The provider adapter is isolated in `tools/ingest/audio_microsoft.py` so it can be replaced without changing validation, encoding, import, or app playback.
 
 ## External vocabulary JSON import
 
-One JSON file in, usable cards out. Ask any LLM for a file matching
-`tools/prompts/external_vocab_generation_v1.md` (a self-contained contract - the
-model never needs this repository), then import it. Lexium validates it, resolves
-or creates the destination block, generates the pronunciation audio with the
-locked production voice, encodes and verifies it, and upserts the lexical data.
+One lexical JSON file in, usable cards out. V2 files contain only
+`schemaVersion` and `entries`; the user selects an existing leaf block in the
+app. Vocentra validates the file and trusted target block, reuses canonical
+global senses without overwriting them, adds missing memberships, and generates
+only missing or stale pronunciation audio with the locked production profile.
 
-- Contract for the generating LLM: `tools/prompts/external_vocab_generation_v1.md`
-- Machine-readable schema: `tools/schemas/external_vocabulary_import.v1.schema.json`
+- Active machine-readable schema: `tools/schemas/external_vocabulary_import.v2.schema.json`
+- Deprecated historical V1 contract: `tools/prompts/external_vocab_generation_v1.md`
 - Importer (the only one): `tools/ingest/import_external_vocabulary.py`
 - Audio source of truth: `tools/ingest/audio_profile.py`
 
-In the app, use **Import JSON** in the header, choose the file, and watch the
-progress. From a terminal:
+In the app, open a leaf block's **⋯** menu and choose **Import vocabulary**.
+From a terminal, pass the same trusted block ID outside the file:
 
 ```powershell
 # Import into the app database
-uv run tools/ingest/import_external_vocabulary.py my_words.json
+uv run tools/ingest/import_external_vocabulary.py my_words.json --target-block-id <existing-leaf-id>
 
 # Check a file without writing anything or contacting the speech service
 uv run tools/ingest/import_external_vocabulary.py my_words.json --validate-only
 ```
 
-The file carries words and a destination only. Any attempt to set a voice,
-source format, codec, audio path or learner state is rejected before validation
-completes, and the production profile always wins. Re-importing the same file
-changes nothing and re-synthesises nothing; changing a definition updates the
-card and keeps the audio; changing what is spoken regenerates just that clip.
-Mastery, review history and block membership are never reset by an import.
+The file carries lexical data only. Routing fields, voice, source format, codec,
+audio paths and learner state are rejected before import. Re-importing into the
+same leaf skips existing cards and performs no TTS. Importing into another leaf
+reuses global semantics/current audio and adds membership only. Ordinary import
+never overwrites canonical semantics, mastery, reviews or earlier memberships.
 
 ### How the importer ships
 
@@ -136,6 +135,7 @@ To re-run the installed-build acceptance check, launch the app with
 
 ```powershell
 node scripts/release-import-smoke.mjs tools/ingest/tests/fixtures/external/release_e2e_batch.json tools/ingest/tests/fixtures/external/release_e2e_forbidden_voice.json
+node scripts/release-import-smoke.mjs tools/ingest/tests/fixtures/external/release_e2e_batch.json tools/ingest/tests/fixtures/external/release_e2e_forbidden_voice.json --restart-check
 powershell -File scripts/verify-release-import.ps1
 ```
 

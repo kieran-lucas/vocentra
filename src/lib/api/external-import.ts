@@ -4,5 +4,5 @@ import type { ExternalImportEvent, ExternalImportSummary, SpeechProfile } from '
 
 export const PROGRESS_EVENT='external-import://progress';
 export const speechProfile=()=>command<SpeechProfile>('speech_profile');
-export const importExternalJson=(json:string)=>command<ExternalImportSummary>('import_external_json',{json});
+export const importExternalJson=(json:string,targetBlockId:string)=>command<ExternalImportSummary>('import_external_json',{json,targetBlockId});
 export const onImportProgress=(handler:(event:ExternalImportEvent)=>void)=>listen<ExternalImportEvent>(PROGRESS_EVENT,(message)=>handler(message.payload));

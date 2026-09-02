@@ -7,8 +7,7 @@ depend on anything the UI claims. Used by the release acceptance run.
 #>
 [CmdletBinding()]
 param(
-    [string]$AppData = (Join-Path $env:APPDATA 'com.lexium.desktop'),
-    [string]$BlockName = 'Release E2E'
+    [string]$AppData = (Join-Path $env:APPDATA 'com.lexium.desktop')
 )
 
 $ErrorActionPreference = 'Stop'
@@ -25,20 +24,27 @@ Add-Type -AssemblyName System.Data
 $sqlitePs = @"
 import json, sqlite3, sys
 connection = sqlite3.connect(sys.argv[1]); connection.row_factory = sqlite3.Row
-block = connection.execute("SELECT id FROM blocks WHERE name=?", (sys.argv[2],)).fetchone()
-out = {"block": bool(block)}
-if block:
-    out["cards"] = connection.execute(
-        "SELECT COUNT(*) FROM block_entries WHERE block_id=?", (block["id"],)).fetchone()[0]
-    out["rows"] = [dict(r) for r in connection.execute(
-        "SELECT v.word, v.ipa, v.part_of_speech, v.audio_voice, v.audio_path, v.extra_metadata "
-        "FROM block_entries be JOIN vocabulary_entries v ON v.id=be.entry_id WHERE be.block_id=? ORDER BY v.word",
-        (block["id"],))]
+memberships = connection.execute(
+    "SELECT p.name || ' / ' || b.name path, COUNT(*) count "
+    "FROM blocks b JOIN blocks p ON p.id=b.parent_id "
+    "JOIN block_entries be ON be.block_id=b.id JOIN vocabulary_entries v ON v.id=be.entry_id "
+    "WHERE p.name='Import Test' AND b.name IN ('V2 Leaf A','V2 Leaf B') "
+    "AND v.sense_id LIKE 'sense_v2e2e_%' GROUP BY b.id,p.name,b.name ORDER BY b.name").fetchall()
+out = {"blocks": {r["path"]: r["count"] for r in memberships}}
+out["rows"] = [dict(r) for r in connection.execute(
+    "SELECT p.name || ' / ' || b.name block_name,v.word,v.ipa,v.part_of_speech,v.audio_voice,v.audio_path,v.extra_metadata "
+    "FROM blocks b JOIN blocks p ON p.id=b.parent_id JOIN block_entries be ON be.block_id=b.id "
+    "JOIN vocabulary_entries v ON v.id=be.entry_id WHERE p.name='Import Test' "
+    "AND b.name IN ('V2 Leaf A','V2 Leaf B') AND v.sense_id LIKE 'sense_v2e2e_%' ORDER BY b.name,v.word")]
+out["canonical_v2_cards"] = connection.execute(
+    "SELECT COUNT(*) FROM vocabulary_entries WHERE sense_id LIKE 'sense_v2e2e_%'").fetchone()[0]
 out["assets"] = [dict(r) for r in connection.execute(
     "SELECT pronunciation_id, status, fingerprint, ROUND(duration_seconds,3) duration, app_path "
-    "FROM lexical_audio_assets WHERE pronunciation_id LIKE 'pron_e2e_%' ORDER BY 1")]
+    "FROM lexical_audio_assets WHERE pronunciation_id LIKE 'pron_v2e2e_%' ORDER BY 1")]
 out["pilot"] = connection.execute(
     "SELECT COUNT(*) FROM vocabulary_entries WHERE source_name='oxford3000'").fetchone()[0]
+out["pilot_audio_paths"] = [r[0] for r in connection.execute(
+    "SELECT DISTINCT audio_path FROM vocabulary_entries WHERE source_name='oxford3000' AND audio_path IS NOT NULL")]
 out["pilot_imported"] = connection.execute(
     "SELECT COUNT(*) FROM ingestion_items WHERE status='IMPORTED'").fetchone()[0]
 out["pilot_failed"] = connection.execute(
@@ -58,14 +64,23 @@ $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
 if (-not $pythonCommand) { throw 'This verification helper needs python to read the database; the app itself does not.' }
 $python = $pythonCommand.Source
 $env:PYTHONIOENCODING = 'utf-8'
-$report = & $python $temp $database $BlockName | ConvertFrom-Json
+$report = & $python $temp $database | ConvertFrom-Json
 Remove-Item $temp -Force
 
-Write-Host "block '$BlockName' present : $($report.block)"
-Write-Host "cards in block            : $($report.cards)"
+if ($report.canonical_v2_cards -ne 2) { throw "Expected exactly 2 canonical V2 cards, found $($report.canonical_v2_cards)" }
+if ($report.blocks.'Import Test / V2 Leaf A' -ne 2) { throw 'Leaf A does not contain exactly 2 V2 cards' }
+if ($report.blocks.'Import Test / V2 Leaf B' -ne 2) { throw 'Leaf B does not contain exactly 2 V2 cards' }
+if ($report.assets.Count -ne 2) { throw "Expected 2 shared audio assets, found $($report.assets.Count)" }
+if ($report.pilot -ne 180 -or $report.pilot_imported -ne 180 -or $report.pilot_failed -ne 0) {
+    throw "Oxford pilot changed: $($report.pilot) / $($report.pilot_imported) / $($report.pilot_failed)"
+}
+if ($report.lexical_tables -ne 11) { throw "Expected the existing 11-table lexical model, found $($report.lexical_tables)" }
+
+Write-Host "V2 leaf memberships       : $($report.blocks | ConvertTo-Json -Compress)"
+Write-Host "canonical V2 cards        : $($report.canonical_v2_cards)"
 foreach ($row in $report.rows) {
     $additional = ($row.extra_metadata | ConvertFrom-Json).items.Count
-    Write-Host ("  {0,-12} {1,-8} {2,-16} voice={3} additional={4}" -f $row.word, $row.part_of_speech, $row.ipa, $row.audio_voice, $additional)
+    Write-Host ("  {0,-10} {1,-12} {2,-8} {3,-16} voice={4} additional={5}" -f $row.block_name, $row.word, $row.part_of_speech, $row.ipa, $row.audio_voice, $additional)
     $file = Join-Path $AppData $row.audio_path
     if (-not (Test-Path $file)) { throw "Missing audio file for $($row.word): $file" }
     if ($ffprobe) {
@@ -80,8 +95,12 @@ foreach ($asset in $report.assets) {
     Write-Host ("  {0,-32} {1,-13} {2}s" -f $asset.pronunciation_id, $asset.status, $asset.duration)
     if ($asset.fingerprint -notlike '*en-US-JennyNeural*') { throw "Wrong voice in fingerprint: $($asset.fingerprint)" }
     if ($asset.fingerprint -notlike '*audio-24khz-48kbitrate-mono-mp3*') { throw "Wrong source format: $($asset.fingerprint)" }
+    if ($asset.fingerprint -notlike '*opus-64k-mono-vbr*') { throw "Wrong final encoding target: $($asset.fingerprint)" }
     if ($asset.duration -le 0.2) { throw "Suspiciously short audio for $($asset.pronunciation_id)" }
 }
 Write-Host "pilot entries / imported / failed : $($report.pilot) / $($report.pilot_imported) / $($report.pilot_failed)"
+$pilotAudioFiles = @($report.pilot_audio_paths | ForEach-Object { Join-Path $AppData $_ } | Where-Object { Test-Path $_ } | Get-Item)
+$latestPilotAudio = $pilotAudioFiles | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+Write-Host "pilot audio files / latest write    : $($pilotAudioFiles.Count) / $($latestPilotAudio.LastWriteTime.ToString('o'))"
 Write-Host "mastery / reviews / study events  : $($report.mastery_sum) / $($report.reviews_sum) / $($report.study_events)"
 Write-Host "lexical tables / migrations       : $($report.lexical_tables) / $($report.migrations -join ',')"
