@@ -13,6 +13,9 @@ use std::process::Stdio;
 use tokio::io::{AsyncBufReadExt, BufReader};
 use tokio::process::Command;
 
+#[cfg(windows)]
+const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+
 pub const PROGRESS_EVENT: &str = "external-import://progress";
 
 /// How to launch the importer, resolved at call time rather than at startup.
@@ -123,16 +126,18 @@ where
     let (route, location) = importer.describe();
     on_event(serde_json::json!({"stage": "importer", "route": route, "path": location}));
     let (program, args) = importer.program_and_args(file, target_block_id, database, app_data);
-    let mut child = Command::new(&program)
+    let mut command = Command::new(&program);
+    command
         .args(&args)
         .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
-        .spawn()
-        .map_err(|error| {
-            AppError::Internal(format!(
-                "Could not start the vocabulary importer ({program}): {error}"
-            ))
-        })?;
+        .stderr(Stdio::piped());
+    #[cfg(windows)]
+    command.creation_flags(CREATE_NO_WINDOW);
+    let mut child = command.spawn().map_err(|error| {
+        AppError::Internal(format!(
+            "Could not start the vocabulary importer ({program}): {error}"
+        ))
+    })?;
 
     let stdout = child
         .stdout
