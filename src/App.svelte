@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import gsap from 'gsap';
+  import { onMount, tick } from 'svelte';
+  import { animate } from './lib/motion';
   import { ArrowLeft, ArrowRight, ChevronRight, Home, Plus, WifiOff, Layers3, BookOpenCheck, Gauge } from 'lucide-svelte';
   import heroArtwork from './assets/lexium-library-hero.jpg';
   import type { BlockSummary, ExternalImportSummary } from './lib/api/types';
   import { createBlock, deleteBlock, listBlocks, updateBlock } from './lib/api/blocks';
   import BlockGrid from './lib/components/blocks/BlockGrid.svelte';
-  import BlockDialog from './lib/components/blocks/BlockDialog.svelte';
-  import VocabularyManager from './lib/components/manage/VocabularyManager.svelte';
-  import StudyScreen from './lib/components/study/StudyScreen.svelte';
-  import ExternalImportDialog from './lib/components/import/ExternalImportDialog.svelte';
+  const loadBlockDialog = () => import('./lib/components/blocks/BlockDialog.svelte');
+  const loadManager = () => import('./lib/components/manage/VocabularyManager.svelte');
+  const loadStudy = () => import('./lib/components/study/StudyScreen.svelte');
+  const loadImport = () => import('./lib/components/import/ExternalImportDialog.svelte');
   import Toast from './lib/components/common/Toast.svelte';
+  import { clearAudioCache } from './lib/api/audio';
 
   let blocks = $state<BlockSummary[]>([]);
   let path = $state<BlockSummary[]>([]);
@@ -26,6 +27,9 @@
   let navigationReady = $state(false);
   let navigationSession = '';
   let loadVersion = 0;
+  let transition: Animation | undefined;
+  let initialLoad = true;
+  let toastTimer: ReturnType<typeof setTimeout>;
   const totalWords = $derived(blocks.reduce((total,block)=>total+block.wordCount,0));
   const averageMastery = $derived(blocks.length?Math.round(blocks.reduce((total,block)=>total+block.averageMastery,0)/blocks.length):0);
   const canGoBack = $derived(navigationReady&&historyIndex>0);
@@ -39,7 +43,8 @@
   function currentParent() { return path.at(-1)?.id ?? null; }
   function notify(message:string,kind:'info'|'error'|'success'='info') {
     toast={message,kind};
-    setTimeout(()=>{if(toast?.message===message)toast=null},3200);
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(()=>toast=null,3200);
   }
   function copyBlock(block:BlockSummary) { return {...block}; }
   function isSameRoute(next:NavigationRoute) {
@@ -65,14 +70,18 @@
     try {
       const next=await listBlocks(parent);
       if(version!==loadVersion)return;
-      if(view){
-        gsap.killTweensOf(view);
-        await gsap.to(view,{x:-18*direction,opacity:0,duration:.12,ease:'power1.in'});
-      }
-      if(version!==loadVersion)return;
       blocks=next;
-      requestAnimationFrame(()=>view&&gsap.fromTo(view,{x:22*direction,opacity:0},{x:0,opacity:1,duration:.25,ease:'power3.out'}));
-    } catch(error) { notify((error as Error).message,'error'); }
+      loading=false;
+      await tick();
+      if(version!==loadVersion)return;
+      transition?.cancel();
+      if(initialLoad) {
+        initialLoad=false;
+        performance.mark('lexium:library-ready');
+      } else if(view) {
+        transition=animate(view,[{transform:`translateX(${12*direction}px)`},{transform:'translateX(0)'}]);
+      }
+    } catch(error) { if(version===loadVersion)notify((error as Error).message,'error'); }
     finally { if(version===loadVersion)loading=false; }
   }
   async function applyRoute(next:NavigationRoute,direction:1|-1) {
@@ -120,6 +129,7 @@
     catch(error){notify((error as Error).message,'error')}
   }
   async function imported(summary:ExternalImportSummary) {
+    clearAudioCache();
     await load();
     const changed=summary.added+summary.reused;
     notify(`${changed} card${changed===1?'':'s'} added to ${summary.destination}${summary.conflicts?`, ${summary.conflicts} conflict${summary.conflicts===1?'':'s'}`:''}${summary.failed.length?`, ${summary.failed.length} failed`:''}`,summary.failed.length||summary.conflicts?'error':'success');
@@ -139,14 +149,22 @@
     }
     navigationReady=true;
     window.addEventListener('popstate',restoreHistory);
-    return()=>window.removeEventListener('popstate',restoreHistory);
+    return()=>{window.removeEventListener('popstate',restoreHistory);++loadVersion;transition?.cancel();clearTimeout(toastTimer)};
   });
 </script>
 
 {#if mode==='study'&&active}
+  {#await loadStudy()}<div class="loading" role="status">Preparing study…</div>{:then {default: StudyScreen}}
+  {#key active.id}
   <StudyScreen block={active} onexit={goBack} onerror={(message)=>notify(message,'error')}/>
+  {/key}
+  {:catch error}<div class="loading" role="alert">{error.message}<button class="ghost" onclick={goBack}>Back</button></div>{/await}
 {:else if mode==='manage'&&active}
+  {#await loadManager()}<div class="loading" role="status">Loading vocabulary…</div>{:then {default: VocabularyManager}}
+  {#key active.id}
   <main class="page"><VocabularyManager block={active} onback={goBack} onforward={goForward} onhome={goHome} canback={canGoBack} canforward={canGoForward} onstudy={()=>navigate({mode:'study',path:path.map(copyBlock),active:active?copyBlock(active):null})} onchange={()=>load()} onerror={(message)=>notify(message,'error')}/></main>
+  {/key}
+  {:catch error}<div class="loading" role="alert">{error.message}<button class="ghost" onclick={goBack}>Back</button></div>{/await}
 {:else}
   <div class="shell">
     <header class="app-header">
@@ -184,8 +202,8 @@
   </div>
 {/if}
 
-{#if importTarget}<ExternalImportDialog targetBlockId={importTarget.block.id} targetLabel={importTarget.label} onclose={()=>importTarget=null} onimported={imported}/>{/if}
-{#if dialog}<BlockDialog title={dialog.kind==='create'?'Create block':'Edit block'} initialName={dialog.block?.name} initialIcon={dialog.block?.iconKey} onsave={save} onclose={()=>dialog=null}/>{/if}
+{#if importTarget}{#await loadImport() then {default: ExternalImportDialog}}<ExternalImportDialog targetBlockId={importTarget.block.id} targetLabel={importTarget.label} onclose={()=>importTarget=null} onimported={imported}/>{:catch error}<Toast message={error.message} kind="error"/>{/await}{/if}
+{#if dialog}{#await loadBlockDialog() then {default: BlockDialog}}<BlockDialog title={dialog.kind==='create'?'Create block':'Edit block'} initialName={dialog.block?.name} initialIcon={dialog.block?.iconKey} onsave={save} onclose={()=>dialog=null}/>{:catch error}<Toast message={error.message} kind="error"/>{/await}{/if}
 {#if toast}<Toast message={toast.message} kind={toast.kind}/>{/if}
 
 <style>

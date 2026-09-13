@@ -7,16 +7,35 @@ use sqlx::SqlitePool;
 use uuid::Uuid;
 
 pub async fn list(pool: &SqlitePool, parent_id: Option<&str>) -> AppResult<Vec<BlockSummary>> {
-    let rows = sqlx::query_as::<_, BlockSummary>(r#"
-      WITH RECURSIVE descendants(root_id, id) AS (
-        SELECT id, id FROM blocks UNION ALL SELECT d.root_id, b.id FROM blocks b JOIN descendants d ON b.parent_id=d.id
+    let rows = sqlx::query_as::<_, BlockSummary>(
+        r#"
+      WITH RECURSIVE visible AS (
+        SELECT * FROM blocks WHERE parent_id IS ?1
+      ), descendants(root_id, id) AS (
+        SELECT id, id FROM visible
+        UNION ALL
+        SELECT d.root_id, b.id FROM blocks b JOIN descendants d ON b.parent_id=d.id
+      ), local_totals AS (
+        SELECT block_id, COUNT(*) word_count, SUM(mastery_score) mastery_total
+        FROM block_entries WHERE block_id IN (SELECT id FROM descendants)
+        GROUP BY block_id
+      ), totals AS (
+        SELECT d.root_id, SUM(t.word_count) word_count,
+          1.0 * SUM(t.mastery_total) / SUM(t.word_count) average_mastery
+        FROM descendants d LEFT JOIN local_totals t ON t.block_id=d.id
+        GROUP BY d.root_id
       )
       SELECT b.id,b.parent_id,b.name,b.icon_key,b.sort_order,
         (SELECT COUNT(*) FROM blocks c WHERE c.parent_id=b.id) child_count,
-        (SELECT COUNT(*) FROM descendants d JOIN block_entries be ON be.block_id=d.id WHERE d.root_id=b.id) word_count,
-        COALESCE((SELECT AVG(be.mastery_score) FROM descendants d JOIN block_entries be ON be.block_id=d.id WHERE d.root_id=b.id),0.0) average_mastery
-      FROM blocks b WHERE ((?1 IS NULL AND b.parent_id IS NULL) OR b.parent_id=?1) ORDER BY b.sort_order,b.name COLLATE NOCASE
-    "#).bind(parent_id).fetch_all(pool).await?;
+        COALESCE(t.word_count,0) word_count,
+        COALESCE(t.average_mastery,0.0) average_mastery
+      FROM visible b LEFT JOIN totals t ON t.root_id=b.id
+      ORDER BY b.sort_order,b.name COLLATE NOCASE
+    "#,
+    )
+    .bind(parent_id)
+    .fetch_all(pool)
+    .await?;
     Ok(rows)
 }
 

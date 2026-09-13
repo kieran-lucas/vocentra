@@ -56,6 +56,12 @@ impl Scheduler {
             .filter(|(_, s)| s.seen == 0)
             .map(|(i, _)| i)
             .collect();
+        let max_mastery = self
+            .items
+            .iter()
+            .map(|item| item.mastery)
+            .max()
+            .unwrap_or(0);
         let mut repeat: Vec<(usize, i32)> = self
             .items
             .iter()
@@ -67,14 +73,7 @@ impl Scheduler {
                     && s.last_seen
                         .is_none_or(|last| self.index.saturating_sub(last) > MIN_GAP)
             })
-            .map(|(i, s)| {
-                (
-                    i,
-                    s.debt
-                        + (self.items.iter().map(|x| x.mastery).max().unwrap_or(0) - s.mastery)
-                            .clamp(0, 8) as i32,
-                )
-            })
+            .map(|(i, s)| (i, s.debt + (max_mastery - s.mastery).clamp(0, 8) as i32))
             .collect();
         let choose_repeat = !repeat.is_empty()
             && self.repeat_streak < MAX_REPEAT_STREAK

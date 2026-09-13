@@ -21,15 +21,36 @@
   let entries = $state<ManagedEntry[]>([]);
   let search = $state('');
   let editing = $state<ManagedEntry | null>(null);
+  let loading = $state(true);
+  let loadVersion = 0;
+  let loadedBlock = '';
+  const pageSize = 100;
+  let page = $state(0);
+  let hasMore = $state(false);
 
-  async function load() {
-    try { entries = await listVocabulary(block.id, search); }
-    catch(error) { onerror((error as Error).message); }
+  async function load(blockId = block.id, query = search, version = ++loadVersion, pageIndex = page) {
+    loading = true;
+    try {
+      const next = await listVocabulary(blockId, query, pageIndex * pageSize, pageSize + 1);
+      if(version === loadVersion) {
+        hasMore = next.length > pageSize;
+        entries = next.slice(0,pageSize);
+      }
+    }
+    catch(error) { if(version === loadVersion) onerror((error as Error).message); }
+    finally { if(version === loadVersion) loading = false; }
   }
   $effect(() => {
-    search;
-    const timer = setTimeout(load, 180);
-    return () => clearTimeout(timer);
+    const blockId = block.id, query = search, pageIndex = page;
+    const version = ++loadVersion;
+    const changedBlock = blockId !== loadedBlock;
+    loadedBlock = blockId;
+    loading = true;
+    // Open immediately; debounce only subsequent typing.
+    if(changedBlock) entries = [];
+    const timer = changedBlock ? undefined : setTimeout(() => void load(blockId, query, version, pageIndex), query.trim() ? 180 : 0);
+    if(changedBlock) void load(blockId, query, version, pageIndex);
+    return () => { clearTimeout(timer); ++loadVersion; };
   });
   async function remove(entry: ManagedEntry) {
     if(!confirm(`Remove “${entry.word}” from this block?`)) return;
@@ -57,9 +78,9 @@
       <button class="primary" onclick={onstudy} disabled={!entries.length}><BookOpen size={16}/>Study</button>
     </div>
   </header>
-  <div class="toolbar"><Search size={17}/><input bind:value={search} placeholder="Search vocabulary…"/></div>
+  <div class="toolbar"><Search size={17}/><input bind:value={search} oninput={()=>page=0} placeholder="Search vocabulary…"/></div>
   {#if entries.length}
-    <div class="list">
+    <div class="list" aria-busy={loading}>
       {#each entries as entry (entry.blockEntryId)}
         <article>
           <div class="word"><strong>{entry.word}</strong><span>{entry.ipa} · {entry.partOfSpeech}</span></div>
@@ -71,11 +92,22 @@
         </article>
       {/each}
     </div>
+  {:else if loading}
+    <div class="empty" role="status">Loading vocabulary…</div>
+  {:else if search.trim()}
+    <div class="empty"><h2>No matching vocabulary.</h2><p>Try a different search.</p></div>
   {:else}
     <div class="empty">
       <h2>This block has no vocabulary yet.</h2>
       <p>Return to the library and use this block's ⋯ menu to import vocabulary.</p>
     </div>
+  {/if}
+  {#if page>0||hasMore}
+    <nav class="pagination" aria-label="Vocabulary pages">
+      <button class="ghost" disabled={page===0||loading} onclick={()=>page--}>Previous</button>
+      <span>Page {page+1}</span>
+      <button class="ghost" disabled={!hasMore||loading} onclick={()=>page++}>Next</button>
+    </nav>
   {/if}
 </section>
 
@@ -110,6 +142,8 @@
   .list{display:grid;gap:7px}
   .list article{display:grid;grid-template-columns:minmax(160px,.8fr) minmax(220px,1.5fr) 100px 70px 34px 34px;gap:14px;align-items:center;padding:13px 14px;background:var(--surface-1);border:1px solid var(--border);border-radius:11px}
   .word{display:grid;gap:3px}
+  .pagination{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px;color:var(--text-muted)}
+  .list article{content-visibility:auto;contain-intrinsic-size:auto 65px}
   .word span,small{color:var(--text-muted);font-size:11px}
   .list p{color:var(--text-secondary);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mastery{height:4px;background:#1c2b4112;border-radius:3px}

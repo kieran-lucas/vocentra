@@ -37,7 +37,7 @@ pub async fn import_external_json(
     }
     let exists: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM blocks WHERE id=?")
         .bind(&target_block_id)
-        .fetch_one(&state.pool)
+        .fetch_one(state.pool().await?)
         .await?;
     if exists == 0 {
         return Err(AppError::Validation(
@@ -46,7 +46,7 @@ pub async fn import_external_json(
     }
     let children: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM blocks WHERE parent_id=?")
         .bind(&target_block_id)
-        .fetch_one(&state.pool)
+        .fetch_one(state.pool().await?)
         .await?;
     if children > 0 {
         return Err(AppError::Validation(

@@ -1,6 +1,6 @@
 [package]
 name = "lexium"
-version = "0.1.0"
+version = "0.1.1"
 description = "Offline-first vocabulary learning"
 edition = "2024"
 

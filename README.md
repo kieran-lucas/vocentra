@@ -1,6 +1,6 @@
 # Lexium
 
-Lexium is a Windows-only, offline-first vocabulary desktop app built with Tauri 2, Svelte 5, TypeScript, Rust, SQLx, SQLite, GSAP, and local Ogg Opus pronunciation audio.
+Lexium is a Windows-only, offline-first vocabulary desktop app built with Tauri 2, Svelte 5, TypeScript, Rust, SQLx, SQLite, native Web Animations, and local Ogg Opus pronunciation audio.
 
 ## What works
 
@@ -20,6 +20,19 @@ pnpm tauri dev
 ```
 
 The database is `%APPDATA%\com.lexium.desktop\lexium.sqlite3`. Startup enables SQLite foreign keys, WAL, `synchronous=NORMAL`, a five-second busy timeout, a small pool, and embedded forward migrations.
+
+Database initialization runs alongside window creation; commands wait for the same completed migration result. The library renders without waiting for an entrance animation. Management, study, and import screens load on demand. Vocabulary lists use 100-row pages, with stale search responses discarded and offscreen row rendering deferred. Audio is cached in memory with a 24-file / 2 MiB source-string limit, and completed or abandoned study sessions release their in-memory cards.
+
+Performance checks (synthetic fixtures, except the explicitly supplied release binary):
+
+```powershell
+python scripts/benchmark-performance.py --baseline 2a008a3ea684009d3ef84bfa30eeefdd5383c297
+pnpm build
+node scripts/performance-ui-smoke.mjs
+node scripts/measure-startup.mjs C:/Users/kiera/AppData/Local/Lexium/lexium.exe optimized 3
+```
+
+The startup check launches and closes the supplied app three times. It reads the library without rating or editing cards; normal database migrations still run. Debug-enabled timings include WebView startup and polling overhead and are not cold-boot benchmarks. The UI check uses a separate headless Edge instance with mock IPC and never opens the learner database.
 
 ## Build and test
 

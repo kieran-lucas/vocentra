@@ -60,6 +60,7 @@ pub async fn start(
     .execute(pool)
     .await?;
     let scores = items.iter().map(|x| x.mastery_score).collect();
+    let total_unique = items.len();
     sessions.0.lock().await.insert(
         turn_id.clone(),
         ActiveStudy {
@@ -70,13 +71,6 @@ pub async fn start(
             shown_at: now,
         },
     );
-    let total_unique = sessions
-        .0
-        .lock()
-        .await
-        .get(&turn_id)
-        .map(|session| session.items.len())
-        .unwrap_or_default();
     Ok(StudyStart {
         turn_id,
         block_name: name,
@@ -102,14 +96,20 @@ pub async fn next(sessions: &StudySessions, turn_id: &str) -> AppResult<StudyNex
             completed: false,
         })
     } else {
-        Ok(StudyNext {
+        let result = StudyNext {
             card: None,
             unique_covered: session.scheduler.covered(),
             total_unique: session.items.len(),
             total_shown: session.scheduler.total_shown(),
             completed: true,
-        })
+        };
+        guard.remove(turn_id);
+        Ok(result)
     }
+}
+
+pub async fn end(sessions: &StudySessions, turn_id: &str) {
+    sessions.0.lock().await.remove(turn_id);
 }
 pub async fn rate(
     pool: &SqlitePool,
@@ -125,7 +125,6 @@ pub async fn rate(
         .ok_or_else(|| AppError::NotFound("Study turn is no longer active".into()))?;
     let index = session
         .current
-        .take()
         .ok_or_else(|| AppError::Validation("No current card".into()))?;
     let item = &mut session.items[index];
     let before = item.mastery_score;
@@ -149,7 +148,78 @@ pub async fn rate(
             .await?;
     }
     tx.commit().await?;
+    session.current = None;
     item.mastery_score = after;
     session.scheduler.rate(index, rating);
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    const LEAF: &str = "22222222-2222-4222-8222-222222222222";
+
+    #[tokio::test]
+    async fn failed_rating_can_be_retried_without_losing_the_current_card() {
+        let pool = crate::db::memory().await.unwrap();
+        let sessions = StudySessions::default();
+        let turn = start(&pool, &sessions, LEAF).await.unwrap();
+        let card = next(&sessions, &turn.turn_id).await.unwrap().card.unwrap();
+        sqlx::query("CREATE TRIGGER fail_rating BEFORE INSERT ON study_events BEGIN SELECT RAISE(ABORT,'test failure'); END")
+            .execute(&pool).await.unwrap();
+        assert!(
+            rate(&pool, &sessions, &turn.turn_id, Rating::Good, 2, 1)
+                .await
+                .is_err()
+        );
+        assert!(sessions.0.lock().await[&turn.turn_id].current.is_some());
+        let reviews: i64 = sqlx::query_scalar("SELECT total_reviews FROM block_entries WHERE id=?")
+            .bind(&card.block_entry_id)
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+        assert_eq!(reviews, 0);
+        sqlx::query("DROP TRIGGER fail_rating")
+            .execute(&pool)
+            .await
+            .unwrap();
+        rate(&pool, &sessions, &turn.turn_id, Rating::Good, 2, 1)
+            .await
+            .unwrap();
+        let counts: (i64, i64, i64) = sqlx::query_as("SELECT total_reviews,typing_correct_count,typing_error_count FROM block_entries WHERE id=?")
+            .bind(&card.block_entry_id).fetch_one(&pool).await.unwrap();
+        assert_eq!(counts, (1, 2, 1));
+        assert!(next(&sessions, &turn.turn_id).await.is_ok());
+    }
+
+    #[tokio::test]
+    async fn completed_and_abandoned_turns_release_memory_and_keep_history() {
+        let pool = crate::db::memory().await.unwrap();
+        let sessions = StudySessions::default();
+        let turn = start(&pool, &sessions, LEAF).await.unwrap();
+        loop {
+            if next(&sessions, &turn.turn_id).await.unwrap().completed {
+                break;
+            }
+            rate(&pool, &sessions, &turn.turn_id, Rating::Easy, 1, 0)
+                .await
+                .unwrap();
+        }
+        assert!(sessions.0.lock().await.is_empty());
+        let events: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM study_events WHERE turn_id=?")
+            .bind(&turn.turn_id)
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+        assert_eq!(events, turn.total_unique as i64);
+        let abandoned = start(&pool, &sessions, LEAF).await.unwrap();
+        end(&sessions, &abandoned.turn_id).await;
+        end(&sessions, &abandoned.turn_id).await;
+        assert!(sessions.0.lock().await.is_empty());
+        let turns: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM study_turns")
+            .fetch_one(&pool)
+            .await
+            .unwrap();
+        assert_eq!(turns, 2);
+    }
 }

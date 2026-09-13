@@ -7,7 +7,8 @@ use std::path::Path;
 
 pub async fn connect(path: &Path) -> AppResult<SqlitePool> {
     if let Some(parent) = path.parent() {
-        std::fs::create_dir_all(parent)
+        tokio::fs::create_dir_all(parent)
+            .await
             .map_err(|e| crate::error::AppError::Internal(e.to_string()))?;
     }
     let options = SqliteConnectOptions::new()

@@ -15,5 +15,5 @@ pub async fn import_vocabulary(
     block_id: String,
     json: String,
 ) -> AppResult<ImportResult> {
-    import_validation::import(&state.pool, &block_id, &json).await
+    import_validation::import(state.pool().await?, &block_id, &json).await
 }
