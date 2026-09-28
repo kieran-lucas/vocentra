@@ -52,7 +52,9 @@ Write-Host "ffprobe : $ffprobe"
 # --- skip when already current ---------------------------------------------
 $sources = Get-ChildItem -Path (Join-Path $repo 'tools/ingest') -Filter '*.py' -File
 $stampInputs = @($sources.FullName) + @($schema, $ffmpeg, $ffprobe)
-$stampValue = ($stampInputs | ForEach-Object { (Get-FileHash $_ -Algorithm SHA256).Hash }) -join ''
+$stampValue = ($stampInputs | ForEach-Object {
+    ([System.BitConverter]::ToString((New-Object System.Security.Cryptography.SHA256Managed).ComputeHash([System.IO.File]::ReadAllBytes($_)))).Replace('-', '')
+}) -join ''
 $stamp = Join-Path $work 'inputs.sha256'
 if (-not $Force -and (Test-Path $sidecar) -and (Test-Path $stamp) -and
     ((Get-Content $stamp -Raw).Trim() -eq $stampValue)) {

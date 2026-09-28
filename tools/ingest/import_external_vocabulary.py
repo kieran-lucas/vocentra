@@ -659,7 +659,7 @@ def main() -> int:
     parser.add_argument("file", type=Path)
     parser.add_argument("--target-block-id", help="Existing leaf block selected by the app (required for import)")
     parser.add_argument("--db", type=Path, help="Target SQLite file (defaults to the app database)")
-    parser.add_argument("--app-data", type=Path, help="App-data directory that owns audio/ (defaults to %APPDATA%/com.lexium.desktop)")
+    parser.add_argument("--app-data", type=Path, help="App-data directory that owns audio/ (defaults to %%APPDATA%%/com.lexium.desktop)")
     parser.add_argument("--progress-json", action="store_true", help="Emit JSON-lines progress on stdout")
     parser.add_argument("--validate-only", action="store_true", help="Validate and report without writing or synthesising")
     parser.add_argument("--skip-audio", action="store_true", help="Import semantics without contacting the speech service")
